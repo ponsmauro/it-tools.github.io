@@ -18,7 +18,6 @@ window.TOOLS_CATALOG = [
     ]
   },
   { category: "FORMATTERS", tools: ["JSON formatter", "XML formatter", "HTML formatter", "CSS formatter", "JS formatter", "SQL formatter"] },
-  { category: "MINIFIERS", tools: ["JSON minifier", "XML minifier", "HTML minifier", "CSS minifier", "JS minifier"] },
   { category: "ENCODERS", tools: ["Base64 encode", "URL encode", "HTML entities encode"] },
   { category: "DECODERS", tools: ["Base64 decode", "URL decode", "HTML entities decode", "JWT decode"] },
   {
