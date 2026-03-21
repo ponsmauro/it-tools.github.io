@@ -160,3 +160,17 @@ HOOK_GLOBAL_VERIFICATION:
 ```
 
 Only if all answers are YES, the agent may proceed.
+
+## Pull Request Naming Convention
+
+When creating pull requests, use the following format:
+
+```
+[entity - functionality] - description
+```
+
+Examples:
+- `[feature - converters] - add JSON/YAML conversion support`
+- `[fix - date-format] - resolve timezone issue`
+- `[docs - architecture] - update system design documentation`
+- `[refactor - units] - simplify conversion logic`
