@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IT Tools Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>IT Tools Dashboard</h1>
+      </div>
+      <div class="topbar-meta">
+        <span class="chip">UI Mockup</span>
+        <span class="chip">No Logic</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="panel">
+          <h2>Categorías</h2>
+          <nav id="categories" class="category-nav" aria-label="Categorías de herramientas"></nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="panel panel-controls">
+          <div class="panel-head">
+            <h2 id="toolsTitle">Tools</h2>
+          </div>
+          <label class="select-label" for="toolSelect">Seleccionar herramienta</label>
+          <select id="toolSelect" class="tool-select"></select>
+          <a id="openToolLink" class="open-tool-link" href="#">Abrir tool seleccionada</a>
+        </div>
+
+      </section>
+    </main>
+
+    <script src="assets/js/tools-data.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
