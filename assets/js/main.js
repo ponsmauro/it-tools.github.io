@@ -4,6 +4,7 @@
   const formattersPanelNode = document.getElementById("formattersPanel");
   const encodersPanelNode = document.getElementById("encodersPanel");
   const decodersPanelNode = document.getElementById("decodersPanel");
+  const generatorsPanelNode = document.getElementById("generatorsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -22,12 +23,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -38,6 +39,8 @@
             showEncodersPanel();
           } else if (active === "DECODERS") {
             showDecodersPanel();
+          } else if (active === "GENERATORS") {
+            showGeneratorsPanel();
           }
         }
       });
@@ -50,6 +53,7 @@
     formattersPanelNode.style.display = "none";
     encodersPanelNode.style.display = "none";
     decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
     renderConverterTabs();
   }
 
@@ -58,6 +62,7 @@
     formattersPanelNode.style.display = "flex";
     encodersPanelNode.style.display = "none";
     decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
     renderFormatterTabs();
   }
 
@@ -66,7 +71,26 @@
     formattersPanelNode.style.display = "none";
     encodersPanelNode.style.display = "flex";
     decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
     renderEncoderTabs();
+  }
+
+  function showDecodersPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "flex";
+    generatorsPanelNode.style.display = "none";
+    renderDecoderTabs();
+  }
+
+  function showGeneratorsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "flex";
+    renderGeneratorTabs();
   }
 
   function showDecodersPanel() {
@@ -124,6 +148,286 @@
 
   let currentDecoderTabId = 'base64';
   let decoderTabsInitialized = false;
+
+  const generatorTabs = {
+    'uuid': { render: renderUuidGenerator, setup: setupUuidGeneratorListeners },
+    'password': { render: renderPasswordGenerator, setup: setupPasswordGeneratorListeners },
+    'commit': { render: renderCommitGenerator, setup: setupCommitGeneratorListeners },
+    'branch': { render: renderBranchGenerator, setup: setupBranchGeneratorListeners }
+  };
+
+  let currentGeneratorTabId = 'uuid';
+  let generatorTabsInitialized = false;
+
+  function renderGeneratorTabs() {
+    const tabsContainer = document.getElementById("generatorTabs");
+    if (!tabsContainer || !window.GENERATORS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.GENERATORS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentGeneratorTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!generatorTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentGeneratorTabId = tabBtn.dataset.tabId;
+        renderGeneratorTabs();
+        loadGeneratorContent();
+      });
+      generatorTabsInitialized = true;
+    }
+
+    loadGeneratorContent();
+  }
+
+  function loadGeneratorContent() {
+    const generator = generatorTabs[currentGeneratorTabId];
+    if (generator) {
+      generator.render();
+      generator.setup();
+    }
+  }
+
+  function renderUuidGenerator() {
+    const workspace = document.getElementById("generatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>UUID</label>
+            <input type="text" id="uuidOutput" class="converter-input" readonly>
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="generateUuidBtn" class="convert-btn">Generate</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupUuidGeneratorListeners() {
+    const output = document.getElementById("uuidOutput");
+    const btn = document.getElementById("generateUuidBtn");
+    if (!output || !btn) return;
+
+    function generate() {
+      if (crypto.randomUUID) {
+        output.value = crypto.randomUUID();
+      } else {
+        output.value = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+      }
+    }
+
+    btn.addEventListener('click', generate);
+    generate();
+  }
+
+  function renderPasswordGenerator() {
+    const workspace = document.getElementById("generatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Length</label>
+            <input type="number" id="passwordLength" class="converter-input" value="16" min="4" max="128">
+          </div>
+          <div class="input-group">
+            <label>Options</label>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;">
+                <input type="checkbox" id="pwdUpper" checked> Upper
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;">
+                <input type="checkbox" id="pwdLower" checked> Lower
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;">
+                <input type="checkbox" id="pwdNumber" checked> Number
+              </label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;">
+                <input type="checkbox" id="pwdSymbol" checked> Symbol
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Password</label>
+            <input type="text" id="passwordOutput" class="converter-input" readonly>
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="generatePasswordBtn" class="convert-btn">Generate</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupPasswordGeneratorListeners() {
+    const output = document.getElementById("passwordOutput");
+    const btn = document.getElementById("generatePasswordBtn");
+    const length = document.getElementById("passwordLength");
+    if (!output || !btn || !length) return;
+
+    function generate() {
+      const len = parseInt(length.value) || 16;
+      const useUpper = document.getElementById("pwdUpper").checked;
+      const useLower = document.getElementById("pwdLower").checked;
+      const useNumber = document.getElementById("pwdNumber").checked;
+      const useSymbol = document.getElementById("pwdSymbol").checked;
+
+      let chars = '';
+      if (useUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (useLower) chars += 'abcdefghijklmnopqrstuvwxyz';
+      if (useNumber) chars += '0123456789';
+      if (useSymbol) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+      if (!chars) {
+        output.value = '';
+        return;
+      }
+
+      let password = '';
+      for (let i = 0; i < len; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      output.value = password;
+    }
+
+    btn.addEventListener('click', generate);
+    length.addEventListener('input', generate);
+    document.getElementById("pwdUpper")?.addEventListener('change', generate);
+    document.getElementById("pwdLower")?.addEventListener('change', generate);
+    document.getElementById("pwdNumber")?.addEventListener('change', generate);
+    document.getElementById("pwdSymbol")?.addEventListener('change', generate);
+    generate();
+  }
+
+  function renderCommitGenerator() {
+    const workspace = document.getElementById("generatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Type</label>
+            <select id="commitType" class="converter-select">
+              <option value="feat">feat</option>
+              <option value="fix">fix</option>
+              <option value="docs">docs</option>
+              <option value="style">style</option>
+              <option value="refactor">refactor</option>
+              <option value="perf">perf</option>
+              <option value="test">test</option>
+              <option value="chore">chore</option>
+            </select>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Scope</label>
+            <input type="text" id="commitScope" class="converter-input" placeholder="(optional)">
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Description</label>
+            <input type="text" id="commitDesc" class="converter-input" placeholder="Short description">
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Generated Commit</label>
+            <input type="text" id="commitOutput" class="converter-input" readonly>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupCommitGeneratorListeners() {
+    const type = document.getElementById("commitType");
+    const scope = document.getElementById("commitScope");
+    const desc = document.getElementById("commitDesc");
+    const output = document.getElementById("commitOutput");
+    if (!type || !scope || !desc || !output) return;
+
+    function generate() {
+      const t = type.value;
+      const s = scope.value.trim();
+      const d = desc.value.trim();
+      if (!d) {
+        output.value = '';
+        return;
+      }
+      output.value = s ? `${t}(${s}): ${d}` : `${t}: ${d}`;
+    }
+
+    type.addEventListener('change', generate);
+    scope.addEventListener('input', generate);
+    desc.addEventListener('input', generate);
+    generate();
+  }
+
+  function renderBranchGenerator() {
+    const workspace = document.getElementById("generatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Type</label>
+            <select id="branchType" class="converter-select">
+              <option value="feature">feature</option>
+              <option value="fix">fix</option>
+              <option value="hotfix">hotfix</option>
+              <option value="release">release</option>
+              <option value="bugfix">bugfix</option>
+              <option value="docs">docs</option>
+              <option value="refactor">refactor</option>
+              <option value="chore">chore</option>
+            </select>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Name</label>
+            <input type="text" id="branchName" class="converter-input" placeholder="branch-name">
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Generated Branch</label>
+            <input type="text" id="branchOutput" class="converter-input" readonly>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupBranchGeneratorListeners() {
+    const type = document.getElementById("branchType");
+    const name = document.getElementById("branchName");
+    const output = document.getElementById("branchOutput");
+    if (!type || !name || !output) return;
+
+    function generate() {
+      const t = type.value;
+      const n = name.value.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      if (!n) {
+        output.value = '';
+        return;
+      }
+      output.value = `${t}/${n}`;
+    }
+
+    type.addEventListener('change', generate);
+    name.addEventListener('input', generate);
+    generate();
+  }
 
   function renderDecoderTabs() {
     const tabsContainer = document.getElementById("decoderTabs");
