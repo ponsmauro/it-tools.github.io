@@ -1,0 +1,7 @@
+{
+  "blackboxai.contextFile": "~/.blackbox-context",
+  "blackboxai.autoLoadContext": true,
+  "terminal.integrated.env.osx": {
+    "BLACKBOX_CONTEXT_FILE": "~/.blackbox-context"
+  }
+}
