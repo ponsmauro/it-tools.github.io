@@ -6,6 +6,7 @@
   const decodersPanelNode = document.getElementById("decodersPanel");
   const generatorsPanelNode = document.getElementById("generatorsPanel");
   const validatorsPanelNode = document.getElementById("validatorsPanel");
+  const checkersPanelNode = document.getElementById("checkersPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -24,12 +25,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -44,6 +45,8 @@
             showGeneratorsPanel();
           } else if (active === "VALIDATORS") {
             showValidatorsPanel();
+          } else if (active === "CHECKERS") {
+            showCheckersPanel();
           }
         }
       });
@@ -58,6 +61,7 @@
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
     validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
     renderConverterTabs();
   }
 
@@ -68,6 +72,7 @@
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
     validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
     renderFormatterTabs();
   }
 
@@ -78,6 +83,53 @@
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
     validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    renderEncoderTabs();
+  }
+
+  function showDecodersPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "flex";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    renderDecoderTabs();
+  }
+
+  function showGeneratorsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "flex";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    renderGeneratorTabs();
+  }
+
+  function showValidatorsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "flex";
+    checkersPanelNode.style.display = "none";
+    renderValidatorTabs();
+  }
+
+  function showCheckersPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "flex";
+    renderCheckerTabs();
+  }
     renderEncoderTabs();
   }
 
@@ -499,6 +551,284 @@
 
     input.addEventListener('input', validate);
     validate();
+  }
+
+  const checkerTabs = {
+    'contrast': { render: renderContrastChecker, setup: setupContrastCheckerListeners },
+    'cors': { render: renderCorsChecker, setup: setupCorsCheckerListeners },
+    'secrets': { render: renderSecretsChecker, setup: setupSecretsCheckerListeners },
+    'duplicate': { render: renderDuplicateChecker, setup: setupDuplicateCheckerListeners }
+  };
+
+  let currentCheckerTabId = 'contrast';
+  let checkerTabsInitialized = false;
+
+  function renderCheckerTabs() {
+    const tabsContainer = document.getElementById("checkerTabs");
+    if (!tabsContainer || !window.CHECKERS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.CHECKERS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentCheckerTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!checkerTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCheckerTabId = tabBtn.dataset.tabId;
+        renderCheckerTabs();
+        loadCheckerContent();
+      });
+      checkerTabsInitialized = true;
+    }
+
+    loadCheckerContent();
+  }
+
+  function loadCheckerContent() {
+    const checker = checkerTabs[currentCheckerTabId];
+    if (checker) {
+      checker.render();
+      checker.setup();
+    }
+  }
+
+  function renderContrastChecker() {
+    const workspace = document.getElementById("checkerWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Foreground Color</label>
+            <input type="color" id="fgColor" class="converter-input" style="height:32px;padding:2px;" value="#000000">
+            <input type="text" id="fgColorText" class="converter-input" value="#000000" style="margin-top:4px;">
+          </div>
+          <div class="input-group">
+            <label>Background Color</label>
+            <input type="color" id="bgColor" class="converter-input" style="height:32px;padding:2px;" value="#ffffff">
+            <input type="text" id="bgColorText" class="converter-input" value="#ffffff" style="margin-top:4px;">
+          </div>
+        </div>
+        <div id="contrastPreview" style="margin:16px 0;padding:20px;border-radius:8px;font-size:1.2rem;text-align:center;">Sample Text</div>
+        <div id="contrastResult"></div>
+      </div>
+    `;
+  }
+
+  function setupContrastCheckerListeners() {
+    const fgPicker = document.getElementById("fgColor");
+    const fgText = document.getElementById("fgColorText");
+    const bgPicker = document.getElementById("bgColor");
+    const bgText = document.getElementById("bgColorText");
+    const preview = document.getElementById("contrastPreview");
+    const result = document.getElementById("contrastResult");
+    if (!fgPicker || !fgText || !bgPicker || !bgText || !preview || !result) return;
+
+    function getLuminance(hex) {
+      const rgb = hex.replace('#', '').match(/.{2}/g).map(x => parseInt(x, 16) / 255);
+      const [r, g, b] = rgb.map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    }
+
+    function check() {
+      const fg = fgPicker.value;
+      const bg = bgPicker.value;
+      fgText.value = fg;
+      bgText.value = bg;
+      preview.style.color = fg;
+      preview.style.backgroundColor = bg;
+
+      const l1 = getLuminance(fg);
+      const l2 = getLuminance(bg);
+      const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+
+      const wcagAA = ratio >= 4.5;
+      const wcagAAA = ratio >= 7;
+      const wcagAALarge = ratio >= 3;
+
+      result.innerHTML = `
+        <div style="margin-top:12px;">
+          <strong>Contrast Ratio:</strong> ${ratio.toFixed(2)}:1
+        </div>
+        <div style="margin-top:8px;">
+          <span style="color:${wcagAA ? '#00ff00' : '#ff6b6b'};">${wcagAA ? '✓' : '✗'} WCAG AA (normal text)</span>
+          <span style="margin-left:12px;color:${wcagAAA ? '#00ff00' : '#ff6b6b'};">${wcagAAA ? '✓' : '✗'} WCAG AAA</span>
+          <span style="margin-left:12px;color:${wcagAALarge ? '#00ff00' : '#ff6b6b'};">${wcagAALarge ? '✓' : '✗'} WCAG AA (large text)</span>
+        </div>
+      `;
+    }
+
+    fgPicker.addEventListener('input', check);
+    bgPicker.addEventListener('input', check);
+    fgText.addEventListener('input', () => { fgPicker.value = fgText.value; check(); });
+    bgText.addEventListener('input', () => { bgPicker.value = bgText.value; check(); });
+    check();
+  }
+
+  function renderCorsChecker() {
+    const workspace = document.getElementById("checkerWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Origin (your site)</label>
+            <input type="text" id="corsOrigin" class="converter-input" placeholder="https://example.com">
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Access-Control-Allow-Origin header</label>
+            <input type="text" id="corsAllowed" class="converter-input" placeholder="* or https://example.com">
+          </div>
+        </div>
+        <div id="corsResult" style="margin-top:12px;"></div>
+      </div>
+    `;
+  }
+
+  function setupCorsCheckerListeners() {
+    const origin = document.getElementById("corsOrigin");
+    const allowed = document.getElementById("corsAllowed");
+    const result = document.getElementById("corsResult");
+    if (!origin || !allowed || !result) return;
+
+    function check() {
+      const o = origin.value.trim();
+      const a = allowed.value.trim();
+      if (!o || !a) {
+        result.innerHTML = '';
+        return;
+      }
+
+      const isWildcard = a === '*';
+      const isMatch = isWildcard || a === o;
+
+      result.innerHTML = `
+        <div style="color:${isMatch ? '#00ff00' : '#ff6b6b'};">
+          ${isMatch ? '✓' : '✗'} CORS ${isMatch ? 'allows' : 'blocks'} requests from ${o}
+        </div>
+        ${isWildcard ? '<div style="color:#ffa500;margin-top:8px;">⚠ Warning: Wildcard (*) allows any origin</div>' : ''}
+      `;
+    }
+
+    origin.addEventListener('input', check);
+    allowed.addEventListener('input', check);
+  }
+
+  function renderSecretsChecker() {
+    const workspace = document.getElementById("checkerWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Text to scan</label>
+            <textarea id="secretsInput" class="converter-textarea" placeholder="Paste text to check for secrets..."></textarea>
+          </div>
+        </div>
+        <div id="secretsResult" style="margin-top:12px;"></div>
+      </div>
+    `;
+  }
+
+  function setupSecretsCheckerListeners() {
+    const input = document.getElementById("secretsInput");
+    const result = document.getElementById("secretsResult");
+    if (!input || !result) return;
+
+    const patterns = {
+      'AWS Access Key': /AKIA[0-9A-Z]{16}/,
+      'AWS Secret Key': /[A-Za-z0-9/+=]{40}/,
+      'GitHub Token': /gh[pousr]_[A-Za-z0-9_]{36,255}/,
+      'Private Key': /-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----/,
+      'Generic API Key': /[aA][pP][iI][-_]?[kK][eE][yY].*['"][A-Za-z0-9]{20,}['"]/,
+      'Generic Secret': /[sS][eE][cC][rR][eE][tT].*['"][A-Za-z0-9]{16,}['"]/,
+      'JWT Token': /eyJ[A-Za-z0-9-_]+\.eyJ[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+/,
+      'Slack Token': /xox[baprs]-[0-9]{10,13}-[0-9]{10,13}[a-zA-Z0-9-]*/,
+      'Google API': /AIza[0-9A-Za-z-_]{35}/,
+      'Discord Token': /[MN][A-Za-z\d]{23,}\.[\w-]{6}\.[\w-]{27}/
+    };
+
+    function check() {
+      const text = input.value;
+      if (!text) {
+        result.innerHTML = '';
+        return;
+      }
+
+      const found = [];
+      for (const [name, regex] of Object.entries(patterns)) {
+        if (regex.test(text)) {
+          found.push(name);
+        }
+      }
+
+      if (found.length === 0) {
+        result.innerHTML = '<span style="color:#00ff00;">✓ No secrets detected</span>';
+      } else {
+        result.innerHTML = `
+          <span style="color:#ff6b6b;">✗ Potential secrets found:</span>
+          <ul style="margin:8px 0 0 20px;color:#ff6b6b;">${found.map(s => `<li>${s}</li>`).join('')}</ul>
+        `;
+      }
+    }
+
+    input.addEventListener('input', check);
+    check();
+  }
+
+  function renderDuplicateChecker() {
+    const workspace = document.getElementById("checkerWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>List (one per line)</label>
+            <textarea id="dupInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+          </div>
+        </div>
+        <div id="dupResult" style="margin-top:12px;"></div>
+      </div>
+    `;
+  }
+
+  function setupDuplicateCheckerListeners() {
+    const input = document.getElementById("dupInput");
+    const result = document.getElementById("dupResult");
+    if (!input || !result) return;
+
+    function check() {
+      const lines = input.value.split('\n').map(l => l.trim()).filter(l => l);
+      if (lines.length === 0) {
+        result.innerHTML = '';
+        return;
+      }
+
+      const seen = new Set();
+      const duplicates = [];
+      for (const line of lines) {
+        if (seen.has(line)) {
+          duplicates.push(line);
+        } else {
+          seen.add(line);
+        }
+      }
+
+      if (duplicates.length === 0) {
+        result.innerHTML = '<span style="color:#00ff00;">✓ No duplicates found</span>';
+      } else {
+        result.innerHTML = `
+          <span style="color:#ff6b6b;">✗ ${duplicates.length} duplicate(s) found:</span>
+          <ul style="margin:8px 0 0 20px;color:#ff6b6b;">${duplicates.map(d => `<li>${d}</li>`).join('')}</ul>
+        `;
+      }
+    }
+
+    input.addEventListener('input', check);
+    check();
   }
 
   function renderUuidGenerator() {
