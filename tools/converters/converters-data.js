@@ -33,3 +33,10 @@ window.DECODERS_CATALOG = [
   { tabId: "html", tabName: "HTML Entities" },
   { tabId: "jwt", tabName: "JWT" }
 ];
+
+window.GENERATORS_CATALOG = [
+  { tabId: "uuid", tabName: "UUID" },
+  { tabId: "password", tabName: "Password" },
+  { tabId: "commit", tabName: "Commit" },
+  { tabId: "branch", tabName: "Branch" }
+];
