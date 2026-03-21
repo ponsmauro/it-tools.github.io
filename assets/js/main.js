@@ -2,6 +2,7 @@
   const categoriesNode = document.getElementById("categories");
   const convertersPanelNode = document.getElementById("convertersPanel");
   const formattersPanelNode = document.getElementById("formattersPanel");
+  const encodersPanelNode = document.getElementById("encodersPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -20,18 +21,20 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
             showConvertersPanel();
           } else if (active === "FORMATTERS") {
             showFormattersPanel();
+          } else if (active === "ENCODERS") {
+            showEncodersPanel();
           }
         }
       });
@@ -42,13 +45,22 @@
   function showConvertersPanel() {
     convertersPanelNode.style.display = "flex";
     formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
     renderConverterTabs();
   }
 
   function showFormattersPanel() {
     convertersPanelNode.style.display = "none";
     formattersPanelNode.style.display = "flex";
+    encodersPanelNode.style.display = "none";
     renderFormatterTabs();
+  }
+
+  function showEncodersPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "flex";
+    renderEncoderTabs();
   }
 
   const converterTabs = {
@@ -79,6 +91,165 @@
 
   let currentFormatterTabId = 'json';
   let formatterTabsInitialized = false;
+
+  const encoderTabs = {
+    'base64': { render: renderBase64Encoder, setup: setupBase64EncoderListeners },
+    'url': { render: renderUrlEncoder, setup: setupUrlEncoderListeners },
+    'html': { render: renderHtmlEncoder, setup: setupHtmlEncoderListeners }
+  };
+
+  let currentEncoderTabId = 'base64';
+  let encoderTabsInitialized = false;
+
+  function renderEncoderTabs() {
+    const tabsContainer = document.getElementById("encoderTabs");
+    if (!tabsContainer || !window.ENCODERS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.ENCODERS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentEncoderTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!encoderTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentEncoderTabId = tabBtn.dataset.tabId;
+        renderEncoderTabs();
+        loadEncoderContent();
+      });
+      encoderTabsInitialized = true;
+    }
+
+    loadEncoderContent();
+  }
+
+  function loadEncoderContent() {
+    const encoder = encoderTabs[currentEncoderTabId];
+    if (encoder) {
+      encoder.render();
+      encoder.setup();
+    }
+  }
+
+  function renderBase64Encoder() {
+    const workspace = document.getElementById("encoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="base64Input" class="converter-textarea" placeholder="Enter text to encode/decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="base64Output" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupBase64EncoderListeners() {
+    const input = document.getElementById("base64Input");
+    const output = document.getElementById("base64Output");
+    if (!input || !output) return;
+
+    function encode() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      try {
+        output.value = btoa(unescape(encodeURIComponent(val)));
+      } catch (e) {
+        output.value = '';
+      }
+    }
+
+    input.addEventListener('input', encode);
+    encode();
+  }
+
+  function renderUrlEncoder() {
+    const workspace = document.getElementById("encoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="urlInput" class="converter-textarea" placeholder="Enter text to URL encode/decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="urlOutput" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupUrlEncoderListeners() {
+    const input = document.getElementById("urlInput");
+    const output = document.getElementById("urlOutput");
+    if (!input || !output) return;
+
+    function encode() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      try {
+        output.value = encodeURIComponent(val);
+      } catch (e) {
+        output.value = '';
+      }
+    }
+
+    input.addEventListener('input', encode);
+    encode();
+  }
+
+  function renderHtmlEncoder() {
+    const workspace = document.getElementById("encoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="htmlInputEnc" class="converter-textarea" placeholder="Enter text to HTML encode/decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="htmlOutputEnc" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupHtmlEncoderListeners() {
+    const input = document.getElementById("htmlInputEnc");
+    const output = document.getElementById("htmlOutputEnc");
+    if (!input || !output) return;
+
+    function encode() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      const entities = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      output.value = val.replace(/[&<>"']/g, char => entities[char]);
+    }
+
+    input.addEventListener('input', encode);
+    encode();
+  }
 
   function renderFormatterTabs() {
     const tabsContainer = document.getElementById("formatterTabs");
