@@ -40,3 +40,11 @@ window.GENERATORS_CATALOG = [
   { tabId: "commit", tabName: "Commit" },
   { tabId: "branch", tabName: "Branch" }
 ];
+
+window.VALIDATORS_CATALOG = [
+  { tabId: "email", tabName: "Email" },
+  { tabId: "url", tabName: "URL" },
+  { tabId: "domain", tabName: "Domain" },
+  { tabId: "semver", tabName: "Semver" },
+  { tabId: "password", tabName: "Password" }
+];
