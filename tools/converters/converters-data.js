@@ -20,3 +20,9 @@ window.FORMATTERS_CATALOG = [
   { tabId: "js", tabName: "JS" },
   { tabId: "sql", tabName: "SQL" }
 ];
+
+window.ENCODERS_CATALOG = [
+  { tabId: "base64", tabName: "Base64" },
+  { tabId: "url", tabName: "URL" },
+  { tabId: "html", tabName: "HTML Entities" }
+];
