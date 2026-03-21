@@ -3,6 +3,7 @@
   const convertersPanelNode = document.getElementById("convertersPanel");
   const formattersPanelNode = document.getElementById("formattersPanel");
   const encodersPanelNode = document.getElementById("encodersPanel");
+  const decodersPanelNode = document.getElementById("decodersPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -21,12 +22,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -35,6 +36,8 @@
             showFormattersPanel();
           } else if (active === "ENCODERS") {
             showEncodersPanel();
+          } else if (active === "DECODERS") {
+            showDecodersPanel();
           }
         }
       });
@@ -46,6 +49,7 @@
     convertersPanelNode.style.display = "flex";
     formattersPanelNode.style.display = "none";
     encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
     renderConverterTabs();
   }
 
@@ -53,6 +57,7 @@
     convertersPanelNode.style.display = "none";
     formattersPanelNode.style.display = "flex";
     encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
     renderFormatterTabs();
   }
 
@@ -60,7 +65,16 @@
     convertersPanelNode.style.display = "none";
     formattersPanelNode.style.display = "none";
     encodersPanelNode.style.display = "flex";
+    decodersPanelNode.style.display = "none";
     renderEncoderTabs();
+  }
+
+  function showDecodersPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "flex";
+    renderDecoderTabs();
   }
 
   const converterTabs = {
@@ -100,6 +114,219 @@
 
   let currentEncoderTabId = 'base64';
   let encoderTabsInitialized = false;
+
+  const decoderTabs = {
+    'base64': { render: renderBase64Decoder, setup: setupBase64DecoderListeners },
+    'url': { render: renderUrlDecoder, setup: setupUrlDecoderListeners },
+    'html': { render: renderHtmlDecoder, setup: setupHtmlDecoderListeners },
+    'jwt': { render: renderJwtDecoder, setup: setupJwtDecoderListeners }
+  };
+
+  let currentDecoderTabId = 'base64';
+  let decoderTabsInitialized = false;
+
+  function renderDecoderTabs() {
+    const tabsContainer = document.getElementById("decoderTabs");
+    if (!tabsContainer || !window.DECODERS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.DECODERS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentDecoderTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!decoderTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentDecoderTabId = tabBtn.dataset.tabId;
+        renderDecoderTabs();
+        loadDecoderContent();
+      });
+      decoderTabsInitialized = true;
+    }
+
+    loadDecoderContent();
+  }
+
+  function loadDecoderContent() {
+    const decoder = decoderTabs[currentDecoderTabId];
+    if (decoder) {
+      decoder.render();
+      decoder.setup();
+    }
+  }
+
+  function renderBase64Decoder() {
+    const workspace = document.getElementById("decoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="base64DecInput" class="converter-textarea" placeholder="Enter Base64 to decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="base64DecOutput" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupBase64DecoderListeners() {
+    const input = document.getElementById("base64DecInput");
+    const output = document.getElementById("base64DecOutput");
+    if (!input || !output) return;
+
+    function decode() {
+      const val = input.value.trim();
+      if (!val) { output.value = ''; return; }
+      try {
+        output.value = decodeURIComponent(escape(atob(val)));
+      } catch (e) {
+        output.value = '';
+      }
+    }
+
+    input.addEventListener('input', decode);
+    decode();
+  }
+
+  function renderUrlDecoder() {
+    const workspace = document.getElementById("decoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="urlDecInput" class="converter-textarea" placeholder="Enter URL encoded text to decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="urlDecOutput" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupUrlDecoderListeners() {
+    const input = document.getElementById("urlDecInput");
+    const output = document.getElementById("urlDecOutput");
+    if (!input || !output) return;
+
+    function decode() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      try {
+        output.value = decodeURIComponent(val);
+      } catch (e) {
+        output.value = '';
+      }
+    }
+
+    input.addEventListener('input', decode);
+    decode();
+  }
+
+  function renderHtmlDecoder() {
+    const workspace = document.getElementById("decoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="htmlDecInput" class="converter-textarea" placeholder="Enter HTML encoded text to decode..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Output</label>
+            <textarea id="htmlDecOutput" class="converter-textarea" placeholder="Result (editable)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupHtmlDecoderListeners() {
+    const input = document.getElementById("htmlDecInput");
+    const output = document.getElementById("htmlDecOutput");
+    if (!input || !output) return;
+
+    function decode() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = val;
+      output.value = textarea.value;
+    }
+
+    input.addEventListener('input', decode);
+    decode();
+  }
+
+  function renderJwtDecoder() {
+    const workspace = document.getElementById("decoderWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input (JWT Token)</label>
+            <textarea id="jwtDecInput" class="converter-textarea" placeholder="Paste JWT token here..."></textarea>
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Header</label>
+            <textarea id="jwtHeader" class="converter-textarea" readonly placeholder="JWT Header (JSON)"></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Payload</label>
+            <textarea id="jwtPayload" class="converter-textarea" readonly placeholder="JWT Payload (JSON)"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupJwtDecoderListeners() {
+    const input = document.getElementById("jwtDecInput");
+    const header = document.getElementById("jwtHeader");
+    const payload = document.getElementById("jwtPayload");
+    if (!input || !header || !payload) return;
+
+    function decodeJwt() {
+      const val = input.value.trim();
+      if (!val) {
+        header.value = '';
+        payload.value = '';
+        return;
+      }
+      try {
+        const parts = val.split('.');
+        if (parts.length !== 3) {
+          header.value = '';
+          payload.value = '';
+          return;
+        }
+        const headerJson = JSON.parse(atob(parts[0]));
+        const payloadJson = JSON.parse(atob(parts[1]));
+        header.value = JSON.stringify(headerJson, null, 2);
+        payload.value = JSON.stringify(payloadJson, null, 2);
+      } catch (e) {
+        header.value = '';
+        payload.value = '';
+      }
+    }
+
+    input.addEventListener('input', decodeJwt);
+    decodeJwt();
+  }
 
   function renderEncoderTabs() {
     const tabsContainer = document.getElementById("encoderTabs");

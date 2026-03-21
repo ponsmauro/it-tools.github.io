@@ -26,3 +26,10 @@ window.ENCODERS_CATALOG = [
   { tabId: "url", tabName: "URL" },
   { tabId: "html", tabName: "HTML Entities" }
 ];
+
+window.DECODERS_CATALOG = [
+  { tabId: "base64", tabName: "Base64" },
+  { tabId: "url", tabName: "URL" },
+  { tabId: "html", tabName: "HTML Entities" },
+  { tabId: "jwt", tabName: "JWT" }
+];
