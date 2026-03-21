@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,24 +21,38 @@
     <main class="layout">
       <aside class="sidebar">
         <div class="panel">
-          <h2>Categorías</h2>
-          <nav id="categories" class="category-nav" aria-label="Categorías de herramientas"></nav>
+          <h2>Categories</h2>
+          <nav id="categories" class="category-nav" aria-label="Tool Categories"></nav>
         </div>
       </aside>
 
       <section class="content">
-        <div class="panel panel-controls">
-          <div class="panel-head">
-            <h2 id="toolsTitle">Tools</h2>
+        <div id="convertersPanel" class="converters-panel">
+          <div class="converter-tabs-wrapper">
+            <nav id="converterTabs" class="converter-tabs" aria-label="Converter Categories"></nav>
           </div>
-          <label class="select-label" for="toolSelect">Seleccionar herramienta</label>
-          <select id="toolSelect" class="tool-select"></select>
-          <a id="openToolLink" class="open-tool-link" href="#">Abrir tool seleccionada</a>
+          <div id="converterWorkspace" class="converter-workspace"></div>
         </div>
-
+        <div id="formattersPanel" class="converters-panel" style="display: none;">
+          <div class="converter-tabs-wrapper">
+            <nav id="formatterTabs" class="converter-tabs" aria-label="Formatter Categories"></nav>
+          </div>
+          <div id="formatterWorkspace" class="converter-workspace"></div>
+        </div>
       </section>
     </main>
 
+    <link rel="stylesheet" href="tools/converters/converters.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xml2js/0.4.23/xml2js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@iarna/toml@2.2.5/dist/toml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.11/beautify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.11/beautify-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.11/beautify-html.min.js"></script>
+    <script src="tools/converters/converters-data.js"></script>
+    <script src="tools/converters/converters-implementations.js"></script>
+    <script src="tools/converters/converters-main.js"></script>
     <script src="assets/js/tools-data.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
