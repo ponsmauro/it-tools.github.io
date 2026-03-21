@@ -5,6 +5,7 @@
   const encodersPanelNode = document.getElementById("encodersPanel");
   const decodersPanelNode = document.getElementById("decodersPanel");
   const generatorsPanelNode = document.getElementById("generatorsPanel");
+  const validatorsPanelNode = document.getElementById("validatorsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -23,12 +24,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -41,6 +42,8 @@
             showDecodersPanel();
           } else if (active === "GENERATORS") {
             showGeneratorsPanel();
+          } else if (active === "VALIDATORS") {
+            showValidatorsPanel();
           }
         }
       });
@@ -54,6 +57,7 @@
     encodersPanelNode.style.display = "none";
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
     renderConverterTabs();
   }
 
@@ -63,6 +67,7 @@
     encodersPanelNode.style.display = "none";
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
     renderFormatterTabs();
   }
 
@@ -72,12 +77,39 @@
     encodersPanelNode.style.display = "flex";
     decodersPanelNode.style.display = "none";
     generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
     renderEncoderTabs();
   }
 
   function showDecodersPanel() {
     convertersPanelNode.style.display = "none";
     formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "flex";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    renderDecoderTabs();
+  }
+
+  function showGeneratorsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "flex";
+    validatorsPanelNode.style.display = "none";
+    renderGeneratorTabs();
+  }
+
+  function showValidatorsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "flex";
+    renderValidatorTabs();
+  }
     encodersPanelNode.style.display = "none";
     decodersPanelNode.style.display = "flex";
     generatorsPanelNode.style.display = "none";
@@ -193,6 +225,280 @@
       generator.render();
       generator.setup();
     }
+  }
+
+  const validatorTabs = {
+    'email': { render: renderEmailValidator, setup: setupEmailValidatorListeners },
+    'url': { render: renderUrlValidator, setup: setupUrlValidatorListeners },
+    'domain': { render: renderDomainValidator, setup: setupDomainValidatorListeners },
+    'semver': { render: renderSemverValidator, setup: setupSemverValidatorListeners },
+    'password': { render: renderPasswordValidator, setup: setupPasswordValidatorListeners }
+  };
+
+  let currentValidatorTabId = 'email';
+  let validatorTabsInitialized = false;
+
+  function renderValidatorTabs() {
+    const tabsContainer = document.getElementById("validatorTabs");
+    if (!tabsContainer || !window.VALIDATORS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.VALIDATORS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentValidatorTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!validatorTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentValidatorTabId = tabBtn.dataset.tabId;
+        renderValidatorTabs();
+        loadValidatorContent();
+      });
+      validatorTabsInitialized = true;
+    }
+
+    loadValidatorContent();
+  }
+
+  function loadValidatorContent() {
+    const validator = validatorTabs[currentValidatorTabId];
+    if (validator) {
+      validator.render();
+      validator.setup();
+    }
+  }
+
+  function renderEmailValidator() {
+    const workspace = document.getElementById("validatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Email</label>
+            <input type="text" id="emailInput" class="converter-input" placeholder="Enter email to validate">
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="validateEmailBtn" class="convert-btn">Validate</button>
+          </div>
+        </div>
+        <div id="emailResult" class="muted-text"></div>
+      </div>
+    `;
+  }
+
+  function setupEmailValidatorListeners() {
+    const input = document.getElementById("emailInput");
+    const btn = document.getElementById("validateEmailBtn");
+    const result = document.getElementById("emailResult");
+    if (!input || !btn || !result) return;
+
+    function validate() {
+      const email = input.value.trim();
+      if (!email) {
+        result.textContent = '';
+        result.className = 'muted-text';
+        return;
+      }
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      result.textContent = valid ? 'Valid email' : 'Invalid email';
+      result.className = valid ? 'muted-text' : 'error-text';
+    }
+
+    btn.addEventListener('click', validate);
+    input.addEventListener('input', validate);
+  }
+
+  function renderUrlValidator() {
+    const workspace = document.getElementById("validatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>URL</label>
+            <input type="text" id="urlInput" class="converter-input" placeholder="Enter URL to validate">
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="validateUrlBtn" class="convert-btn">Validate</button>
+          </div>
+        </div>
+        <div id="urlResult" class="muted-text"></div>
+      </div>
+    `;
+  }
+
+  function setupUrlValidatorListeners() {
+    const input = document.getElementById("urlInput");
+    const btn = document.getElementById("validateUrlBtn");
+    const result = document.getElementById("urlResult");
+    if (!input || !btn || !result) return;
+
+    function validate() {
+      const url = input.value.trim();
+      if (!url) {
+        result.textContent = '';
+        result.className = 'muted-text';
+        return;
+      }
+      try {
+        new URL(url);
+        result.textContent = 'Valid URL';
+        result.className = 'muted-text';
+      } catch {
+        result.textContent = 'Invalid URL';
+        result.className = 'error-text';
+      }
+    }
+
+    btn.addEventListener('click', validate);
+    input.addEventListener('input', validate);
+  }
+
+  function renderDomainValidator() {
+    const workspace = document.getElementById("validatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Domain</label>
+            <input type="text" id="domainInput" class="converter-input" placeholder="Enter domain to validate">
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="validateDomainBtn" class="convert-btn">Validate</button>
+          </div>
+        </div>
+        <div id="domainResult" class="muted-text"></div>
+      </div>
+    `;
+  }
+
+  function setupDomainValidatorListeners() {
+    const input = document.getElementById("domainInput");
+    const btn = document.getElementById("validateDomainBtn");
+    const result = document.getElementById("domainResult");
+    if (!input || !btn || !result) return;
+
+    function validate() {
+      const domain = input.value.trim();
+      if (!domain) {
+        result.textContent = '';
+        result.className = 'muted-text';
+        return;
+      }
+      const valid = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i.test(domain);
+      result.textContent = valid ? 'Valid domain' : 'Invalid domain';
+      result.className = valid ? 'muted-text' : 'error-text';
+    }
+
+    btn.addEventListener('click', validate);
+    input.addEventListener('input', validate);
+  }
+
+  function renderSemverValidator() {
+    const workspace = document.getElementById("validatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Version (Semver)</label>
+            <input type="text" id="semverInput" class="converter-input" placeholder="e.g., 1.2.3 or 1.0.0-alpha+001">
+          </div>
+          <div class="input-group" style="flex:0 0 auto; align-self: flex-end;">
+            <button id="validateSemverBtn" class="convert-btn">Validate</button>
+          </div>
+        </div>
+        <div id="semverResult" class="muted-text"></div>
+      </div>
+    `;
+  }
+
+  function setupSemverValidatorListeners() {
+    const input = document.getElementById("semverInput");
+    const btn = document.getElementById("validateSemverBtn");
+    const result = document.getElementById("semverResult");
+    if (!input || !btn || !result) return;
+
+    function validate() {
+      const version = input.value.trim();
+      if (!version) {
+        result.textContent = '';
+        result.className = 'muted-text';
+        return;
+      }
+      const semverRegex = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+      const valid = semverRegex.test(version);
+      result.textContent = valid ? 'Valid semver' : 'Invalid semver';
+      result.className = valid ? 'muted-text' : 'error-text';
+    }
+
+    btn.addEventListener('click', validate);
+    input.addEventListener('input', validate);
+  }
+
+  function renderPasswordValidator() {
+    const workspace = document.getElementById("validatorWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Password</label>
+            <input type="text" id="passwordValInput" class="converter-input" placeholder="Enter password to check strength">
+          </div>
+        </div>
+        <div id="passwordStrength" style="margin-top:12px;"></div>
+        <div id="passwordCriteria" style="margin-top:8px;font-size:0.85rem;"></div>
+      </div>
+    `;
+  }
+
+  function setupPasswordValidatorListeners() {
+    const input = document.getElementById("passwordValInput");
+    const strength = document.getElementById("passwordStrength");
+    const criteria = document.getElementById("passwordCriteria");
+    if (!input || !strength || !criteria) return;
+
+    function validate() {
+      const pwd = input.value;
+      if (!pwd) {
+        strength.textContent = '';
+        criteria.innerHTML = '';
+        return;
+      }
+
+      let score = 0;
+      const checks = {
+        length: pwd.length >= 8,
+        upper: /[A-Z]/.test(pwd),
+        lower: /[a-z]/.test(pwd),
+        number: /[0-9]/.test(pwd),
+        symbol: /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(pwd)
+      };
+
+      if (checks.length) score++;
+      if (checks.upper) score++;
+      if (checks.lower) score++;
+      if (checks.number) score++;
+      if (checks.symbol) score++;
+
+      const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+      const colors = ['#ff6b6b', '#ffa500', '#ffd700', '#90ee90', '#00ff00'];
+      
+      strength.textContent = `Strength: ${labels[score - 1] || 'Very Weak'}`;
+      strength.style.color = colors[score - 1] || '#ff6b6b';
+      strength.style.fontWeight = 'bold';
+
+      criteria.innerHTML = Object.entries(checks).map(([key, pass]) => 
+        `<span style="color:${pass ? '#00ff00' : '#ff6b6b'};margin-right:10px;">${pass ? '✓' : '✗'} ${key}</span>`
+      ).join('');
+    }
+
+    input.addEventListener('input', validate);
+    validate();
   }
 
   function renderUuidGenerator() {
