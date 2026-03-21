@@ -48,3 +48,10 @@ window.VALIDATORS_CATALOG = [
   { tabId: "semver", tabName: "Semver" },
   { tabId: "password", tabName: "Password" }
 ];
+
+window.CHECKERS_CATALOG = [
+  { tabId: "contrast", tabName: "Contrast" },
+  { tabId: "cors", tabName: "CORS" },
+  { tabId: "secrets", tabName: "Secrets" },
+  { tabId: "duplicate", tabName: "Duplicates" }
+];
