@@ -62,5 +62,5 @@ window.TOOLS_CATALOG = [
   { category: "HTML TOOLS", tools: ["HTML sanitizer/render", "HTML formatter/minifier"] },
   { category: "BITWISE TOOLS", tools: ["Bitwise calculator", "Binary/base numeric tools"] },
   { category: "RESILIENCE TOOLS", tools: ["Retry simulator", "Backoff simulator", "Circuit-breaker simulator"] },
-  { category: "SECURITY POLICY TOOLS", tools: ["CSP policy generator"] }
+  { category: "SECURITY TOOLS", tools: ["CSP policy generator"] }
 ];
