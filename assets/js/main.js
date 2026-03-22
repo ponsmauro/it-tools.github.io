@@ -130,60 +130,6 @@
     checkersPanelNode.style.display = "flex";
     renderCheckerTabs();
   }
-    renderEncoderTabs();
-  }
-
-  function showDecodersPanel() {
-    convertersPanelNode.style.display = "none";
-    formattersPanelNode.style.display = "none";
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "flex";
-    generatorsPanelNode.style.display = "none";
-    validatorsPanelNode.style.display = "none";
-    renderDecoderTabs();
-  }
-
-  function showGeneratorsPanel() {
-    convertersPanelNode.style.display = "none";
-    formattersPanelNode.style.display = "none";
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "none";
-    generatorsPanelNode.style.display = "flex";
-    validatorsPanelNode.style.display = "none";
-    renderGeneratorTabs();
-  }
-
-  function showValidatorsPanel() {
-    convertersPanelNode.style.display = "none";
-    formattersPanelNode.style.display = "none";
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "none";
-    generatorsPanelNode.style.display = "none";
-    validatorsPanelNode.style.display = "flex";
-    renderValidatorTabs();
-  }
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "flex";
-    generatorsPanelNode.style.display = "none";
-    renderDecoderTabs();
-  }
-
-  function showGeneratorsPanel() {
-    convertersPanelNode.style.display = "none";
-    formattersPanelNode.style.display = "none";
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "none";
-    generatorsPanelNode.style.display = "flex";
-    renderGeneratorTabs();
-  }
-
-  function showDecodersPanel() {
-    convertersPanelNode.style.display = "none";
-    formattersPanelNode.style.display = "none";
-    encodersPanelNode.style.display = "none";
-    decodersPanelNode.style.display = "flex";
-    renderDecoderTabs();
-  }
 
   const converterTabs = {
     'data-formats': { render: renderDataFormatsConverter, setup: setupDataFormatsListeners },
