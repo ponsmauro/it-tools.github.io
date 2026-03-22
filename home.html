@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IT Tools Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>IT Tools Dashboard</h1>
+      </div>
+      <div class="topbar-actions">
+        <a href="index.html" class="btn-dashboard">Open Dashboard</a>
+      </div>
+    </header>
+
+    <main class="home-layout">
+      <section class="hero">
+        <h2>Discover Developer Tools</h2>
+        <p>Search and explore all available tools</p>
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Search tools..."
+            autocomplete="off"
+          />
+          <span class="search-hint" id="searchHint"></span>
+        </div>
+      </section>
+
+      <section class="tools-section">
+        <div id="toolsGrid" class="tools-grid"></div>
+        <div id="noResults" class="no-results" style="display: none;">
+          <p>No tools found matching your search.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/js/tools-data.js"></script>
+    <script src="assets/js/tools-descriptions.js"></script>
+    <script src="assets/js/home.js"></script>
+  </body>
+</html>
