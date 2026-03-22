@@ -509,3 +509,230 @@ Update currentConverterId
 Render converter workspace
     ↓
 Attach event listeners
+
+## New Category Data Models
+
+### DIFF TOOLS
+
+#### Text Diff Model
+```javascript
+{
+  original: string,      // Original text
+  modified: string,      // Modified text
+  differences: [         // Array of diff results
+    { type: 'unchanged' | 'added' | 'removed', line: string }
+  ]
+}
+```
+
+#### JSON Diff Model
+```javascript
+{
+  path: string,          // Dot-notation path to difference
+  type: 'added' | 'removed' | 'changed',
+  oldValue: any,         // For 'changed' and 'removed'
+  newValue: any         // For 'changed' and 'added'
+}
+```
+
+### DATE TOOLS
+
+#### Date Difference Model
+```javascript
+{
+  startDate: Date,
+  endDate: Date,
+  years: number,
+  months: number,
+  days: number,
+  totalDays: number
+}
+```
+
+#### Unix Timestamp Model
+```javascript
+{
+  unixSeconds: number,      // 1234567890
+  unixMilliseconds: number, // 1234567890000
+  iso8601: string,          // "2009-02-13T23:31:30.000Z"
+  utc: string,              // "Fri, 13 Feb 2009 23:31:30 GMT"
+  local: string             // "2/13/2009, 11:31:30 PM"
+}
+```
+
+### TIME TOOLS
+
+#### Timezone Conversion Model
+```javascript
+{
+  sourceTimezone: string,   // "America/New_York"
+  targetTimezone: string,   // "Europe/London"
+  inputTime: string,        // ISO datetime
+  sourceResult: string,     // Formatted datetime in source
+  targetResult: string      // Formatted datetime in target
+}
+```
+
+### NETWORK TOOLS
+
+#### Subnet Calculator Model
+```javascript
+{
+  ipAddress: string,        // "192.168.1.100"
+  subnetMask: string,       // "255.255.255.0"
+  networkAddress: string,   // "192.168.1.0"
+  broadcastAddress: string, // "192.168.1.255"
+  wildcardMask: string,     // "0.0.0.255"
+  totalHosts: number,       // 254
+  usableRange: string      // "192.168.1.1 - 192.168.1.254"
+}
+```
+
+#### CIDR Model
+```javascript
+{
+  cidr: string,             // "192.168.1.0/24"
+  networkAddress: string,
+  subnetMask: string,
+  wildcardMask: string,
+  broadcastAddress: string,
+  usableHosts: number
+}
+```
+
+### HTTP TOOLS
+
+#### HTTP Request Model
+```javascript
+{
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+  url: string,
+  headers: { [key: string]: string },
+  body?: string
+}
+```
+
+#### HTTP Response Model
+```javascript
+{
+  status: number,           // 200
+  statusText: string,       // "OK"
+  headers: { [key: string]: string },
+  body: string
+}
+```
+
+### FILE TOOLS
+
+#### CSV Mapper Model
+```javascript
+{
+  input: string,            // Raw CSV text
+  mapping: {               // Column rename rules
+    [originalColumn]: newName
+  },
+  headers: string[],        // ["Name", "Age", "City"]
+  rows: string[][],         // [["John", "30", "NYC"]]
+  outputHtml: string        // Rendered HTML table
+}
+```
+
+### CRON Models
+
+#### Cron Expression Model
+```javascript
+{
+  expression: string,       // "*/5 * * * *"
+  fields: {
+    minute: string,         // "*/5"
+    hour: string,          // "*"
+    dayOfMonth: string,    // "*"
+    month: string,         // "*"
+    dayOfWeek: string      // "*"
+  },
+  description: string       // Human-readable description
+}
+```
+
+### BITWISE TOOLS
+
+#### Bitwise Operation Model
+```javascript
+{
+  operandA: number,
+  operandB: number,
+  operation: '&' | '|' | '^' | '<<' | '>>' | '~',
+  result: number,
+  binary: string,          // "101"
+  hex: string              // "0x5"
+}
+```
+
+### RESILIENCE TOOLS
+
+#### Retry Schedule Model
+```javascript
+{
+  maxAttempts: number,
+  baseDelay: number,       // milliseconds
+  maxDelay: number,        // milliseconds
+  schedule: [              // Delay for each attempt
+    { attempt: 1, delay: 1000 },
+    { attempt: 2, delay: 2000 },
+    // ...
+  ],
+  totalWait: number        // Sum of all delays
+}
+```
+
+#### Backoff Strategy Model
+```javascript
+{
+  strategy: 'linear' | 'exponential' | 'fibonacci',
+  baseDelay: number,
+  attempts: number,
+  delays: number[]         // Calculated delays per attempt
+}
+```
+
+### SECURITY TOOLS
+
+#### CSP Policy Model
+```javascript
+{
+  directives: {
+    'default-src': string[],
+    'script-src': string[],
+    'style-src': string[],
+    'img-src': string[],
+    'connect-src': string[],
+    'font-src': string[]
+  },
+  headerValue: string      // Full CSP header string
+}
+```
+
+## Tab Catalog Models
+
+All tool categories follow this catalog structure:
+
+```javascript
+window.XXX_TOOLS_CATALOG = [
+  { tabId: "tab-id", tabName: "Tab Name" },
+  { tabId: "another-tab", tabName: "Another Tab" }
+];
+```
+
+### Tab Registry Model
+
+```javascript
+const xxxToolsTabs = {
+  'tab-id': {
+    render: renderFunction,
+    setup: setupFunction
+  }
+};
+
+let currentXxxToolsTabId = 'tab-id';
+let xxxToolsTabsInitialized = false;
+```

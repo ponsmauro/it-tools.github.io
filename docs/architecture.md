@@ -271,3 +271,92 @@ try {
 - Current architecture supports ~50 tools comfortably
 - Beyond 100 tools, consider virtual scrolling
 - For complex tools, separate into standalone pages
+
+## Category Inventory
+
+The dashboard contains 28 tool categories organized in the sidebar.
+
+### Categories (1-10)
+
+| # | Category | Tabs | Purpose |
+|---|----------|------|---------|
+| 1 | CONVERTERS | 11 | Data format conversions |
+| 2 | FORMATTERS | 6 | Code beautify/minify |
+| 3 | ENCODERS | 3 | Text encoding (Base64, URL, HTML) |
+| 4 | DECODERS | 4 | Text decoding (Base64, URL, HTML, JWT) |
+| 5 | GENERATORS | 4 | Generate UUIDs, passwords, commits |
+| 6 | VALIDATORS | 5 | Validate email, URL, domain, semver |
+| 7 | CHECKERS | 4 | Contrast, CORS, secrets, duplicates |
+| 8 | HASHING | 4 | MD5, SHA-1, SHA-256, SHA-512 |
+| 9 | CRYPTO | 2 | Keypair, X.509 certificates |
+| 10 | TEXT TOOLS | 3 | Counter, slug, regex |
+
+### Categories (11-20)
+
+| # | Category | Tabs | Purpose |
+|---|----------|------|---------|
+| 11 | DIFF TOOLS | 2 | Text and JSON comparison |
+| 12 | JSON TOOLS | 2 | Tree viewer, schema validator |
+| 13 | DATE TOOLS | 2 | Date difference, Unix converter |
+| 14 | TIME TOOLS | 1 | Timezone converter |
+| 15 | SCHEDULING TOOLS | 2 | Cron parser, generator |
+| 16 | NETWORK TOOLS | 3 | DNS lookup, subnet, CIDR |
+| 17 | HTTP TOOLS | 3 | Request tester, cURL, headers |
+| 18 | WEBSOCKET TOOLS | 1 | WebSocket client tester |
+| 19 | STORAGE TOOLS | 2 | localStorage, cookies inspector |
+| 20 | FILE TOOLS | 2 | Checksum comparator, CSV mapper |
+
+### Categories (21-28)
+
+| # | Category | Tabs | Purpose |
+|---|----------|------|---------|
+| 21 | CI/CD TOOLS | 2 | YAML validator, GitHub Actions |
+| 22 | CODE QUALITY TOOLS | 2 | ESLint, Prettier playgrounds |
+| 23 | SCAFFOLDING TOOLS | 1 | Project scaffolder |
+| 24 | MARKDOWN TOOLS | 2 | Editor/preview, table generator |
+| 25 | HTML TOOLS | 2 | Sanitizer, formatter |
+| 26 | BITWISE TOOLS | 1 | Bitwise calculator |
+| 27 | RESILIENCE TOOLS | 3 | Retry, backoff, circuit breaker |
+| 28 | SECURITY TOOLS | 1 | CSP generator |
+
+### Panel Architecture
+
+Each category follows the embedded panel pattern:
+
+```javascript
+// index.html - Panel div structure
+<div id="xxxToolsPanel" class="converters-panel" style="display: none;">
+  <nav id="xxxToolsTabs" class="converter-tabs"></nav>
+  <div id="xxxToolsWorkspace" class="converter-workspace"></div>
+</div>
+
+// main.js - Tab registry
+const xxxToolsTabs = {
+  'tab-id': { render: renderXxx, setup: setupXxxListeners }
+};
+
+// converters-data.js - Catalog metadata
+window.XXX_TOOLS_CATALOG = [
+  { tabId: "tab-id", tabName: "Tab Name" }
+];
+```
+
+### Browser APIs Used
+
+| API | Used By |
+|-----|---------|
+| `fetch()` | HTTP TOOLS, WEBSOCKET TOOLS |
+| `WebSocket` | WEBSOCKET TOOLS |
+| `crypto.subtle` | HASHING, FILE TOOLS |
+| `Intl.DateTimeFormat` | TIME TOOLS, DATE TOOLS |
+| `localStorage` | STORAGE TOOLS |
+| `document.cookie` | STORAGE TOOLS |
+
+### External Dependencies
+
+| Library | Used By |
+|--------|---------|
+| js-yaml | CI/CD TOOLS, JSON TOOLS |
+| xml2js | CONVERTERS (XML/JSON) |
+| @iarna/toml | CONVERTERS (TOML/JSON) |
+| js-beautify | FORMATTERS, HTML TOOLS |

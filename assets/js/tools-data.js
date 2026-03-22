@@ -18,7 +18,6 @@ window.TOOLS_CATALOG = [
     ]
   },
   { category: "FORMATTERS", tools: ["JSON formatter", "XML formatter", "HTML formatter", "CSS formatter", "JS formatter", "SQL formatter"] },
-  { category: "MINIFIERS", tools: ["JSON minifier", "XML minifier", "HTML minifier", "CSS minifier", "JS minifier"] },
   { category: "ENCODERS", tools: ["Base64 encode", "URL encode", "HTML entities encode"] },
   { category: "DECODERS", tools: ["Base64 decode", "URL decode", "HTML entities decode", "JWT decode"] },
   {
@@ -63,5 +62,5 @@ window.TOOLS_CATALOG = [
   { category: "HTML TOOLS", tools: ["HTML sanitizer/render", "HTML formatter/minifier"] },
   { category: "BITWISE TOOLS", tools: ["Bitwise calculator", "Binary/base numeric tools"] },
   { category: "RESILIENCE TOOLS", tools: ["Retry simulator", "Backoff simulator", "Circuit-breaker simulator"] },
-  { category: "SECURITY POLICY TOOLS", tools: ["CSP policy generator"] }
+  { category: "SECURITY TOOLS", tools: ["CSP policy generator"] }
 ];
