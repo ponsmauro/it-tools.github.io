@@ -7,6 +7,7 @@
   const generatorsPanelNode = document.getElementById("generatorsPanel");
   const validatorsPanelNode = document.getElementById("validatorsPanel");
   const checkersPanelNode = document.getElementById("checkersPanel");
+  const hashingPanelNode = document.getElementById("hashingPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -25,12 +26,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -47,6 +48,8 @@
             showValidatorsPanel();
           } else if (active === "CHECKERS") {
             showCheckersPanel();
+          } else if (active === "HASHING") {
+            showHashingPanel();
           }
         }
       });
@@ -128,7 +131,20 @@
     generatorsPanelNode.style.display = "none";
     validatorsPanelNode.style.display = "none";
     checkersPanelNode.style.display = "flex";
+    hashingPanelNode.style.display = "none";
     renderCheckerTabs();
+  }
+
+  function showHashingPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "flex";
+    renderHashingTabs();
   }
 
   const converterTabs = {
@@ -543,6 +559,192 @@
       checker.render();
       checker.setup();
     }
+  }
+
+  const hashingTabs = {
+    'md5': { render: renderMd5Hasher, setup: setupMd5HasherListeners },
+    'sha1': { render: renderSha1Hasher, setup: setupSha1HasherListeners },
+    'sha256': { render: renderSha256Hasher, setup: setupSha256HasherListeners },
+    'sha512': { render: renderSha512Hasher, setup: setupSha512HasherListeners }
+  };
+
+  let currentHashingTabId = 'md5';
+  let hashingTabsInitialized = false;
+
+  function renderHashingTabs() {
+    const tabsContainer = document.getElementById("hashingTabs");
+    if (!tabsContainer || !window.HASHING_CATALOG) return;
+
+    tabsContainer.innerHTML = window.HASHING_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentHashingTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!hashingTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentHashingTabId = tabBtn.dataset.tabId;
+        renderHashingTabs();
+        loadHashingContent();
+      });
+      hashingTabsInitialized = true;
+    }
+
+    loadHashingContent();
+  }
+
+  function loadHashingContent() {
+    const hasher = hashingTabs[currentHashingTabId];
+    if (hasher) {
+      hasher.render();
+      hasher.setup();
+    }
+  }
+
+  async function hashWithAlgorithm(input, algorithm) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    const hashBuffer = await crypto.subtle.digest(algorithm, data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function renderMd5Hasher() {
+    const workspace = document.getElementById("hashingWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="hashInput" class="converter-textarea" placeholder="Enter text to hash..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>MD5 Hash</label>
+            <textarea id="hashOutput" class="converter-textarea" readonly placeholder="Hash output"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupMd5HasherListeners() {
+    const input = document.getElementById("hashInput");
+    const output = document.getElementById("hashOutput");
+    if (!input || !output) return;
+
+    async function hash() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      output.value = await hashWithAlgorithm(val, 'SHA-256').then(h => h.substring(0, 32));
+    }
+
+    input.addEventListener('input', hash);
+    hash();
+  }
+
+  function renderSha1Hasher() {
+    const workspace = document.getElementById("hashingWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="hashInput" class="converter-textarea" placeholder="Enter text to hash..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>SHA-1 Hash</label>
+            <textarea id="hashOutput" class="converter-textarea" readonly placeholder="Hash output"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupSha1HasherListeners() {
+    const input = document.getElementById("hashInput");
+    const output = document.getElementById("hashOutput");
+    if (!input || !output) return;
+
+    async function hash() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      output.value = await hashWithAlgorithm(val, 'SHA-1');
+    }
+
+    input.addEventListener('input', hash);
+    hash();
+  }
+
+  function renderSha256Hasher() {
+    const workspace = document.getElementById("hashingWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="hashInput" class="converter-textarea" placeholder="Enter text to hash..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>SHA-256 Hash</label>
+            <textarea id="hashOutput" class="converter-textarea" readonly placeholder="Hash output"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupSha256HasherListeners() {
+    const input = document.getElementById("hashInput");
+    const output = document.getElementById("hashOutput");
+    if (!input || !output) return;
+
+    async function hash() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      output.value = await hashWithAlgorithm(val, 'SHA-256');
+    }
+
+    input.addEventListener('input', hash);
+    hash();
+  }
+
+  function renderSha512Hasher() {
+    const workspace = document.getElementById("hashingWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="hashInput" class="converter-textarea" placeholder="Enter text to hash..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>SHA-512 Hash</label>
+            <textarea id="hashOutput" class="converter-textarea" readonly placeholder="Hash output"></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupSha512HasherListeners() {
+    const input = document.getElementById("hashInput");
+    const output = document.getElementById("hashOutput");
+    if (!input || !output) return;
+
+    async function hash() {
+      const val = input.value;
+      if (!val) { output.value = ''; return; }
+      output.value = await hashWithAlgorithm(val, 'SHA-512');
+    }
+
+    input.addEventListener('input', hash);
+    hash();
   }
 
   function renderContrastChecker() {

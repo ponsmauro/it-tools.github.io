@@ -55,3 +55,10 @@ window.CHECKERS_CATALOG = [
   { tabId: "secrets", tabName: "Secrets" },
   { tabId: "duplicate", tabName: "Duplicates" }
 ];
+
+window.HASHING_CATALOG = [
+  { tabId: "md5", tabName: "MD5" },
+  { tabId: "sha1", tabName: "SHA-1" },
+  { tabId: "sha256", tabName: "SHA-256" },
+  { tabId: "sha512", tabName: "SHA-512" }
+];
