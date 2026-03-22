@@ -8,6 +8,7 @@
   const validatorsPanelNode = document.getElementById("validatorsPanel");
   const checkersPanelNode = document.getElementById("checkersPanel");
   const hashingPanelNode = document.getElementById("hashingPanel");
+  const cryptoPanelNode = document.getElementById("cryptoPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -26,12 +27,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -50,6 +51,8 @@
             showCheckersPanel();
           } else if (active === "HASHING") {
             showHashingPanel();
+          } else if (active === "CRYPTO") {
+            showCryptoPanel();
           }
         }
       });
@@ -144,7 +147,21 @@
     validatorsPanelNode.style.display = "none";
     checkersPanelNode.style.display = "none";
     hashingPanelNode.style.display = "flex";
+    cryptoPanelNode.style.display = "none";
     renderHashingTabs();
+  }
+
+  function showCryptoPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "flex";
+    renderCryptoTabs();
   }
 
   const converterTabs = {
@@ -745,6 +762,150 @@
 
     input.addEventListener('input', hash);
     hash();
+  }
+
+  const cryptoTabs = {
+    'keypair': { render: renderKeypairGenerator, setup: setupKeypairGeneratorListeners },
+    'x509': { render: renderX509Inspector, setup: setupX509InspectorListeners }
+  };
+
+  let currentCryptoTabId = 'keypair';
+  let cryptoTabsInitialized = false;
+
+  function renderCryptoTabs() {
+    const tabsContainer = document.getElementById("cryptoTabs");
+    if (!tabsContainer || !window.CRYPTO_CATALOG) return;
+
+    tabsContainer.innerHTML = window.CRYPTO_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentCryptoTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!cryptoTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCryptoTabId = tabBtn.dataset.tabId;
+        renderCryptoTabs();
+        loadCryptoContent();
+      });
+      cryptoTabsInitialized = true;
+    }
+
+    loadCryptoContent();
+  }
+
+  function loadCryptoContent() {
+    const crypto = cryptoTabs[currentCryptoTabId];
+    if (crypto) {
+      crypto.render();
+      crypto.setup();
+    }
+  }
+
+  function renderKeypairGenerator() {
+    const workspace = document.getElementById("cryptoWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Key Type</label>
+            <select id="keyType" class="converter-select">
+              <option value="RSA-OAEP">RSA-OAEP</option>
+              <option value="AES-GCM">AES-GCM</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Key Size</label>
+            <select id="keySize" class="converter-select">
+              <option value="2048">2048</option>
+              <option value="4096">4096</option>
+            </select>
+          </div>
+        </div>
+        <button id="generateKeyBtn" class="convert-btn">Generate Keypair</button>
+        <div class="converter-inputs" style="margin-top:16px;">
+          <div class="input-group" style="flex:1;">
+            <label>Public Key</label>
+            <textarea id="publicKey" class="converter-textarea" readonly placeholder="Public key..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Private Key</label>
+            <textarea id="privateKey" class="converter-textarea" readonly placeholder="Private key..."></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  async function setupKeypairGeneratorListeners() {
+    const keyType = document.getElementById("keyType");
+    const keySize = document.getElementById("keySize");
+    const generateBtn = document.getElementById("generateKeyBtn");
+    const publicKey = document.getElementById("publicKey");
+    const privateKey = document.getElementById("privateKey");
+    if (!generateBtn || !publicKey || !privateKey) return;
+
+    async function generate() {
+      try {
+        const keyPair = await crypto.subtle.generateKey(
+          {
+            name: keyType.value,
+            modulusLength: parseInt(keySize.value),
+            publicExponent: new Uint8Array([1, 0, 1]),
+            hash: "SHA-256"
+          },
+          true,
+          ["encrypt", "decrypt"]
+        );
+        const publicExported = await crypto.subtle.exportKey("spki", keyPair.publicKey);
+        const privateExported = await crypto.subtle.exportKey("pkcs8", keyPair.privateKey);
+        publicKey.value = btoa(String.fromCharCode(...new Uint8Array(publicExported)));
+        privateKey.value = btoa(String.fromCharCode(...new Uint8Array(privateExported)));
+      } catch (e) {
+        publicKey.value = 'Error generating keypair';
+        privateKey.value = e.message;
+      }
+    }
+
+    generateBtn.addEventListener('click', generate);
+  }
+
+  function renderX509Inspector() {
+    const workspace = document.getElementById("cryptoWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Certificate (PEM)</label>
+            <textarea id="certInput" class="converter-textarea" placeholder="Paste certificate here..."></textarea>
+          </div>
+        </div>
+        <div id="certInfo" style="margin-top:12px;"></div>
+      </div>
+    `;
+  }
+
+  function setupX509InspectorListeners() {
+    const certInput = document.getElementById("certInput");
+    const certInfo = document.getElementById("certInfo");
+    if (!certInput || !certInfo) return;
+
+    function parseCert() {
+      const cert = certInput.value.trim();
+      if (!cert) {
+        certInfo.innerHTML = '';
+        return;
+      }
+      certInfo.innerHTML = '<span style="color:#ffa500;">Certificate parsing not available in browser (requires external library)</span>';
+    }
+
+    certInput.addEventListener('input', parseCert);
   }
 
   function renderContrastChecker() {

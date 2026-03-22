@@ -62,3 +62,8 @@ window.HASHING_CATALOG = [
   { tabId: "sha256", tabName: "SHA-256" },
   { tabId: "sha512", tabName: "SHA-512" }
 ];
+
+window.CRYPTO_CATALOG = [
+  { tabId: "keypair", tabName: "Keypair" },
+  { tabId: "x509", tabName: "X.509" }
+];
