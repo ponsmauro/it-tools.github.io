@@ -14,6 +14,10 @@
   const jsonToolsPanelNode = document.getElementById("jsonToolsPanel");
   const dateToolsPanelNode = document.getElementById("dateToolsPanel");
   const timeToolsPanelNode = document.getElementById("timeToolsPanel");
+  const schedulingToolsPanelNode = document.getElementById("schedulingToolsPanel");
+  const networkToolsPanelNode = document.getElementById("networkToolsPanel");
+  const httpToolsPanelNode = document.getElementById("httpToolsPanel");
+  const websocketToolsPanelNode = document.getElementById("websocketToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -32,12 +36,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -68,6 +72,14 @@
             showDateToolsPanel();
           } else if (active === "TIME TOOLS") {
             showTimeToolsPanel();
+          } else if (active === "SCHEDULING TOOLS") {
+            showSchedulingToolsPanel();
+          } else if (active === "NETWORK TOOLS") {
+            showNetworkToolsPanel();
+          } else if (active === "HTTP TOOLS") {
+            showHttpToolsPanel();
+          } else if (active === "WEBSOCKET TOOLS") {
+            showWebsocketToolsPanel();
           }
         }
       });
@@ -267,7 +279,99 @@
     jsonToolsPanelNode.style.display = "none";
     dateToolsPanelNode.style.display = "none";
     timeToolsPanelNode.style.display = "flex";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
     renderTimeToolsTabs();
+  }
+
+  function showSchedulingToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "flex";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    renderSchedulingToolsTabs();
+  }
+
+  function showNetworkToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "flex";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    renderNetworkToolsTabs();
+  }
+
+  function showHttpToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "flex";
+    websocketToolsPanelNode.style.display = "none";
+    renderHttpToolsTabs();
+  }
+
+  function showWebsocketToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "flex";
+    renderWebsocketToolsTabs();
   }
 
   const converterTabs = {
@@ -1497,6 +1601,334 @@
     source?.addEventListener('change', convert);
     target?.addEventListener('change', convert);
     input?.addEventListener('input', convert);
+  }
+
+  // SCHEDULING TOOLS
+  const schedulingToolsTabs = {
+    'cron-parser': { render: renderCronParser, setup: setupCronParserListeners },
+    'cron-generator': { render: renderCronGenerator, setup: setupCronGeneratorListeners }
+  };
+  let currentSchedulingToolsTabId = 'cron-parser';
+  let schedulingToolsTabsInitialized = false;
+  function renderSchedulingToolsTabs() {
+    const tabsContainer = document.getElementById("schedulingToolsTabs");
+    if (!tabsContainer || !window.SCHEDULING_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SCHEDULING_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentSchedulingToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!schedulingToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentSchedulingToolsTabId = tabBtn.dataset.tabId;
+        renderSchedulingToolsTabs();
+        loadSchedulingToolsContent();
+      });
+      schedulingToolsTabsInitialized = true;
+    }
+    loadSchedulingToolsContent();
+  }
+  function loadSchedulingToolsContent() {
+    const tool = schedulingToolsTabs[currentSchedulingToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderCronParser() {
+    const workspace = document.getElementById("schedulingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Cron Expression</label><input type="text" id="cronInput" class="converter-input" placeholder="* * * * *"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Date/Time to Check</label><input type="datetime-local" id="cronCheckDate" class="converter-input"></div></div><div id="cronResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCronParserListeners() {
+    const input = document.getElementById("cronInput");
+    const checkDate = document.getElementById("cronCheckDate");
+    const result = document.getElementById("cronResult");
+    function parse() {
+      const cron = input.value.trim();
+      if (!cron) { result.innerHTML = ''; return; }
+      const parts = cron.split(/\s+/);
+      if (parts.length !== 5) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid cron expression (need 5 fields)</span>'; return; }
+      const [min, hour, day, month, dow] = parts;
+      const fieldNames = ['Minute', 'Hour', 'Day of Month', 'Month', 'Day of Week'];
+      const fieldValues = [min, hour, day, month, dow];
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+      fieldNames.forEach((name, i) => { html += `<div><strong>${name}:</strong> ${fieldValues[i]}</div>`; });
+      html += '</div>';
+      if (checkDate.value) {
+        const date = new Date(checkDate.value);
+        const mins = min === '*' || min.split(',').includes(String(date.getMinutes())) ? true : (min.includes('/') ? (date.getMinutes() % parseInt(min.split('/')[1]) === 0) : false);
+        const hrs = hour === '*' || hour.split(',').includes(String(date.getHours())) ? true : (hour.includes('/') ? (date.getHours() % parseInt(hour.split('/')[1]) === 0) : false);
+        const runs = mins && hrs;
+        html += `<div style="margin-top:12px;">At <strong>${date.toLocaleString()}</strong>: <span style="color:${runs ? '#90ee90' : '#ff6b6b'};">${runs ? 'WILL RUN' : 'will NOT run'}</span></div>`;
+      }
+      result.innerHTML = html;
+    }
+    input?.addEventListener('input', parse);
+    checkDate?.addEventListener('input', parse);
+  }
+  function renderCronGenerator() {
+    const workspace = document.getElementById("schedulingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Minute</label><select id="cronGenMin" class="converter-select"><option value="*">Every minute</option><option value="0">At minute 0</option><option value="*/5">Every 5 minutes</option><option value="*/10">Every 10 minutes</option><option value="*/15">Every 15 minutes</option><option value="*/30">Every 30 minutes</option></select></div><div class="input-group"><label>Hour</label><select id="cronGenHour" class="converter-select"><option value="*">Every hour</option><option value="0">At midnight</option><option value="9">At 9 AM</option><option value="12">At noon</option><option value="18">At 6 PM</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Day of Month</label><select id="cronGenDay" class="converter-select"><option value="*">Every day</option><option value="1">1st of month</option><option value="15">15th of month</option></select></div><div class="input-group"><label>Month</label><select id="cronGenMonth" class="converter-select"><option value="*">Every month</option><option value="1">January</option><option value="6">June</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Day of Week</label><select id="cronGenDow" class="converter-select"><option value="*">Every day</option><option value="1-5">Weekdays</option><option value="0,6">Weekends</option></select></div></div><div id="cronGenResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCronGeneratorListeners() {
+    const mins = document.getElementById("cronGenMin");
+    const hrs = document.getElementById("cronGenHour");
+    const day = document.getElementById("cronGenDay");
+    const month = document.getElementById("cronGenMonth");
+    const dow = document.getElementById("cronGenDow");
+    const result = document.getElementById("cronGenResult");
+    function generate() {
+      const cron = `${mins.value} ${hrs.value} ${day.value} ${month.value} ${dow.value}`;
+      result.innerHTML = `<div style="font-family:monospace;font-size:1.2rem;background:#e8f5e9;padding:12px;border-radius:4px;"><strong>${cron}</strong></div>`;
+    }
+    [mins, hrs, day, month, dow].forEach(el => el?.addEventListener('change', generate));
+  }
+
+  // NETWORK TOOLS
+  const networkToolsTabs = {
+    'dns': { render: renderDnsLookup, setup: setupDnsLookupListeners },
+    'subnet': { render: renderSubnetCalc, setup: setupSubnetCalcListeners },
+    'cidr': { render: renderCidrTool, setup: setupCidrToolListeners }
+  };
+  let currentNetworkToolsTabId = 'dns';
+  let networkToolsTabsInitialized = false;
+  function renderNetworkToolsTabs() {
+    const tabsContainer = document.getElementById("networkToolsTabs");
+    if (!tabsContainer || !window.NETWORK_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.NETWORK_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentNetworkToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!networkToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentNetworkToolsTabId = tabBtn.dataset.tabId;
+        renderNetworkToolsTabs();
+        loadNetworkToolsContent();
+      });
+      networkToolsTabsInitialized = true;
+    }
+    loadNetworkToolsContent();
+  }
+  function loadNetworkToolsContent() {
+    const tool = networkToolsTabs[currentNetworkToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderDnsLookup() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Domain Name</label><input type="text" id="dnsInput" class="converter-input" placeholder="example.com"></div></div><div id="dnsResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDnsLookupListeners() {
+    const input = document.getElementById("dnsInput");
+    const result = document.getElementById("dnsResult");
+    function lookup() {
+      const domain = input.value.trim();
+      if (!domain) { result.innerHTML = ''; return; }
+      const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      if (ipPattern.test(domain)) {
+        result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Reverse DNS:</strong> ${domain.split('.').reverse().join('.')}.in-addr.arpa (simulated)</div></div>`;
+      } else {
+        result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>A Record:</strong> 93.184.216.34 (simulated)</div><div><strong>AAAA Record:</strong> 2606:2800:220:1::248:1893 (simulated)</div><div><strong>MX Record:</strong> mail.${domain} (simulated)</div><div style="color:#ffa500;margin-top:8px;">Note: DNS lookup requires a server-side API</div></div>`;
+      }
+    }
+    input?.addEventListener('input', lookup);
+  }
+  function renderSubnetCalc() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>IP Address</label><input type="text" id="subnetIp" class="converter-input" placeholder="192.168.1.0"></div><div class="input-group"><label>Subnet Mask</label><input type="text" id="subnetMask" class="converter-input" placeholder="255.255.255.0"></div></div><div id="subnetResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupSubnetCalcListeners() {
+    const ip = document.getElementById("subnetIp");
+    const mask = document.getElementById("subnetMask");
+    const result = document.getElementById("subnetResult");
+    function calc() {
+      const ipVal = ip.value.trim();
+      const maskVal = mask.value.trim();
+      if (!ipVal || !maskVal) { result.innerHTML = ''; return; }
+      const ipParts = ipVal.split('.').map(Number);
+      const maskParts = maskVal.split('.').map(Number);
+      if (ipParts.length !== 4 || maskParts.length !== 4 || ipParts.some(p => isNaN(p) || p > 255) || maskParts.some(p => isNaN(p) || p > 255)) {
+        result.innerHTML = '<span style="color:#ff6b6b;">Invalid IP or mask</span>'; return;
+      }
+      const wildcard = maskParts.map(p => 255 - p);
+      const network = ipParts.map((p, i) => p & maskParts[i]);
+      const broadcast = ipParts.map((p, i) => p | wildcard[i]);
+      const totalHosts = network.map((_, i) => ((255 - maskParts[i]) + 1)).reduce((a, b) => a * b, 1) - 2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Network:</strong> ${network.join('.')}</div><div><strong>Broadcast:</strong> ${broadcast.join('.')}</div><div><strong>Wildcard:</strong> ${wildcard.join('.')}</div><div><strong>Total Hosts:</strong> ${Math.max(0, totalHosts)}</div><div><strong>Usable Range:</strong> ${network.slice(0,3).join('.')}.${network[3]+1} - ${broadcast.slice(0,3).join('.')}.${broadcast[3]-1}</div></div>`;
+    }
+    ip?.addEventListener('input', calc);
+    mask?.addEventListener('input', calc);
+  }
+  function renderCidrTool() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>CIDR Notation</label><input type="text" id="cidrInput" class="converter-input" placeholder="192.168.1.0/24"></div></div><div id="cidrResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCidrToolListeners() {
+    const input = document.getElementById("cidrInput");
+    const result = document.getElementById("cidrResult");
+    function calc() {
+      const cidr = input.value.trim();
+      if (!cidr) { result.innerHTML = ''; return; }
+      const match = cidr.match(/^(\d+\.\d+\.\d+\.\d+)\/(\d+)$/);
+      if (!match) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid CIDR (e.g., 192.168.1.0/24)</span>'; return; }
+      const [_, baseIp, bits] = match;
+      const prefix = parseInt(bits);
+      if (prefix < 0 || prefix > 32) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid prefix (0-32)</span>'; return; }
+      const mask = Array(4).fill(0).map((_, i) => i < Math.floor(prefix / 8) ? 255 : i === Math.floor(prefix / 8) ? 256 - Math.pow(2, 8 - (prefix % 8 || 8)) : 0);
+      const wildcard = mask.map(p => 255 - p);
+      const baseParts = baseIp.split('.').map(Number);
+      const network = baseParts.map((p, i) => p & mask[i]);
+      const broadcast = baseParts.map((p, i) => p | wildcard[i]);
+      const hosts = Math.pow(2, 32 - prefix) - 2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Network:</strong> ${network.join('.')}</div><div><strong>Subnet Mask:</strong> ${mask.join('.')}</div><div><strong>Wildcard:</strong> ${wildcard.join('.')}</div><div><strong>Broadcast:</strong> ${broadcast.join('.')}</div><div><strong>Usable Hosts:</strong> ${Math.max(0, hosts)}</div></div>`;
+    }
+    input?.addEventListener('input', calc);
+  }
+
+  // HTTP TOOLS
+  const httpToolsTabs = {
+    'request': { render: renderHttpRequest, setup: setupHttpRequestListeners },
+    'curl': { render: renderCurlBuilder, setup: setupCurlBuilderListeners },
+    'headers': { render: renderHttpHeaders, setup: setupHttpHeadersListeners }
+  };
+  let currentHttpToolsTabId = 'request';
+  let httpToolsTabsInitialized = false;
+  function renderHttpToolsTabs() {
+    const tabsContainer = document.getElementById("httpToolsTabs");
+    if (!tabsContainer || !window.HTTP_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.HTTP_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentHttpToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!httpToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentHttpToolsTabId = tabBtn.dataset.tabId;
+        renderHttpToolsTabs();
+        loadHttpToolsContent();
+      });
+      httpToolsTabsInitialized = true;
+    }
+    loadHttpToolsContent();
+  }
+  function loadHttpToolsContent() {
+    const tool = httpToolsTabs[currentHttpToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderHttpRequest() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Method</label><select id="httpMethod" class="converter-select"><option value="GET">GET</option><option value="POST">POST</option><option value="PUT">PUT</option><option value="DELETE">DELETE</option><option value="PATCH">PATCH</option></select></div><div class="input-group"><label>URL</label><input type="text" id="httpUrl" class="converter-input" placeholder="https://api.example.com/endpoint"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Headers (JSON)</label><textarea id="httpHeaders" class="converter-textarea" placeholder='{"Authorization": "Bearer token"}'></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Body</label><textarea id="httpBody" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div style="margin-top:12px;"><button id="httpSendBtn" class="converter-btn">Send Request</button></div><div id="httpResponse" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHttpRequestListeners() {
+    const method = document.getElementById("httpMethod");
+    const url = document.getElementById("httpUrl");
+    const headers = document.getElementById("httpHeaders");
+    const body = document.getElementById("httpBody");
+    const sendBtn = document.getElementById("httpSendBtn");
+    const response = document.getElementById("httpResponse");
+    sendBtn?.addEventListener('click', async () => {
+      try {
+        const opts = { method: method.value, headers: JSON.parse(headers.value || '{}') };
+        if (['POST', 'PUT', 'PATCH'].includes(method.value) && body.value) opts.body = body.value;
+        response.innerHTML = `<div style="color:#ffa500;">Sending ${method.value} request to ${url.value}...</div>`;
+        const res = await fetch(url.value, opts);
+        const text = await res.text();
+        response.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Status:</strong> ${res.status} ${res.statusText}</div><div style="margin-top:8px;"><strong>Response:</strong><pre style="white-space:pre-wrap;">${text.slice(0, 500)}${text.length > 500 ? '...' : ''}</pre></div></div>`;
+      } catch (e) {
+        response.innerHTML = `<div style="color:#ff6b6b;">Error: ${e.message}</div>`;
+      }
+    });
+  }
+  function renderCurlBuilder() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Method</label><select id="curlMethod" class="converter-select"><option value="GET">GET</option><option value="POST">POST</option><option value="PUT">PUT</option><option value="DELETE">DELETE</option></select></div><div class="input-group"><label>URL</label><input type="text" id="curlUrl" class="converter-input" placeholder="https://api.example.com"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Headers</label><textarea id="curlHeaders" class="converter-textarea" placeholder="Content-Type: application/json"></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Body</label><textarea id="curlBody" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div id="curlResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCurlBuilderListeners() {
+    const method = document.getElementById("curlMethod");
+    const url = document.getElementById("curlUrl");
+    const headers = document.getElementById("curlHeaders");
+    const body = document.getElementById("curlBody");
+    const result = document.getElementById("curlResult");
+    function build() {
+      let curl = `curl -X ${method.value}`;
+      const headerLines = headers.value.split('\n').filter(h => h.trim());
+      headerLines.forEach(h => { curl += ` \\\n  -H '${h.trim()}'`; });
+      if (['POST', 'PUT', 'PATCH'].includes(method.value) && body.value.trim()) {
+        curl += ` \\\n  -d '${body.value.trim()}'`;
+      }
+      curl += ` \\\n  '${url.value}'`;
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${curl}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    [method, url, headers, body].forEach(el => el?.addEventListener('input', build));
+  }
+  function renderHttpHeaders() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>URL</label><input type="text" id="headersUrl" class="converter-input" placeholder="https://example.com"></div></div><div style="margin-top:12px;"><button id="headersFetchBtn" class="converter-btn">Fetch Headers</button></div><div id="headersResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHttpHeadersListeners() {
+    const url = document.getElementById("headersUrl");
+    const fetchBtn = document.getElementById("headersFetchBtn");
+    const result = document.getElementById("headersResult");
+    fetchBtn?.addEventListener('click', async () => {
+      try {
+        result.innerHTML = `<div style="color:#ffa500;">Fetching headers...</div>`;
+        const res = await fetch(url.value, { method: 'HEAD' });
+        let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+        res.headers.forEach((val, key) => { html += `<div><strong>${key}:</strong> ${val}</div>`; });
+        html += '</div>';
+        result.innerHTML = html;
+      } catch (e) {
+        result.innerHTML = `<div style="color:#ff6b6b;">Error: ${e.message}</div>`;
+      }
+    });
+  }
+
+  // WEBSOCKET TOOLS
+  const websocketToolsTabs = {
+    'tester': { render: renderWebsocketTester, setup: setupWebsocketTesterListeners }
+  };
+  let currentWebsocketToolsTabId = 'tester';
+  let websocketToolsTabsInitialized = false;
+  function renderWebsocketToolsTabs() {
+    const tabsContainer = document.getElementById("websocketToolsTabs");
+    if (!tabsContainer || !window.WEBSOCKET_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.WEBSOCKET_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentWebsocketToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!websocketToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentWebsocketToolsTabId = tabBtn.dataset.tabId;
+        renderWebsocketToolsTabs();
+        loadWebsocketToolsContent();
+      });
+      websocketToolsTabsInitialized = true;
+    }
+    loadWebsocketToolsContent();
+  }
+  function loadWebsocketToolsContent() {
+    const tool = websocketToolsTabs[currentWebsocketToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderWebsocketTester() {
+    const workspace = document.getElementById("websocketToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>WebSocket URL</label><input type="text" id="wsUrl" class="converter-input" placeholder="wss://echo.websocket.org"></div></div><div style="margin-top:12px;"><button id="wsConnectBtn" class="converter-btn">Connect</button><button id="wsDisconnectBtn" class="converter-btn" style="margin-left:8px;" disabled>Disconnect</button></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Message</label><textarea id="wsMessage" class="converter-textarea" placeholder="Enter message..."></textarea></div></div><div style="margin-top:12px;"><button id="wsSendBtn" class="converter-btn" disabled>Send</button></div><div id="wsLog" style="margin-top:12px;max-height:300px;overflow-y:auto;font-family:monospace;background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;"></div></div>`;
+  }
+  function setupWebsocketTesterListeners() {
+    const url = document.getElementById("wsUrl");
+    const connectBtn = document.getElementById("wsConnectBtn");
+    const disconnectBtn = document.getElementById("wsDisconnectBtn");
+    const message = document.getElementById("wsMessage");
+    const sendBtn = document.getElementById("wsSendBtn");
+    const log = document.getElementById("wsLog");
+    let socket = null;
+    function logMsg(msg, type = 'info') {
+      const colors = { info: '#d4d4d4', send: '#90ee90', recv: '#87ceeb', error: '#ff6b6b' };
+      log.innerHTML += `<div style="color:${colors[type] || colors.info};">${new Date().toLocaleTimeString()} ${msg}</div>`;
+      log.scrollTop = log.scrollHeight;
+    }
+    connectBtn?.addEventListener('click', () => {
+      try {
+        socket = new WebSocket(url.value);
+        socket.onopen = () => { logMsg('[Connected]', 'info'); connectBtn.disabled = true; disconnectBtn.disabled = false; sendBtn.disabled = false; };
+        socket.onclose = () => { logMsg('[Disconnected]', 'info'); connectBtn.disabled = false; disconnectBtn.disabled = true; sendBtn.disabled = true; socket = null; };
+        socket.onerror = (e) => logMsg('[Error]', 'error');
+        socket.onmessage = (e) => logMsg(`[Received] ${e.data}`, 'recv');
+        logMsg(`[Connecting to ${url.value}...]`, 'info');
+      } catch (e) { logMsg(`[Error] ${e.message}`, 'error'); }
+    });
+    disconnectBtn?.addEventListener('click', () => { if (socket) socket.close(); });
+    sendBtn?.addEventListener('click', () => { if (socket && socket.readyState === WebSocket.OPEN) { socket.send(message.value); logMsg(`[Sent] ${message.value}`, 'send'); } });
   }
 
   function renderContrastChecker() {

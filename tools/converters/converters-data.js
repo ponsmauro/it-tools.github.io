@@ -92,3 +92,24 @@ window.DATE_TOOLS_CATALOG = [
 window.TIME_TOOLS_CATALOG = [
   { tabId: "timezone", tabName: "Timezone" }
 ];
+
+window.SCHEDULING_TOOLS_CATALOG = [
+  { tabId: "cron-parser", tabName: "Cron Parser" },
+  { tabId: "cron-generator", tabName: "Cron Generator" }
+];
+
+window.NETWORK_TOOLS_CATALOG = [
+  { tabId: "dns", tabName: "DNS Lookup" },
+  { tabId: "subnet", tabName: "Subnet Calculator" },
+  { tabId: "cidr", tabName: "CIDR Tool" }
+];
+
+window.HTTP_TOOLS_CATALOG = [
+  { tabId: "request", tabName: "Request Tester" },
+  { tabId: "curl", tabName: "cURL Builder" },
+  { tabId: "headers", tabName: "Headers" }
+];
+
+window.WEBSOCKET_TOOLS_CATALOG = [
+  { tabId: "tester", tabName: "WebSocket Tester" }
+];
