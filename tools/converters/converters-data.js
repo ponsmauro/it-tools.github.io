@@ -113,3 +113,23 @@ window.HTTP_TOOLS_CATALOG = [
 window.WEBSOCKET_TOOLS_CATALOG = [
   { tabId: "tester", tabName: "WebSocket Tester" }
 ];
+
+window.STORAGE_TOOLS_CATALOG = [
+  { tabId: "localstorage", tabName: "localStorage" },
+  { tabId: "cookies", tabName: "Cookies" }
+];
+
+window.FILE_TOOLS_CATALOG = [
+  { tabId: "checksum", tabName: "Checksum Comparator" },
+  { tabId: "csv", tabName: "CSV Mapper" }
+];
+
+window.CICD_TOOLS_CATALOG = [
+  { tabId: "yaml", tabName: "YAML Validator" },
+  { tabId: "github-actions", tabName: "GitHub Actions" }
+];
+
+window.CODE_QUALITY_TOOLS_CATALOG = [
+  { tabId: "eslint", tabName: "ESLint Playground" },
+  { tabId: "prettier", tabName: "Prettier Playground" }
+];

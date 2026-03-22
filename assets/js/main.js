@@ -18,6 +18,10 @@
   const networkToolsPanelNode = document.getElementById("networkToolsPanel");
   const httpToolsPanelNode = document.getElementById("httpToolsPanel");
   const websocketToolsPanelNode = document.getElementById("websocketToolsPanel");
+  const storageToolsPanelNode = document.getElementById("storageToolsPanel");
+  const fileToolsPanelNode = document.getElementById("fileToolsPanel");
+  const ciCdToolsPanelNode = document.getElementById("ciCdToolsPanel");
+  const codeQualityToolsPanelNode = document.getElementById("codeQualityToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -36,12 +40,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -80,6 +84,14 @@
             showHttpToolsPanel();
           } else if (active === "WEBSOCKET TOOLS") {
             showWebsocketToolsPanel();
+          } else if (active === "STORAGE TOOLS") {
+            showStorageToolsPanel();
+          } else if (active === "FILE TOOLS") {
+            showFileToolsPanel();
+          } else if (active === "CI/CD TOOLS") {
+            showCiCdToolsPanel();
+          } else if (active === "CODE QUALITY TOOLS") {
+            showCodeQualityToolsPanel();
           }
         }
       });
@@ -371,7 +383,115 @@
     networkToolsPanelNode.style.display = "none";
     httpToolsPanelNode.style.display = "none";
     websocketToolsPanelNode.style.display = "flex";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
     renderWebsocketToolsTabs();
+  }
+
+  function showStorageToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "flex";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderStorageToolsTabs();
+  }
+
+  function showFileToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "flex";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderFileToolsTabs();
+  }
+
+  function showCiCdToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "flex";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderCiCdToolsTabs();
+  }
+
+  function showCodeQualityToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "flex";
+    renderCodeQualityToolsTabs();
   }
 
   const converterTabs = {
@@ -1929,6 +2049,316 @@
     });
     disconnectBtn?.addEventListener('click', () => { if (socket) socket.close(); });
     sendBtn?.addEventListener('click', () => { if (socket && socket.readyState === WebSocket.OPEN) { socket.send(message.value); logMsg(`[Sent] ${message.value}`, 'send'); } });
+  }
+
+  // STORAGE TOOLS
+  const storageToolsTabs = {
+    'localstorage': { render: renderLocalStorage, setup: setupLocalStorageListeners },
+    'cookies': { render: renderCookies, setup: setupCookiesListeners }
+  };
+  let currentStorageToolsTabId = 'localstorage';
+  let storageToolsTabsInitialized = false;
+  function renderStorageToolsTabs() {
+    const tabsContainer = document.getElementById("storageToolsTabs");
+    if (!tabsContainer || !window.STORAGE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.STORAGE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentStorageToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!storageToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentStorageToolsTabId = tabBtn.dataset.tabId;
+        renderStorageToolsTabs();
+        loadStorageToolsContent();
+      });
+      storageToolsTabsInitialized = true;
+    }
+    loadStorageToolsContent();
+  }
+  function loadStorageToolsContent() {
+    const tool = storageToolsTabs[currentStorageToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderLocalStorage() {
+    const workspace = document.getElementById("storageToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div style="margin-bottom:12px;"><button id="lsRefreshBtn" class="converter-btn">Refresh</button><button id="lsClearBtn" class="converter-btn" style="margin-left:8px;">Clear All</button></div><div id="lsList" style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"></div><div style="margin-top:12px;"><h4>Add/Edit Item</h4><div class="converter-inputs"><div class="input-group"><label>Key</label><input type="text" id="lsKey" class="converter-input"></div><div class="input-group"><label>Value</label><input type="text" id="lsValue" class="converter-input"></div></div><button id="lsSaveBtn" class="converter-btn" style="margin-top:8px;">Save</button></div></div>`;
+  }
+  function setupLocalStorageListeners() {
+    const list = document.getElementById("lsList");
+    const refreshBtn = document.getElementById("lsRefreshBtn");
+    const clearBtn = document.getElementById("lsClearBtn");
+    const keyInput = document.getElementById("lsKey");
+    const valueInput = document.getElementById("lsValue");
+    const saveBtn = document.getElementById("lsSaveBtn");
+    function refresh() {
+      let html = '';
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const val = localStorage.getItem(key);
+        html += `<div style="margin-bottom:8px;"><strong>${key}:</strong> <span style="color:#666;">${val}</span> <button class="converter-btn" style="padding:2px 8px;font-size:0.8rem;" onclick="localStorage.removeItem('${key}');document.getElementById('lsRefreshBtn').click()">Delete</button></div>`;
+      }
+      if (!html) html = '<span style="color:#888;">No items in localStorage</span>';
+      list.innerHTML = html;
+    }
+    refreshBtn?.addEventListener('click', refresh);
+    clearBtn?.addEventListener('click', () => { if (confirm('Clear all localStorage?')) { localStorage.clear(); refresh(); } });
+    saveBtn?.addEventListener('click', () => { if (keyInput.value) { localStorage.setItem(keyInput.value, valueInput.value); keyInput.value = ''; valueInput.value = ''; refresh(); } });
+    refresh();
+  }
+  function renderCookies() {
+    const workspace = document.getElementById("storageToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div style="margin-bottom:12px;"><button id="cookieRefreshBtn" class="converter-btn">Refresh</button></div><div id="cookieList" style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"></div><div style="margin-top:12px;"><h4>Cookie Info</h4><p style="color:#666;font-size:0.9rem;">Note: Cookies can only be read/written for the current domain. This tool shows available cookie data.</p></div></div>`;
+  }
+  function setupCookiesListeners() {
+    const list = document.getElementById("cookieList");
+    const refreshBtn = document.getElementById("cookieRefreshBtn");
+    function refresh() {
+      const cookies = document.cookie.split(';').map(c => c.trim());
+      let html = '';
+      if (cookies.length === 1 && cookies[0] === '') {
+        html = '<span style="color:#888;">No cookies found for this domain</span>';
+      } else {
+        cookies.filter(c => c).forEach(cookie => {
+          const [name, ...valueParts] = cookie.split('=');
+          html += `<div style="margin-bottom:8px;"><strong>${name}:</strong> <span style="color:#666;">${valueParts.join('=')}</span></div>`;
+        });
+      }
+      list.innerHTML = html;
+    }
+    refreshBtn?.addEventListener('click', refresh);
+    refresh();
+  }
+
+  // FILE TOOLS
+  const fileToolsTabs = {
+    'checksum': { render: renderChecksum, setup: setupChecksumListeners },
+    'csv': { render: renderCsvMapper, setup: setupCsvMapperListeners }
+  };
+  let currentFileToolsTabId = 'checksum';
+  let fileToolsTabsInitialized = false;
+  function renderFileToolsTabs() {
+    const tabsContainer = document.getElementById("fileToolsTabs");
+    if (!tabsContainer || !window.FILE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.FILE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentFileToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!fileToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentFileToolsTabId = tabBtn.dataset.tabId;
+        renderFileToolsTabs();
+        loadFileToolsContent();
+      });
+      fileToolsTabsInitialized = true;
+    }
+    loadFileToolsContent();
+  }
+  function loadFileToolsContent() {
+    const tool = fileToolsTabs[currentFileToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderChecksum() {
+    const workspace = document.getElementById("fileToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>File 1</label><input type="file" id="checksumFile1" class="converter-input" style="padding:4px;"></div><div class="input-group"><label>File 2</label><input type="file" id="checksumFile2" class="converter-input" style="padding:4px;"></div></div><div id="checksumResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupChecksumListeners() {
+    const file1 = document.getElementById("checksumFile1");
+    const file2 = document.getElementById("checksumFile2");
+    const result = document.getElementById("checksumResult");
+    async function computeHash(file) {
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    async function compare() {
+      if (!file1.files[0] || !file2.files[0]) { result.innerHTML = ''; return; }
+      result.innerHTML = '<div style="color:#ffa500;">Computing hashes...</div>';
+      const [h1, h2] = await Promise.all([computeHash(file1.files[0]), computeHash(file2.files[0])]);
+      const match = h1 === h2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>${file1.files[0].name}:</strong> ${h1}</div><div style="margin-top:8px;"><strong>${file2.files[0].name}:</strong> ${h2}</div><div style="margin-top:12px;color:${match ? '#90ee90' : '#ff6b6b'};"><strong>${match ? 'MATCH' : 'MISMATCH'}</strong></div></div>`;
+    }
+    file1?.addEventListener('change', compare);
+    file2?.addEventListener('change', compare);
+  }
+  function renderCsvMapper() {
+    const workspace = document.getElementById("fileToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Input CSV</label><textarea id="csvInput" class="converter-textarea" placeholder="name,age,city&#10;John,30,NYC&#10;Jane,25,LA"></textarea></div><div class="input-group"><label>Mapping (JSON)</label><textarea id="csvMapping" class="converter-textarea" placeholder='{"name": "Name", "age": "Age", "city": "City"}'></textarea></div></div><div style="margin-top:12px;"><button id="csvTransformBtn" class="converter-btn">Transform</button></div><div id="csvResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCsvMapperListeners() {
+    const input = document.getElementById("csvInput");
+    const mapping = document.getElementById("csvMapping");
+    const transformBtn = document.getElementById("csvTransformBtn");
+    const result = document.getElementById("csvResult");
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return { headers: [], rows: [] };
+      const headers = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line => line.split(',').map(cell => cell.trim()));
+      return { headers, rows };
+    }
+    function transform() {
+      try {
+        const { headers, rows } = parseCSV(input.value);
+        const map = JSON.parse(mapping.value || '{}');
+        const newHeaders = Object.values(map);
+        let html = `<table style="width:100%;border-collapse:collapse;"><thead><tr>${newHeaders.map(h => `<th style="border:1px solid #ddd;padding:8px;background:#f5f5f5;">${h}</th>`).join('')}</tr></thead><tbody>`;
+        rows.forEach(row => {
+          html += '<tr>' + headers.map((h, i) => `<td style="border:1px solid #ddd;padding:8px;">${row[i] || ''}</td>`).join('') + '</tr>';
+        });
+        html += '</tbody></table>';
+        result.innerHTML = html;
+      } catch (e) {
+        result.innerHTML = `<span style="color:#ff6b6b;">Error: ${e.message}</span>`;
+      }
+    }
+    transformBtn?.addEventListener('click', transform);
+    input?.addEventListener('input', transform);
+    mapping?.addEventListener('input', transform);
+  }
+
+  // CI/CD TOOLS
+  const ciCdToolsTabs = {
+    'yaml': { render: renderYamlValidator, setup: setupYamlValidatorListeners },
+    'github-actions': { render: renderGithubActions, setup: setupGithubActionsListeners }
+  };
+  let currentCiCdToolsTabId = 'yaml';
+  let ciCdToolsTabsInitialized = false;
+  function renderCiCdToolsTabs() {
+    const tabsContainer = document.getElementById("ciCdToolsTabs");
+    if (!tabsContainer || !window.CICD_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.CICD_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentCiCdToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!ciCdToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCiCdToolsTabId = tabBtn.dataset.tabId;
+        renderCiCdToolsTabs();
+        loadCiCdToolsContent();
+      });
+      ciCdToolsTabsInitialized = true;
+    }
+    loadCiCdToolsContent();
+  }
+  function loadCiCdToolsContent() {
+    const tool = ciCdToolsTabs[currentCiCdToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderYamlValidator() {
+    const workspace = document.getElementById("ciCdToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>YAML Input</label><textarea id="yamlInput" class="converter-textarea" placeholder="name: example&#10;version: 1.0&#10;dependencies:&#10;  - package1&#10;  - package2"></textarea></div></div><div style="margin-top:12px;"><button id="yamlValidateBtn" class="converter-btn">Validate</button></div><div id="yamlResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupYamlValidatorListeners() {
+    const input = document.getElementById("yamlInput");
+    const validateBtn = document.getElementById("yamlValidateBtn");
+    const result = document.getElementById("yamlResult");
+    function validate() {
+      if (!window.jsyaml) { result.innerHTML = '<span style="color:#ffa500;">YAML library not loaded</span>'; return; }
+      try {
+        const parsed = jsyaml.load(input.value);
+        result.innerHTML = `<div style="color:#90ee90;">Valid YAML</div><pre style="background:#f5f5f5;padding:12px;border-radius:4px;margin-top:8px;max-height:300px;overflow:auto;">${JSON.stringify(parsed, null, 2)}</pre>`;
+      } catch (e) {
+        result.innerHTML = `<div style="color:#ff6b6b;">Invalid YAML: ${e.message}</div>`;
+      }
+    }
+    validateBtn?.addEventListener('click', validate);
+    input?.addEventListener('input', validate);
+  }
+  function renderGithubActions() {
+    const workspace = document.getElementById("ciCdToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Workflow Name</label><input type="text" id="gaName" class="converter-input" placeholder="my-workflow"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Trigger Event</label><select id="gaTrigger" class="converter-select"><option value="push">push</option><option value="pull_request">pull_request</option><option value="schedule">schedule</option><option value="workflow_dispatch">workflow_dispatch</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Job Name</label><input type="text" id="gaJob" class="converter-input" placeholder="build"></div></div><div style="margin-top:12px;"><button id="gaGenerateBtn" class="converter-btn">Generate</button></div><div id="gaResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupGithubActionsListeners() {
+    const name = document.getElementById("gaName");
+    const trigger = document.getElementById("gaTrigger");
+    const job = document.getElementById("gaJob");
+    const generateBtn = document.getElementById("gaGenerateBtn");
+    const result = document.getElementById("gaResult");
+    function generate() {
+      const workflow = { name: name.value || 'My Workflow', on: trigger.value, jobs: { [job.value || 'build']: { 'runs-on': 'ubuntu-latest', steps: [{ uses: 'actions/checkout@v3' }, { run: 'echo "Hello World"' }] } } };
+      const yaml = window.jsyaml ? jsyaml.dump(workflow) : JSON.stringify(workflow, null, 2);
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${yaml}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    generateBtn?.addEventListener('click', generate);
+    [name, trigger, job].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // CODE QUALITY TOOLS
+  const codeQualityToolsTabs = {
+    'eslint': { render: renderEslintPlayground, setup: setupEslintPlaygroundListeners },
+    'prettier': { render: renderPrettierPlayground, setup: setupPrettierPlaygroundListeners }
+  };
+  let currentCodeQualityToolsTabId = 'eslint';
+  let codeQualityToolsTabsInitialized = false;
+  function renderCodeQualityToolsTabs() {
+    const tabsContainer = document.getElementById("codeQualityToolsTabs");
+    if (!tabsContainer || !window.CODE_QUALITY_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.CODE_QUALITY_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentCodeQualityToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!codeQualityToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCodeQualityToolsTabId = tabBtn.dataset.tabId;
+        renderCodeQualityToolsTabs();
+        loadCodeQualityToolsContent();
+      });
+      codeQualityToolsTabsInitialized = true;
+    }
+    loadCodeQualityToolsContent();
+  }
+  function loadCodeQualityToolsContent() {
+    const tool = codeQualityToolsTabs[currentCodeQualityToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderEslintPlayground() {
+    const workspace = document.getElementById("codeQualityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>JavaScript Code</label><textarea id="eslintInput" class="converter-textarea" placeholder="const x=1&#10;console.log(x)"></textarea></div></div><div id="eslintResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupEslintPlaygroundListeners() {
+    const input = document.getElementById("eslintInput");
+    const result = document.getElementById("eslintResult");
+    const rules = { 'no-unused-vars': 'warn', 'no-console': 'warn', 'semi': 'error', 'quotes': ['error', 'single'] };
+    function lint() {
+      const code = input.value;
+      if (!code.trim()) { result.innerHTML = ''; return; }
+      const issues = [];
+      const unusedVars = code.match(/\b(const|let|var)\s+(\w+)/g) || [];
+      unusedVars.forEach(v => { const match = v.match(/\b(const|let|var)\s+(\w+)/); if (match && !code.includes(match[2] + ';')) {} });
+      if (code.includes('console.log')) issues.push({ rule: 'no-console', severity: 'warn', message: 'Unexpected console statement' });
+      if (!code.includes(';') && code.length > 10) issues.push({ rule: 'semi', severity: 'error', message: 'Missing semicolon' });
+      if (code.includes('"') && !code.includes("'")) issues.push({ rule: 'quotes', severity: 'error', message: 'Strings must use single quotes' });
+      if (issues.length === 0) {
+        result.innerHTML = '<div style="color:#90ee90;">No issues found (basic linting)</div>';
+      } else {
+        result.innerHTML = issues.map(i => `<div style="margin-bottom:4px;"><span style="color:${i.severity === 'error' ? '#ff6b6b' : '#ffa500'};">[${i.severity}]</span> <strong>${i.rule}:</strong> ${i.message}</div>`).join('');
+      }
+    }
+    input?.addEventListener('input', lint);
+    lint();
+  }
+  function renderPrettierPlayground() {
+    const workspace = document.getElementById("codeQualityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Input Code</label><textarea id="prettierInput" class="converter-textarea" placeholder="const x=1&#10;const y=2"></textarea></div><div class="input-group"><label>Formatted Output</label><textarea id="prettierOutput" class="converter-textarea" readonly style="background:#f5f5f5;"></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Print Width</label><input type="number" id="prettierWidth" class="converter-input" value="80"></div><div class="input-group"><label>Tab Width</label><input type="number" id="prettierTabWidth" class="converter-input" value="2"></div></div></div>`;
+  }
+  function setupPrettierPlaygroundListeners() {
+    const input = document.getElementById("prettierInput");
+    const output = document.getElementById("prettierOutput");
+    const width = document.getElementById("prettierWidth");
+    const tabWidth = document.getElementById("prettierTabWidth");
+    function format() {
+      try {
+        const pw = parseInt(width.value) || 80;
+        const tw = parseInt(tabWidth.value) || 2;
+        let result = input.value;
+        result = result.replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ').replace(/\s*\{\s*/g, ' { ').replace(/\s*\}\s*/g, ' } ').replace(/\s*;\s*/g, ';\n').replace(/\n+/g, '\n').trim();
+        let lines = result.split('\n');
+        lines = lines.map(line => ' '.repeat(tw) + line.trim());
+        output.value = lines.join('\n');
+      } catch (e) {
+        output.value = 'Error: ' + e.message;
+      }
+    }
+    input?.addEventListener('input', format);
+    width?.addEventListener('input', format);
+    tabWidth?.addEventListener('input', format);
+    format();
   }
 
   function renderContrastChecker() {
