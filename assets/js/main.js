@@ -9,6 +9,7 @@
   const checkersPanelNode = document.getElementById("checkersPanel");
   const hashingPanelNode = document.getElementById("hashingPanel");
   const cryptoPanelNode = document.getElementById("cryptoPanel");
+  const textToolsPanelNode = document.getElementById("textToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -27,12 +28,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -53,6 +54,8 @@
             showHashingPanel();
           } else if (active === "CRYPTO") {
             showCryptoPanel();
+          } else if (active === "TEXT TOOLS") {
+            showTextToolsPanel();
           }
         }
       });
@@ -161,7 +164,22 @@
     checkersPanelNode.style.display = "none";
     hashingPanelNode.style.display = "none";
     cryptoPanelNode.style.display = "flex";
+    textToolsPanelNode.style.display = "none";
     renderCryptoTabs();
+  }
+
+  function showTextToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "flex";
+    renderTextToolsTabs();
   }
 
   const converterTabs = {
@@ -906,6 +924,199 @@
     }
 
     certInput.addEventListener('input', parseCert);
+  }
+
+  const textToolsTabs = {
+    'counter': { render: renderTextCounter, setup: setupTextCounterListeners },
+    'slug': { render: renderSlugGenerator, setup: setupSlugGeneratorListeners },
+    'regex': { render: renderRegexTester, setup: setupRegexTesterListeners }
+  };
+
+  let currentTextToolsTabId = 'counter';
+  let textToolsTabsInitialized = false;
+
+  function renderTextToolsTabs() {
+    const tabsContainer = document.getElementById("textToolsTabs");
+    if (!tabsContainer || !window.TEXT_TOOLS_CATALOG) return;
+
+    tabsContainer.innerHTML = window.TEXT_TOOLS_CATALOG.map(tab => `
+      <button 
+        class="category-btn ${tab.tabId === currentTextToolsTabId ? 'active' : ''}" 
+        data-tab-id="${tab.tabId}"
+        aria-label="${tab.tabName}"
+      >
+        ${tab.tabName}
+      </button>
+    `).join('');
+
+    if (!textToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentTextToolsTabId = tabBtn.dataset.tabId;
+        renderTextToolsTabs();
+        loadTextToolsContent();
+      });
+      textToolsTabsInitialized = true;
+    }
+
+    loadTextToolsContent();
+  }
+
+  function loadTextToolsContent() {
+    const textTool = textToolsTabs[currentTextToolsTabId];
+    if (textTool) {
+      textTool.render();
+      textTool.setup();
+    }
+  }
+
+  function renderTextCounter() {
+    const workspace = document.getElementById("textToolsWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="textCounterInput" class="converter-textarea" placeholder="Enter text..."></textarea>
+          </div>
+        </div>
+        <div id="textCounterStats" style="margin-top:12px;"></div>
+      </div>
+    `;
+  }
+
+  function setupTextCounterListeners() {
+    const input = document.getElementById("textCounterInput");
+    const stats = document.getElementById("textCounterStats");
+    if (!input || !stats) return;
+
+    function count() {
+      const text = input.value;
+      if (!text) {
+        stats.innerHTML = '';
+        return;
+      }
+      const chars = text.length;
+      const charsNoSpaces = text.replace(/\s/g, '').length;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      const lines = text.split('\n').length;
+      const paragraphs = text.split(/\n\n+/).filter(p => p.trim()).length;
+
+      stats.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+          <div><strong>Characters:</strong> ${chars}</div>
+          <div><strong>Characters (no spaces):</strong> ${charsNoSpaces}</div>
+          <div><strong>Words:</strong> ${words}</div>
+          <div><strong>Lines:</strong> ${lines}</div>
+          <div><strong>Paragraphs:</strong> ${paragraphs}</div>
+        </div>
+      `;
+    }
+
+    input.addEventListener('input', count);
+    count();
+  }
+
+  function renderSlugGenerator() {
+    const workspace = document.getElementById("textToolsWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Input</label>
+            <textarea id="slugInput" class="converter-textarea" placeholder="Enter text to convert to slug..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Slug</label>
+            <input type="text" id="slugOutput" class="converter-input" readonly>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupSlugGeneratorListeners() {
+    const input = document.getElementById("slugInput");
+    const output = document.getElementById("slugOutput");
+    if (!input || !output) return;
+
+    function toSlug() {
+      const text = input.value.trim().toLowerCase();
+      output.value = text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    input.addEventListener('input', toSlug);
+    toSlug();
+  }
+
+  function renderRegexTester() {
+    const workspace = document.getElementById("textToolsWorkspace");
+    workspace.innerHTML = `
+      <div class="converter-container">
+        <div class="converter-inputs">
+          <div class="input-group">
+            <label>Pattern</label>
+            <input type="text" id="regexPattern" class="converter-input" placeholder="e.g., \\d+ or [a-z]+">
+          </div>
+          <div class="input-group">
+            <label>Flags</label>
+            <div style="display:flex;gap:10px;">
+              <label><input type="checkbox" id="regexFlagG" checked> g</label>
+              <label><input type="checkbox" id="regexFlagI"> i</label>
+              <label><input type="checkbox" id="regexFlagM"> m</label>
+            </div>
+          </div>
+        </div>
+        <div class="converter-inputs">
+          <div class="input-group" style="flex:1;">
+            <label>Test String</label>
+            <textarea id="regexInput" class="converter-textarea" placeholder="Enter text to test..."></textarea>
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Matches</label>
+            <textarea id="regexOutput" class="converter-textarea" readonly placeholder="Matches will appear here..."></textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function setupRegexTesterListeners() {
+    const pattern = document.getElementById("regexPattern");
+    const input = document.getElementById("regexInput");
+    const output = document.getElementById("regexOutput");
+    if (!pattern || !input || !output) return;
+
+    function testRegex() {
+      const p = pattern.value;
+      const text = input.value;
+      if (!p || !text) {
+        output.value = '';
+        return;
+      }
+      try {
+        let flags = '';
+        if (document.getElementById("regexFlagG").checked) flags += 'g';
+        if (document.getElementById("regexFlagI").checked) flags += 'i';
+        if (document.getElementById("regexFlagM").checked) flags += 'm';
+        const regex = new RegExp(p, flags);
+        const matches = text.match(regex);
+        output.value = matches ? matches.join('\n') : 'No matches';
+      } catch (e) {
+        output.value = 'Invalid regex';
+      }
+    }
+
+    pattern.addEventListener('input', testRegex);
+    input.addEventListener('input', testRegex);
+    document.getElementById("regexFlagG")?.addEventListener('change', testRegex);
+    document.getElementById("regexFlagI")?.addEventListener('change', testRegex);
+    document.getElementById("regexFlagM")?.addEventListener('change', testRegex);
   }
 
   function renderContrastChecker() {
