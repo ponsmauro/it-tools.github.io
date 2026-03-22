@@ -26,6 +26,8 @@
   const markdownToolsPanelNode = document.getElementById("markdownToolsPanel");
   const htmlToolsPanelNode = document.getElementById("htmlToolsPanel");
   const bitwiseToolsPanelNode = document.getElementById("bitwiseToolsPanel");
+  const resilienceToolsPanelNode = document.getElementById("resilienceToolsPanel");
+  const securityToolsPanelNode = document.getElementById("securityToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -44,12 +46,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS" && entry.category !== "SCAFFOLDING TOOLS" && entry.category !== "MARKDOWN TOOLS" && entry.category !== "HTML TOOLS" && entry.category !== "BITWISE TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS" && entry.category !== "SCAFFOLDING TOOLS" && entry.category !== "MARKDOWN TOOLS" && entry.category !== "HTML TOOLS" && entry.category !== "BITWISE TOOLS" && entry.category !== "RESILIENCE TOOLS" && entry.category !== "SECURITY TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS" || entry.category === "SCAFFOLDING TOOLS" || entry.category === "MARKDOWN TOOLS" || entry.category === "HTML TOOLS" || entry.category === "BITWISE TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS" || entry.category === "SCAFFOLDING TOOLS" || entry.category === "MARKDOWN TOOLS" || entry.category === "HTML TOOLS" || entry.category === "BITWISE TOOLS" || entry.category === "RESILIENCE TOOLS" || entry.category === "SECURITY TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -104,6 +106,10 @@
             showHtmlToolsPanel();
           } else if (active === "BITWISE TOOLS") {
             showBitwiseToolsPanel();
+          } else if (active === "RESILIENCE TOOLS") {
+            showResilienceToolsPanel();
+          } else if (active === "SECURITY TOOLS") {
+            showSecurityToolsPanel();
           }
         }
       });
@@ -627,7 +633,73 @@
     markdownToolsPanelNode.style.display = "none";
     htmlToolsPanelNode.style.display = "none";
     bitwiseToolsPanelNode.style.display = "flex";
+    resilienceToolsPanelNode.style.display = "none";
+    securityToolsPanelNode.style.display = "none";
     renderBitwiseToolsTabs();
+  }
+
+  function showResilienceToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    resilienceToolsPanelNode.style.display = "flex";
+    securityToolsPanelNode.style.display = "none";
+    renderResilienceToolsTabs();
+  }
+
+  function showSecurityToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    resilienceToolsPanelNode.style.display = "none";
+    securityToolsPanelNode.style.display = "flex";
+    renderSecurityToolsTabs();
   }
 
   const converterTabs = {
@@ -2743,6 +2815,157 @@
     }
     [a, op, b].forEach(el => el?.addEventListener('input', calc));
     calc();
+  }
+
+  // RESILIENCE TOOLS
+  const resilienceToolsTabs = {
+    'retry': { render: renderRetryCalculator, setup: setupRetryCalculatorListeners },
+    'backoff': { render: renderBackoffGenerator, setup: setupBackoffGeneratorListeners },
+    'circuit': { render: renderCircuitBreaker, setup: setupCircuitBreakerListeners }
+  };
+  let currentResilienceToolsTabId = 'retry';
+  let resilienceToolsTabsInitialized = false;
+  function renderResilienceToolsTabs() {
+    const tabsContainer = document.getElementById("resilienceToolsTabs");
+    if (!tabsContainer || !window.RESILIENCE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.RESILIENCE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentResilienceToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!resilienceToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentResilienceToolsTabId = tabBtn.dataset.tabId;
+        renderResilienceToolsTabs();
+        loadResilienceToolsContent();
+      });
+      resilienceToolsTabsInitialized = true;
+    }
+    loadResilienceToolsContent();
+  }
+  function loadResilienceToolsContent() {
+    const tool = resilienceToolsTabs[currentResilienceToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderRetryCalculator() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Max Attempts</label><input type="number" id="retryMax" class="converter-input" value="5" min="1"></div><div class="input-group"><label>Base Delay (ms)</label><input type="number" id="retryDelay" class="converter-input" value="1000"></div><div class="input-group"><label>Max Delay (ms)</label><input type="number" id="retryMaxDelay" class="converter-input" value="30000"></div></div><div style="margin-top:12px;"><button id="retryCalcBtn" class="converter-btn">Calculate</button></div><div id="retryResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupRetryCalculatorListeners() {
+    const max = document.getElementById("retryMax");
+    const delay = document.getElementById("retryDelay");
+    const maxDelay = document.getElementById("retryMaxDelay");
+    const calcBtn = document.getElementById("retryCalcBtn");
+    const result = document.getElementById("retryResult");
+    function calculate() {
+      const m = parseInt(max.value) || 5;
+      const d = parseInt(delay.value) || 1000;
+      const mx = parseInt(maxDelay.value) || 30000;
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Attempt Schedule:</strong><ul style="margin:8px 0 0 20px;padding:0;">';
+      let total = 0;
+      for (let i = 1; i <= m; i++) {
+        const wait = Math.min(d * Math.pow(2, i - 1), mx);
+        total += wait;
+        html += `<li>Attempt ${i}: wait ${wait}ms</li>`;
+      }
+      html += `</ul><div style="margin-top:8px;"><strong>Total max wait:</strong> ${total}ms</div></div>`;
+      result.innerHTML = html;
+    }
+    calcBtn?.addEventListener('click', calculate);
+    [max, delay, maxDelay].forEach(el => el?.addEventListener('input', calculate));
+    calculate();
+  }
+  function renderBackoffGenerator() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Strategy</label><select id="backoffStrategy" class="converter-select"><option value="linear">Linear</option><option value="exponential">Exponential</option><option value="fibonacci">Fibonacci</option></select></div><div class="input-group"><label>Base Delay (ms)</label><input type="number" id="backoffBase" class="converter-input" value="1000"></div><div class="input-group"><label>Max Attempts</label><input type="number" id="backoffAttempts" class="converter-input" value="5"></div></div><div style="margin-top:12px;"><button id="backoffGenBtn" class="converter-btn">Generate Code</button></div><div id="backoffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupBackoffGeneratorListeners() {
+    const strategy = document.getElementById("backoffStrategy");
+    const base = document.getElementById("backoffBase");
+    const attempts = document.getElementById("backoffAttempts");
+    const genBtn = document.getElementById("backoffGenBtn");
+    const result = document.getElementById("backoffResult");
+    function generate() {
+      const str = strategy.value;
+      const b = parseInt(base.value) || 1000;
+      const a = parseInt(attempts.value) || 5;
+      let code = '';
+      if (str === 'linear') {
+        code = `function linearBackoff(attempt) {\n  return ${b} * attempt;\n}`;
+      } else if (str === 'exponential') {
+        code = `function exponentialBackoff(attempt) {\n  return ${b} * Math.pow(2, attempt - 1);\n}`;
+      } else {
+        code = `function fibonacciBackoff(attempt) {\n  const fib = [1, 1];\n  for (let i = 2; i < attempt; i++) fib.push(fib[i-1] + fib[i-2]);\n  return ${b} * fib[attempt - 1];\n}`;
+      }
+      code += `\n\n// Delays for ${a} attempts:\n` + Array.from({length: a}, (_, i) => `// Attempt ${i+1}: ${str === 'linear' ? b * (i+1) : str === 'exponential' ? b * Math.pow(2, i) : b}ms`).join('\n');
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${code}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [strategy, base, attempts].forEach(el => el?.addEventListener('input', generate));
+  }
+  function renderCircuitBreaker() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Failure Threshold</label><input type="number" id="cbThreshold" class="converter-input" value="5"></div><div class="input-group"><label>Timeout (ms)</label><input type="number" id="cbTimeout" class="converter-input" value="60000"></div><div class="input-group"><label>Reset Timeout (ms)</label><input type="number" id="cbReset" class="converter-input" value="30000"></div></div><div id="cbResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCircuitBreakerListeners() {
+    const threshold = document.getElementById("cbThreshold");
+    const timeout = document.getElementById("cbTimeout");
+    const reset = document.getElementById("cbReset");
+    const result = document.getElementById("cbResult");
+    function update() {
+      const t = parseInt(threshold.value) || 5;
+      const to = parseInt(timeout.value) || 60000;
+      const r = parseInt(reset.value) || 30000;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Circuit Breaker Config:</strong><ul style="margin:8px 0 0 20px;padding:0;"><li>Open after: ${t} failures</li><li>Timeout: ${to}ms</li><li>Reset after: ${r}ms</li></ul><div style="margin-top:8px;"><strong>States:</strong> CLOSED → OPEN → HALF-OPEN → CLOSED</div></div>`;
+    }
+    [threshold, timeout, reset].forEach(el => el?.addEventListener('input', update));
+    update();
+  }
+
+  // SECURITY TOOLS
+  const securityToolsTabs = {
+    'csp': { render: renderCspGenerator, setup: setupCspGeneratorListeners }
+  };
+  let currentSecurityToolsTabId = 'csp';
+  let securityToolsTabsInitialized = false;
+  function renderSecurityToolsTabs() {
+    const tabsContainer = document.getElementById("securityToolsTabs");
+    if (!tabsContainer || !window.SECURITY_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SECURITY_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentSecurityToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!securityToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentSecurityToolsTabId = tabBtn.dataset.tabId;
+        renderSecurityToolsTabs();
+        loadSecurityToolsContent();
+      });
+      securityToolsTabsInitialized = true;
+    }
+    loadSecurityToolsContent();
+  }
+  function loadSecurityToolsContent() {
+    const tool = securityToolsTabs[currentSecurityToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderCspGenerator() {
+    const workspace = document.getElementById("securityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Default-src</label><input type="text" id="cspDefault" class="converter-input" value="'self'"></div><div class="input-group"><label>Script-src</label><input type="text" id="cspScript" class="converter-input" value="'self' 'unsafe-inline'"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Style-src</label><input type="text" id="cspStyle" class="converter-input" value="'self' 'unsafe-inline'"></div><div class="input-group"><label>Img-src</label><input type="text" id="cspImg" class="converter-input" value="'self' data:"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Connect-src</label><input type="text" id="cspConnect" class="converter-input" value="'self'"></div><div class="input-group"><label>Font-src</label><input type="text" id="cspFont" class="converter-input" value="'self'"></div></div><div style="margin-top:12px;"><button id="cspGenBtn" class="converter-btn">Generate CSP</button></div><div id="cspResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCspGeneratorListeners() {
+    const defaultSrc = document.getElementById("cspDefault");
+    const scriptSrc = document.getElementById("cspScript");
+    const styleSrc = document.getElementById("cspStyle");
+    const imgSrc = document.getElementById("cspImg");
+    const connectSrc = document.getElementById("cspConnect");
+    const fontSrc = document.getElementById("cspFont");
+    const genBtn = document.getElementById("cspGenBtn");
+    const result = document.getElementById("cspResult");
+    function generate() {
+      const csp = `default-src ${defaultSrc.value}; script-src ${scriptSrc.value}; style-src ${styleSrc.value}; img-src ${imgSrc.value}; connect-src ${connectSrc.value}; font-src ${fontSrc.value};`;
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${csp}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div><div style="margin-top:8px;font-size:0.9rem;color:#666;">Add as HTTP header: <code>Content-Security-Policy: ${csp}</code></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [defaultSrc, scriptSrc, styleSrc, imgSrc, connectSrc, fontSrc].forEach(el => el?.addEventListener('input', generate));
+    generate();
   }
 
   function renderContrastChecker() {

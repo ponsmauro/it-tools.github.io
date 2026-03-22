@@ -151,3 +151,13 @@ window.HTML_TOOLS_CATALOG = [
 window.BITWISE_TOOLS_CATALOG = [
   { tabId: "calculator", tabName: "Calculator" }
 ];
+
+window.RESILIENCE_TOOLS_CATALOG = [
+  { tabId: "retry", tabName: "Retry Calculator" },
+  { tabId: "backoff", tabName: "Backoff Generator" },
+  { tabId: "circuit", tabName: "Circuit Breaker" }
+];
+
+window.SECURITY_TOOLS_CATALOG = [
+  { tabId: "csp", tabName: "CSP Generator" }
+];
