@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IT Tools Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>IT Tools Dashboard</h1>
+      </div>
+      <div class="topbar-meta">
+        <span class="chip">UI Mockup</span>
+        <span class="chip">No Logic</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="panel">
+          <h2>Categories</h2>
+          <nav id="categories" class="category-nav" aria-label="Tool Categories"></nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="convertersPanel" class="converters-panel">
+          <div class="converter-tabs-wrapper">
+            <nav id="converterTabs" class="converter-tabs" aria-label="Converter Categories"></nav>
+          </div>
+          <div id="converterWorkspace" class="converter-workspace"></div>
+        </div>
+      </section>
+    </main>
+
+    <link rel="stylesheet" href="tools/converters/converters.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xml2js/0.4.23/xml2js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@iarna/toml@2.2.5/dist/toml.min.js"></script>
+    <script src="tools/converters/converters-data.js"></script>
+    <script src="tools/converters/converters-implementations.js"></script>
+    <script src="tools/converters/converters-main.js"></script>
+    <script src="assets/js/tools-data.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
