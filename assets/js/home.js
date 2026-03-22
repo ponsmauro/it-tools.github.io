@@ -1936,6 +1936,130 @@ MIT`;
       }
     }
 
+    if (panelId === 'panel-text-tools-sort-randomly') {
+      const input = el('sortRandomInput');
+      const output = el('sortRandomOutput');
+      const btn = el('sortRandomBtn');
+      if (btn && output) {
+        function shuffle() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+          }
+          output.value = items.join('\n');
+        }
+        btn.addEventListener('click', shuffle);
+        input?.addEventListener('input', shuffle);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-sort-alphabetically-asc') {
+      const input = el('sortAscInput');
+      const output = el('sortAscOutput');
+      const btn = el('sortAscBtn');
+      if (btn && output) {
+        function sortAsc() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          items.sort((a, b) => a.localeCompare(b));
+          output.value = items.join('\n');
+        }
+        btn.addEventListener('click', sortAsc);
+        input?.addEventListener('input', sortAsc);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-sort-alphabetically-desc') {
+      const input = el('sortDescInput');
+      const output = el('sortDescOutput');
+      const btn = el('sortDescBtn');
+      if (btn && output) {
+        function sortDesc() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          items.sort((a, b) => b.localeCompare(a));
+          output.value = items.join('\n');
+        }
+        btn.addEventListener('click', sortDesc);
+        input?.addEventListener('input', sortDesc);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-inline-join') {
+      const input = el('inlineJoinInput');
+      const separator = el('inlineJoinSeparator');
+      const output = el('inlineJoinOutput');
+      const btn = el('inlineJoinBtn');
+      if (btn && output) {
+        function join() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          const sep = separator?.value || ',';
+          output.value = items.join(sep);
+        }
+        btn.addEventListener('click', join);
+        input?.addEventListener('input', join);
+        separator?.addEventListener('input', join);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-multi-line-split') {
+      const input = el('multiLineInput');
+      const separator = el('multiLineSeparator');
+      const output = el('multiLineOutput');
+      const btn = el('multiLineBtn');
+      if (btn && output) {
+        function split() {
+          const text = input?.value || '';
+          const sep = separator?.value || ',';
+          output.value = text.split(sep).map(x => x.trim()).filter(x => x).join('\n');
+        }
+        btn.addEventListener('click', split);
+        input?.addEventListener('input', split);
+        separator?.addEventListener('input', split);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-unique-values') {
+      const input = el('uniqueInput');
+      const output = el('uniqueOutput');
+      const btn = el('uniqueBtn');
+      if (btn && output) {
+        function unique() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          output.value = [...new Set(items)].join('\n');
+        }
+        btn.addEventListener('click', unique);
+        input?.addEventListener('input', unique);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-reverse-array') {
+      const input = el('reverseInput');
+      const output = el('reverseOutput');
+      const btn = el('reverseBtn');
+      if (btn && output) {
+        function reverse() {
+          const items = input?.value?.split('\n').filter(x => x) || [];
+          output.value = items.reverse().join('\n');
+        }
+        btn.addEventListener('click', reverse);
+        input?.addEventListener('input', reverse);
+      }
+    }
+
+    if (panelId === 'panel-text-tools-filter-empty-lines') {
+      const input = el('filterEmptyInput');
+      const output = el('filterEmptyOutput');
+      const btn = el('filterEmptyBtn');
+      if (btn && output) {
+        function filterEmpty() {
+          const items = input?.value?.split('\n').map(x => x.trim()).filter(x => x) || [];
+          output.value = items.join('\n');
+        }
+        btn.addEventListener('click', filterEmpty);
+        input?.addEventListener('input', filterEmpty);
+      }
+    }
+
     // HTTP TOOLS
     if (panelId === 'panel-http-tools-uptime-checker-http-monitor') {
       const url = el('uptimeUrl');

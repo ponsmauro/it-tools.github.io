@@ -1070,6 +1070,158 @@
         </div>
       </div>
 
+      <div id="panel-text-tools-sort-randomly">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="sortRandomInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="sortRandomBtn" class="convert-btn" style="margin-top:12px;">Shuffle</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="sortRandomOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-sort-alphabetically-asc">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="sortAscInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="sortAscBtn" class="convert-btn" style="margin-top:12px;">Sort A-Z</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="sortAscOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-sort-alphabetically-desc">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="sortDescInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="sortDescBtn" class="convert-btn" style="margin-top:12px;">Sort Z-A</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="sortDescOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-inline-join">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="inlineJoinInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+            <div class="input-group">
+              <label>Separator</label>
+              <input type="text" id="inlineJoinSeparator" class="converter-input" value="," placeholder="," style="width:60px;">
+            </div>
+          </div>
+          <button id="inlineJoinBtn" class="convert-btn" style="margin-top:12px;">Join</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="inlineJoinOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-multi-line-split">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input</label>
+              <textarea id="multiLineInput" class="converter-textarea" placeholder="Enter text with separators..."></textarea>
+            </div>
+            <div class="input-group">
+              <label>Separator</label>
+              <input type="text" id="multiLineSeparator" class="converter-input" value="," placeholder="," style="width:60px;">
+            </div>
+          </div>
+          <button id="multiLineBtn" class="convert-btn" style="margin-top:12px;">Split</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output (one per line)</label>
+              <textarea id="multiLineOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-unique-values">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="uniqueInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="uniqueBtn" class="convert-btn" style="margin-top:12px;">Remove Duplicates</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="uniqueOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-reverse-array">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="reverseInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="reverseBtn" class="convert-btn" style="margin-top:12px;">Reverse</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="reverseOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-text-tools-filter-empty-lines">
+        <div class="converter-container">
+          <div class="converter-inputs">
+            <div class="input-group" style="flex:1;">
+              <label>Input (one item per line)</label>
+              <textarea id="filterEmptyInput" class="converter-textarea" placeholder="Enter items, one per line..."></textarea>
+            </div>
+          </div>
+          <button id="filterEmptyBtn" class="convert-btn" style="margin-top:12px;">Remove Empty</button>
+          <div class="converter-inputs" style="margin-top:12px;">
+            <div class="input-group" style="flex:1;">
+              <label>Output</label>
+              <textarea id="filterEmptyOutput" class="converter-textarea" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- DIFF TOOLS -->
       <div id="panel-diff-tools-text-diff">
         <div class="converter-container">
