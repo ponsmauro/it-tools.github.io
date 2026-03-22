@@ -2001,7 +2001,7 @@ MIT`;
       }
     }
 
-    if (panelId === 'panel-text-tools-multi-line-split') {
+    if (panelId === 'panel-text-tools-multiline-split') {
       const input = el('multiLineInput');
       const separator = el('multiLineSeparator');
       const output = el('multiLineOutput');
