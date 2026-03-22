@@ -44,7 +44,7 @@ window.TOOLS_CATALOG = [
   },
   { category: "HASHING", tools: ["MD5 hash", "SHA-1 hash", "SHA-256 hash", "SHA-512 hash", "HMAC calculator", "CRC32", "Adler32"] },
   { category: "CRYPTO", tools: ["AES-GCM encrypt/decrypt", "Digital sign/verify", "RSA/ECDSA/Ed25519 keypair generator", "X.509 certificate inspector"] },
-  { category: "TEXT TOOLS", tools: ["Word/character/token counter", "Slug generator", "Text normalizer", "Regex tester"] },
+  { category: "TEXT TOOLS", tools: ["Word/character/token counter", "Slug generator", "Text normalizer", "Regex tester", "Sort randomly", "Sort alphabetically (ASC)", "Sort alphabetically (DESC)", "Inline join", "Multi-line split", "Unique values", "Reverse array", "Filter empty lines"] },
   { category: "DIFF TOOLS", tools: ["Text diff", "JSON diff"] },
   { category: "JSON TOOLS", tools: ["JSON tree viewer", "JSON Schema validator", "JSON formatter/minifier", "JSON converters"] },
   { category: "DATE TOOLS", tools: ["Date difference calculator", "Unix timestamp converter"] },
