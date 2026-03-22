@@ -174,3 +174,19 @@ Examples:
 - `[fix - date-format] - resolve timezone issue`
 - `[docs - architecture] - update system design documentation`
 - `[refactor - units] - simplify conversion logic`
+
+## Merge Strategy Convention
+
+**CRITICAL: Use the correct merge type based on destination branch:**
+
+| Destination | Merge Type | Command |
+|-------------|------------|---------|
+| develop (PR from feature) | `--squash` | `gh pr merge [N] --squash --delete-branch` |
+| main (release PR) | `--merge` | `gh pr merge [N] --merge --delete-branch` |
+| backport to develop | `--merge` | `gh pr merge [N] --merge --delete-branch` |
+
+**Why:**
+- `--squash`: Creates a single commit, keeps develop history linear
+- `--merge`: Preserves commit history, prevents divergence between main and develop
+
+**Failure to follow this causes:** Histogram divergence, conflicts on subsequent releases
