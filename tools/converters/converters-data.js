@@ -133,3 +133,21 @@ window.CODE_QUALITY_TOOLS_CATALOG = [
   { tabId: "eslint", tabName: "ESLint Playground" },
   { tabId: "prettier", tabName: "Prettier Playground" }
 ];
+
+window.SCAFFOLDING_TOOLS_CATALOG = [
+  { tabId: "project", tabName: "Project Scaffolder" }
+];
+
+window.MARKDOWN_TOOLS_CATALOG = [
+  { tabId: "editor", tabName: "Editor/Preview" },
+  { tabId: "table", tabName: "Table Generator" }
+];
+
+window.HTML_TOOLS_CATALOG = [
+  { tabId: "sanitizer", tabName: "Sanitizer" },
+  { tabId: "formatter", tabName: "Formatter" }
+];
+
+window.BITWISE_TOOLS_CATALOG = [
+  { tabId: "calculator", tabName: "Calculator" }
+];

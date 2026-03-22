@@ -22,6 +22,10 @@
   const fileToolsPanelNode = document.getElementById("fileToolsPanel");
   const ciCdToolsPanelNode = document.getElementById("ciCdToolsPanel");
   const codeQualityToolsPanelNode = document.getElementById("codeQualityToolsPanel");
+  const scaffoldingToolsPanelNode = document.getElementById("scaffoldingToolsPanel");
+  const markdownToolsPanelNode = document.getElementById("markdownToolsPanel");
+  const htmlToolsPanelNode = document.getElementById("htmlToolsPanel");
+  const bitwiseToolsPanelNode = document.getElementById("bitwiseToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -40,12 +44,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS" && entry.category !== "SCAFFOLDING TOOLS" && entry.category !== "MARKDOWN TOOLS" && entry.category !== "HTML TOOLS" && entry.category !== "BITWISE TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS" || entry.category === "SCAFFOLDING TOOLS" || entry.category === "MARKDOWN TOOLS" || entry.category === "HTML TOOLS" || entry.category === "BITWISE TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -92,6 +96,14 @@
             showCiCdToolsPanel();
           } else if (active === "CODE QUALITY TOOLS") {
             showCodeQualityToolsPanel();
+          } else if (active === "SCAFFOLDING TOOLS") {
+            showScaffoldingToolsPanel();
+          } else if (active === "MARKDOWN TOOLS") {
+            showMarkdownToolsPanel();
+          } else if (active === "HTML TOOLS") {
+            showHtmlToolsPanel();
+          } else if (active === "BITWISE TOOLS") {
+            showBitwiseToolsPanel();
           }
         }
       });
@@ -491,7 +503,131 @@
     fileToolsPanelNode.style.display = "none";
     ciCdToolsPanelNode.style.display = "none";
     codeQualityToolsPanelNode.style.display = "flex";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
     renderCodeQualityToolsTabs();
+  }
+
+  function showScaffoldingToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "flex";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderScaffoldingToolsTabs();
+  }
+
+  function showMarkdownToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "flex";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderMarkdownToolsTabs();
+  }
+
+  function showHtmlToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "flex";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderHtmlToolsTabs();
+  }
+
+  function showBitwiseToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "flex";
+    renderBitwiseToolsTabs();
   }
 
   const converterTabs = {
@@ -2359,6 +2495,254 @@
     width?.addEventListener('input', format);
     tabWidth?.addEventListener('input', format);
     format();
+  }
+
+  // SCAFFOLDING TOOLS
+  const scaffoldingToolsTabs = {
+    'project': { render: renderProjectScaffolder, setup: setupProjectScaffolderListeners }
+  };
+  let currentScaffoldingToolsTabId = 'project';
+  let scaffoldingToolsTabsInitialized = false;
+  function renderScaffoldingToolsTabs() {
+    const tabsContainer = document.getElementById("scaffoldingToolsTabs");
+    if (!tabsContainer || !window.SCAFFOLDING_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SCAFFOLDING_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentScaffoldingToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!scaffoldingToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentScaffoldingToolsTabId = tabBtn.dataset.tabId;
+        renderScaffoldingToolsTabs();
+        loadScaffoldingToolsContent();
+      });
+      scaffoldingToolsTabsInitialized = true;
+    }
+    loadScaffoldingToolsContent();
+  }
+  function loadScaffoldingToolsContent() {
+    const tool = scaffoldingToolsTabs[currentScaffoldingToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderProjectScaffolder() {
+    const workspace = document.getElementById("scaffoldingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Project Type</label><select id="scaffoldType" class="converter-select"><option value="node">Node.js</option><option value="react">React</option><option value="python">Python</option></select></div><div class="input-group"><label>Project Name</label><input type="text" id="scaffoldName" class="converter-input" placeholder="my-project"></div></div><div style="margin-top:12px;"><button id="scaffoldGenerateBtn" class="converter-btn">Generate</button></div><div id="scaffoldResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupProjectScaffolderListeners() {
+    const type = document.getElementById("scaffoldType");
+    const name = document.getElementById("scaffoldName");
+    const generateBtn = document.getElementById("scaffoldGenerateBtn");
+    const result = document.getElementById("scaffoldResult");
+    function generate() {
+      const projectName = name.value || 'my-project';
+      let files = {};
+      if (type.value === 'node') {
+        files = { 'package.json': JSON.stringify({ name: projectName, version: '1.0.0', main: 'index.js', scripts: { start: 'node index.js' } }, null, 2), 'index.js': 'console.log("Hello, World!");', 'README.md': `# ${projectName}\n\nA Node.js project.` };
+      } else if (type.value === 'react') {
+        files = { 'package.json': JSON.stringify({ name: projectName, version: '1.0.0', scripts: { start: 'react-scripts start', build: 'react-scripts build' } }, null, 2), 'src/App.js': 'function App() { return <div>Hello World</div>; }', 'README.md': `# ${projectName}\n\nA React project.` };
+      } else {
+        files = { 'main.py': 'print("Hello, World!")', 'requirements.txt': '', 'README.md': `# ${projectName}\n\nA Python project.` };
+      }
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+      Object.entries(files).forEach(([filename, content]) => {
+        html += `<div style="margin-bottom:12px;"><strong>${filename}</strong>:</div><pre style="background:#1e1e1e;color:#d4d4d4;padding:8px;border-radius:4px;margin-bottom:8px;">${content}</pre>`;
+      });
+      html += '</div>';
+      result.innerHTML = html;
+    }
+    generateBtn?.addEventListener('click', generate);
+    [type, name].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // MARKDOWN TOOLS
+  const markdownToolsTabs = {
+    'editor': { render: renderMarkdownEditor, setup: setupMarkdownEditorListeners },
+    'table': { render: renderMarkdownTable, setup: setupMarkdownTableListeners }
+  };
+  let currentMarkdownToolsTabId = 'editor';
+  let markdownToolsTabsInitialized = false;
+  function renderMarkdownToolsTabs() {
+    const tabsContainer = document.getElementById("markdownToolsTabs");
+    if (!tabsContainer || !window.MARKDOWN_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.MARKDOWN_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentMarkdownToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!markdownToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentMarkdownToolsTabId = tabBtn.dataset.tabId;
+        renderMarkdownToolsTabs();
+        loadMarkdownToolsContent();
+      });
+      markdownToolsTabsInitialized = true;
+    }
+    loadMarkdownToolsContent();
+  }
+  function loadMarkdownToolsContent() {
+    const tool = markdownToolsTabs[currentMarkdownToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderMarkdownEditor() {
+    const workspace = document.getElementById("markdownToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Markdown</label><textarea id="mdInput" class="converter-textarea" style="height:200px;" placeholder="# Hello&#10;&#10;This is **bold** and *italic*."></textarea></div><div class="input-group"><label>Preview</label><div id="mdPreview" class="converter-textarea" style="height:200px;background:#fff;overflow:auto;border:1px solid #ddd;"></div></div></div></div>`;
+  }
+  function setupMarkdownEditorListeners() {
+    const input = document.getElementById("mdInput");
+    const preview = document.getElementById("mdPreview");
+    function convert() {
+      let md = input.value;
+      md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+      md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+      md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+      md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      md = md.replace(/`(.+?)`/g, '<code>$1</code>');
+      md = md.replace(/\n/g, '<br>');
+      preview.innerHTML = md;
+    }
+    input?.addEventListener('input', convert);
+    convert();
+  }
+  function renderMarkdownTable() {
+    const workspace = document.getElementById("markdownToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Columns (comma-separated)</label><input type="text" id="tableCols" class="converter-input" placeholder="Name, Age, City"></div><div class="input-group"><label>Rows</label><input type="number" id="tableRows" class="converter-input" value="3" min="1" max="10"></div></div><div style="margin-top:12px;"><button id="tableGenBtn" class="converter-btn">Generate Table</button></div><div id="tableResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupMarkdownTableListeners() {
+    const cols = document.getElementById("tableCols");
+    const rows = document.getElementById("tableRows");
+    const genBtn = document.getElementById("tableGenBtn");
+    const result = document.getElementById("tableResult");
+    function generate() {
+      const headers = cols.value.split(',').map(h => h.trim()).filter(h => h);
+      if (headers.length === 0) { result.innerHTML = ''; return; }
+      const sep = headers.map(() => '---');
+      let md = `| ${headers.join(' | ')} |\n| ${sep.join(' | ')} |`;
+      for (let i = 0; i < parseInt(rows.value) || 3; i++) {
+        md += `\n| ${headers.map(() => 'Cell').join(' | ')} |`;
+      }
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${md}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [cols, rows].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // HTML TOOLS
+  const htmlToolsTabs = {
+    'sanitizer': { render: renderHtmlSanitizer, setup: setupHtmlSanitizerListeners },
+    'formatter': { render: renderHtmlFormatterTool, setup: setupHtmlFormatterToolListeners }
+  };
+  let currentHtmlToolsTabId = 'sanitizer';
+  let htmlToolsTabsInitialized = false;
+  function renderHtmlToolsTabs() {
+    const tabsContainer = document.getElementById("htmlToolsTabs");
+    if (!tabsContainer || !window.HTML_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.HTML_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentHtmlToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!htmlToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentHtmlToolsTabId = tabBtn.dataset.tabId;
+        renderHtmlToolsTabs();
+        loadHtmlToolsContent();
+      });
+      htmlToolsTabsInitialized = true;
+    }
+    loadHtmlToolsContent();
+  }
+  function loadHtmlToolsContent() {
+    const tool = htmlToolsTabs[currentHtmlToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderHtmlSanitizer() {
+    const workspace = document.getElementById("htmlToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>HTML Input</label><textarea id="htmlSanInput" class="converter-textarea" placeholder="<script>alert('xss')</script><p>Safe content</p>"></textarea></div></div><div style="margin-top:12px;"><button id="htmlSanitizeBtn" class="converter-btn">Sanitize</button></div><div id="htmlSanResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHtmlSanitizerListeners() {
+    const input = document.getElementById("htmlSanInput");
+    const sanitizeBtn = document.getElementById("htmlSanitizeBtn");
+    const result = document.getElementById("htmlSanResult");
+    function sanitize() {
+      let html = input.value;
+      html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      html = html.replace(/on\w+="[^"]*"/gi, '');
+      html = html.replace(/on\w+='[^']*'/gi, '');
+      html = html.replace(/javascript:/gi, '');
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Sanitized HTML:</strong><pre style="white-space:pre-wrap;margin-top:8px;">${html}</pre></div>`;
+    }
+    sanitizeBtn?.addEventListener('click', sanitize);
+    input?.addEventListener('input', sanitize);
+  }
+  function renderHtmlFormatterTool() {
+    const workspace = document.getElementById("htmlToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>HTML Input</label><textarea id="htmlFmtInput" class="converter-textarea" placeholder="<div><p>Hello</p></div>"></textarea></div></div><div style="margin-top:12px;"><button id="htmlFmtBtn" class="converter-btn">Format</button></div><div id="htmlFmtResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHtmlFormatterToolListeners() {
+    const input = document.getElementById("htmlFmtInput");
+    const fmtBtn = document.getElementById("htmlFmtBtn");
+    const result = document.getElementById("htmlFmtResult");
+    function format() {
+      try {
+        let html = input.value;
+        html = html.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim();
+        result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${html}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+      } catch (e) {
+        result.innerHTML = `<span style="color:#ff6b6b;">Error: ${e.message}</span>`;
+      }
+    }
+    fmtBtn?.addEventListener('click', format);
+    input?.addEventListener('input', format);
+  }
+
+  // BITWISE TOOLS
+  const bitwiseToolsTabs = {
+    'calculator': { render: renderBitwiseCalculator, setup: setupBitwiseCalculatorListeners }
+  };
+  let currentBitwiseToolsTabId = 'calculator';
+  let bitwiseToolsTabsInitialized = false;
+  function renderBitwiseToolsTabs() {
+    const tabsContainer = document.getElementById("bitwiseToolsTabs");
+    if (!tabsContainer || !window.BITWISE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.BITWISE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentBitwiseToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!bitwiseToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentBitwiseToolsTabId = tabBtn.dataset.tabId;
+        renderBitwiseToolsTabs();
+        loadBitwiseToolsContent();
+      });
+      bitwiseToolsTabsInitialized = true;
+    }
+    loadBitwiseToolsContent();
+  }
+  function loadBitwiseToolsContent() {
+    const tool = bitwiseToolsTabs[currentBitwiseToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderBitwiseCalculator() {
+    const workspace = document.getElementById("bitwiseToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Number A</label><input type="number" id="bitA" class="converter-input" value="5"></div><div class="input-group"><label>Operation</label><select id="bitOp" class="converter-select"><option value="&amp;">AND (&amp;)</option><option value="|">OR (|)</option><option value="^">XOR (^)</option><option value="&lt;&lt;">Left Shift (&lt;&lt;)</option><option value=">>">Right Shift (>>)</option><option value="~">NOT (~)</option></select></div><div class="input-group"><label>Number B</label><input type="number" id="bitB" class="converter-input" value="3"></div></div><div id="bitResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupBitwiseCalculatorListeners() {
+    const a = document.getElementById("bitA");
+    const op = document.getElementById("bitOp");
+    const b = document.getElementById("bitB");
+    const result = document.getElementById("bitResult");
+    function calc() {
+      const aVal = parseInt(a.value) || 0;
+      const bVal = parseInt(b.value) || 0;
+      let res;
+      if (op.value === '~') {
+        res = ~aVal;
+      } else if (op.value === '<<') {
+        res = aVal << bVal;
+      } else if (op.value === '>>') {
+        res = aVal >> bVal;
+      } else {
+        res = eval(`${aVal} ${op.value} ${bVal}`);
+      }
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Result:</strong> ${res}</div><div><strong>Binary:</strong> ${(res >>> 0).toString(2)}</div><div><strong>Hex:</strong> 0x${(res >>> 0).toString(16).toUpperCase()}</div></div>`;
+    }
+    [a, op, b].forEach(el => el?.addEventListener('input', calc));
+    calc();
   }
 
   function renderContrastChecker() {
