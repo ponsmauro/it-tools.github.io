@@ -73,3 +73,91 @@ window.TEXT_TOOLS_CATALOG = [
   { tabId: "slug", tabName: "Slug" },
   { tabId: "regex", tabName: "Regex" }
 ];
+
+window.DIFF_TOOLS_CATALOG = [
+  { tabId: "text", tabName: "Text Diff" },
+  { tabId: "json", tabName: "JSON Diff" }
+];
+
+window.JSON_TOOLS_CATALOG = [
+  { tabId: "tree", tabName: "Tree Viewer" },
+  { tabId: "schema", tabName: "Schema Validator" }
+];
+
+window.DATE_TOOLS_CATALOG = [
+  { tabId: "difference", tabName: "Difference" },
+  { tabId: "unix", tabName: "Unix Converter" }
+];
+
+window.TIME_TOOLS_CATALOG = [
+  { tabId: "timezone", tabName: "Timezone" }
+];
+
+window.SCHEDULING_TOOLS_CATALOG = [
+  { tabId: "cron-parser", tabName: "Cron Parser" },
+  { tabId: "cron-generator", tabName: "Cron Generator" }
+];
+
+window.NETWORK_TOOLS_CATALOG = [
+  { tabId: "dns", tabName: "DNS Lookup" },
+  { tabId: "subnet", tabName: "Subnet Calculator" },
+  { tabId: "cidr", tabName: "CIDR Tool" }
+];
+
+window.HTTP_TOOLS_CATALOG = [
+  { tabId: "request", tabName: "Request Tester" },
+  { tabId: "curl", tabName: "cURL Builder" },
+  { tabId: "headers", tabName: "Headers" }
+];
+
+window.WEBSOCKET_TOOLS_CATALOG = [
+  { tabId: "tester", tabName: "WebSocket Tester" }
+];
+
+window.STORAGE_TOOLS_CATALOG = [
+  { tabId: "localstorage", tabName: "localStorage" },
+  { tabId: "cookies", tabName: "Cookies" }
+];
+
+window.FILE_TOOLS_CATALOG = [
+  { tabId: "checksum", tabName: "Checksum Comparator" },
+  { tabId: "csv", tabName: "CSV Mapper" }
+];
+
+window.CICD_TOOLS_CATALOG = [
+  { tabId: "yaml", tabName: "YAML Validator" },
+  { tabId: "github-actions", tabName: "GitHub Actions" }
+];
+
+window.CODE_QUALITY_TOOLS_CATALOG = [
+  { tabId: "eslint", tabName: "ESLint Playground" },
+  { tabId: "prettier", tabName: "Prettier Playground" }
+];
+
+window.SCAFFOLDING_TOOLS_CATALOG = [
+  { tabId: "project", tabName: "Project Scaffolder" }
+];
+
+window.MARKDOWN_TOOLS_CATALOG = [
+  { tabId: "editor", tabName: "Editor/Preview" },
+  { tabId: "table", tabName: "Table Generator" }
+];
+
+window.HTML_TOOLS_CATALOG = [
+  { tabId: "sanitizer", tabName: "Sanitizer" },
+  { tabId: "formatter", tabName: "Formatter" }
+];
+
+window.BITWISE_TOOLS_CATALOG = [
+  { tabId: "calculator", tabName: "Calculator" }
+];
+
+window.RESILIENCE_TOOLS_CATALOG = [
+  { tabId: "retry", tabName: "Retry Calculator" },
+  { tabId: "backoff", tabName: "Backoff Generator" },
+  { tabId: "circuit", tabName: "Circuit Breaker" }
+];
+
+window.SECURITY_TOOLS_CATALOG = [
+  { tabId: "csp", tabName: "CSP Generator" }
+];

@@ -10,6 +10,24 @@
   const hashingPanelNode = document.getElementById("hashingPanel");
   const cryptoPanelNode = document.getElementById("cryptoPanel");
   const textToolsPanelNode = document.getElementById("textToolsPanel");
+  const diffToolsPanelNode = document.getElementById("diffToolsPanel");
+  const jsonToolsPanelNode = document.getElementById("jsonToolsPanel");
+  const dateToolsPanelNode = document.getElementById("dateToolsPanel");
+  const timeToolsPanelNode = document.getElementById("timeToolsPanel");
+  const schedulingToolsPanelNode = document.getElementById("schedulingToolsPanel");
+  const networkToolsPanelNode = document.getElementById("networkToolsPanel");
+  const httpToolsPanelNode = document.getElementById("httpToolsPanel");
+  const websocketToolsPanelNode = document.getElementById("websocketToolsPanel");
+  const storageToolsPanelNode = document.getElementById("storageToolsPanel");
+  const fileToolsPanelNode = document.getElementById("fileToolsPanel");
+  const ciCdToolsPanelNode = document.getElementById("ciCdToolsPanel");
+  const codeQualityToolsPanelNode = document.getElementById("codeQualityToolsPanel");
+  const scaffoldingToolsPanelNode = document.getElementById("scaffoldingToolsPanel");
+  const markdownToolsPanelNode = document.getElementById("markdownToolsPanel");
+  const htmlToolsPanelNode = document.getElementById("htmlToolsPanel");
+  const bitwiseToolsPanelNode = document.getElementById("bitwiseToolsPanel");
+  const resilienceToolsPanelNode = document.getElementById("resilienceToolsPanel");
+  const securityToolsPanelNode = document.getElementById("securityToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -28,12 +46,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS" && entry.category !== "SCHEDULING TOOLS" && entry.category !== "NETWORK TOOLS" && entry.category !== "HTTP TOOLS" && entry.category !== "WEBSOCKET TOOLS" && entry.category !== "STORAGE TOOLS" && entry.category !== "FILE TOOLS" && entry.category !== "CI/CD TOOLS" && entry.category !== "CODE QUALITY TOOLS" && entry.category !== "SCAFFOLDING TOOLS" && entry.category !== "MARKDOWN TOOLS" && entry.category !== "HTML TOOLS" && entry.category !== "BITWISE TOOLS" && entry.category !== "RESILIENCE TOOLS" && entry.category !== "SECURITY TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS" || entry.category === "SCHEDULING TOOLS" || entry.category === "NETWORK TOOLS" || entry.category === "HTTP TOOLS" || entry.category === "WEBSOCKET TOOLS" || entry.category === "STORAGE TOOLS" || entry.category === "FILE TOOLS" || entry.category === "CI/CD TOOLS" || entry.category === "CODE QUALITY TOOLS" || entry.category === "SCAFFOLDING TOOLS" || entry.category === "MARKDOWN TOOLS" || entry.category === "HTML TOOLS" || entry.category === "BITWISE TOOLS" || entry.category === "RESILIENCE TOOLS" || entry.category === "SECURITY TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -56,6 +74,42 @@
             showCryptoPanel();
           } else if (active === "TEXT TOOLS") {
             showTextToolsPanel();
+          } else if (active === "DIFF TOOLS") {
+            showDiffToolsPanel();
+          } else if (active === "JSON TOOLS") {
+            showJsonToolsPanel();
+          } else if (active === "DATE TOOLS") {
+            showDateToolsPanel();
+          } else if (active === "TIME TOOLS") {
+            showTimeToolsPanel();
+          } else if (active === "SCHEDULING TOOLS") {
+            showSchedulingToolsPanel();
+          } else if (active === "NETWORK TOOLS") {
+            showNetworkToolsPanel();
+          } else if (active === "HTTP TOOLS") {
+            showHttpToolsPanel();
+          } else if (active === "WEBSOCKET TOOLS") {
+            showWebsocketToolsPanel();
+          } else if (active === "STORAGE TOOLS") {
+            showStorageToolsPanel();
+          } else if (active === "FILE TOOLS") {
+            showFileToolsPanel();
+          } else if (active === "CI/CD TOOLS") {
+            showCiCdToolsPanel();
+          } else if (active === "CODE QUALITY TOOLS") {
+            showCodeQualityToolsPanel();
+          } else if (active === "SCAFFOLDING TOOLS") {
+            showScaffoldingToolsPanel();
+          } else if (active === "MARKDOWN TOOLS") {
+            showMarkdownToolsPanel();
+          } else if (active === "HTML TOOLS") {
+            showHtmlToolsPanel();
+          } else if (active === "BITWISE TOOLS") {
+            showBitwiseToolsPanel();
+          } else if (active === "RESILIENCE TOOLS") {
+            showResilienceToolsPanel();
+          } else if (active === "SECURITY TOOLS") {
+            showSecurityToolsPanel();
           }
         }
       });
@@ -179,7 +233,473 @@
     hashingPanelNode.style.display = "none";
     cryptoPanelNode.style.display = "none";
     textToolsPanelNode.style.display = "flex";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
     renderTextToolsTabs();
+  }
+
+  function showDiffToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "flex";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    renderDiffToolsTabs();
+  }
+
+  function showJsonToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "flex";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    renderJsonToolsTabs();
+  }
+
+  function showDateToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "flex";
+    timeToolsPanelNode.style.display = "none";
+    renderDateToolsTabs();
+  }
+
+  function showTimeToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "flex";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    renderTimeToolsTabs();
+  }
+
+  function showSchedulingToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "flex";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    renderSchedulingToolsTabs();
+  }
+
+  function showNetworkToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "flex";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    renderNetworkToolsTabs();
+  }
+
+  function showHttpToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "flex";
+    websocketToolsPanelNode.style.display = "none";
+    renderHttpToolsTabs();
+  }
+
+  function showWebsocketToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "flex";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderWebsocketToolsTabs();
+  }
+
+  function showStorageToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "flex";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderStorageToolsTabs();
+  }
+
+  function showFileToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "flex";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderFileToolsTabs();
+  }
+
+  function showCiCdToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "flex";
+    codeQualityToolsPanelNode.style.display = "none";
+    renderCiCdToolsTabs();
+  }
+
+  function showCodeQualityToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "flex";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderCodeQualityToolsTabs();
+  }
+
+  function showScaffoldingToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "flex";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderScaffoldingToolsTabs();
+  }
+
+  function showMarkdownToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "flex";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderMarkdownToolsTabs();
+  }
+
+  function showHtmlToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "flex";
+    bitwiseToolsPanelNode.style.display = "none";
+    renderHtmlToolsTabs();
+  }
+
+  function showBitwiseToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "flex";
+    resilienceToolsPanelNode.style.display = "none";
+    securityToolsPanelNode.style.display = "none";
+    renderBitwiseToolsTabs();
+  }
+
+  function showResilienceToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    resilienceToolsPanelNode.style.display = "flex";
+    securityToolsPanelNode.style.display = "none";
+    renderResilienceToolsTabs();
+  }
+
+  function showSecurityToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    schedulingToolsPanelNode.style.display = "none";
+    networkToolsPanelNode.style.display = "none";
+    httpToolsPanelNode.style.display = "none";
+    websocketToolsPanelNode.style.display = "none";
+    storageToolsPanelNode.style.display = "none";
+    fileToolsPanelNode.style.display = "none";
+    ciCdToolsPanelNode.style.display = "none";
+    codeQualityToolsPanelNode.style.display = "none";
+    scaffoldingToolsPanelNode.style.display = "none";
+    markdownToolsPanelNode.style.display = "none";
+    htmlToolsPanelNode.style.display = "none";
+    bitwiseToolsPanelNode.style.display = "none";
+    resilienceToolsPanelNode.style.display = "none";
+    securityToolsPanelNode.style.display = "flex";
+    renderSecurityToolsTabs();
   }
 
   const converterTabs = {
@@ -1117,6 +1637,1335 @@
     document.getElementById("regexFlagG")?.addEventListener('change', testRegex);
     document.getElementById("regexFlagI")?.addEventListener('change', testRegex);
     document.getElementById("regexFlagM")?.addEventListener('change', testRegex);
+  }
+
+  // DIFF TOOLS
+  const diffToolsTabs = {
+    'text': { render: renderTextDiff, setup: setupTextDiffListeners },
+    'json': { render: renderJsonDiff, setup: setupJsonDiffListeners }
+  };
+  let currentDiffToolsTabId = 'text';
+  let diffToolsTabsInitialized = false;
+  function renderDiffToolsTabs() {
+    const tabsContainer = document.getElementById("diffToolsTabs");
+    if (!tabsContainer || !window.DIFF_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.DIFF_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentDiffToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!diffToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentDiffToolsTabId = tabBtn.dataset.tabId;
+        renderDiffToolsTabs();
+        loadDiffToolsContent();
+      });
+      diffToolsTabsInitialized = true;
+    }
+    loadDiffToolsContent();
+  }
+  function loadDiffToolsContent() {
+    const tool = diffToolsTabs[currentDiffToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderTextDiff() {
+    const workspace = document.getElementById("diffToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>Original</label><textarea id="diffOriginal" class="converter-textarea" placeholder="Original text..."></textarea></div><div class="input-group" style="flex:1;"><label>Modified</label><textarea id="diffModified" class="converter-textarea" placeholder="Modified text..."></textarea></div></div><div id="diffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupTextDiffListeners() {
+    const original = document.getElementById("diffOriginal");
+    const modified = document.getElementById("diffModified");
+    const result = document.getElementById("diffResult");
+    function diff() {
+      if (!original.value && !modified.value) { result.innerHTML = ''; return; }
+      const origLines = original.value.split('\n');
+      const modLines = modified.value.split('\n');
+      let html = '<div style="font-family:monospace;">';
+      const maxLen = Math.max(origLines.length, modLines.length);
+      for (let i = 0; i < maxLen; i++) {
+        const o = origLines[i] || '';
+        const m = modLines[i] || '';
+        if (o === m) {
+          html += `<div style="color:#888;">  ${o}</div>`;
+        } else {
+          if (o) html += `<div style="color:#ff6b6b;">- ${o}</div>`;
+          if (m) html += `<div style="color:#90ee90;">+ ${m}</div>`;
+        }
+      }
+      html += '</div>';
+      result.innerHTML = html;
+    }
+    original?.addEventListener('input', diff);
+    modified?.addEventListener('input', diff);
+  }
+  function renderJsonDiff() {
+    const workspace = document.getElementById("diffToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON 1</label><textarea id="jsonDiff1" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div><div class="input-group" style="flex:1;"><label>JSON 2</label><textarea id="jsonDiff2" class="converter-textarea" placeholder='{"key": "value2"}'></textarea></div></div><div id="jsonDiffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupJsonDiffListeners() {
+    const input1 = document.getElementById("jsonDiff1");
+    const input2 = document.getElementById("jsonDiff2");
+    const result = document.getElementById("jsonDiffResult");
+    function diff() {
+      try {
+        const obj1 = JSON.parse(input1.value || '{}');
+        const obj2 = JSON.parse(input2.value || '{}');
+        const diff = findJsonDiff(obj1, obj2);
+        result.innerHTML = diff || '<span style="color:#90ee90;">Objects are identical</span>';
+      } catch (e) {
+        result.innerHTML = '<span style="color:#ffa500;">Invalid JSON</span>';
+      }
+    }
+    function findJsonDiff(o1, o2, path = '') {
+      let result = '';
+      const allKeys = new Set([...Object.keys(o1 || {}), ...Object.keys(o2 || {})]);
+      for (const key of allKeys) {
+        const p = path ? `${path}.${key}` : key;
+        if (!(key in o1)) result += `<div style="color:#90ee90;">+ ${p}: ${JSON.stringify(o2[key])}</div>`;
+        else if (!(key in o2)) result += `<div style="color:#ff6b6b;">- ${p}: ${JSON.stringify(o1[key])}</div>`;
+        else if (JSON.stringify(o1[key]) !== JSON.stringify(o2[key])) {
+          if (typeof o1[key] === 'object') result += findJsonDiff(o1[key], o2[key], p);
+          else result += `<div style="color:#ffa500;">~ ${p}: ${JSON.stringify(o1[key])} → ${JSON.stringify(o2[key])}</div>`;
+        }
+      }
+      return result;
+    }
+    input1?.addEventListener('input', diff);
+    input2?.addEventListener('input', diff);
+  }
+
+  // JSON TOOLS
+  const jsonToolsTabs = {
+    'tree': { render: renderJsonTree, setup: setupJsonTreeListeners },
+    'schema': { render: renderJsonSchema, setup: setupJsonSchemaListeners }
+  };
+  let currentJsonToolsTabId = 'tree';
+  let jsonToolsTabsInitialized = false;
+  function renderJsonToolsTabs() {
+    const tabsContainer = document.getElementById("jsonToolsTabs");
+    if (!tabsContainer || !window.JSON_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.JSON_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentJsonToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!jsonToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentJsonToolsTabId = tabBtn.dataset.tabId;
+        renderJsonToolsTabs();
+        loadJsonToolsContent();
+      });
+      jsonToolsTabsInitialized = true;
+    }
+    loadJsonToolsContent();
+  }
+  function loadJsonToolsContent() {
+    const tool = jsonToolsTabs[currentJsonToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderJsonTree() {
+    const workspace = document.getElementById("jsonToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON Input</label><textarea id="jsonTreeInput" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><pre id="jsonTreeOutput" style="background:#1a1a2e;padding:12px;border-radius:8px;overflow:auto;max-height:400px;"></pre></div>`;
+  }
+  function setupJsonTreeListeners() {
+    const input = document.getElementById("jsonTreeInput");
+    const output = document.getElementById("jsonTreeOutput");
+    function render() {
+      try {
+        const obj = JSON.parse(input.value);
+        output.innerHTML = renderTree(obj, 0);
+      } catch (e) {
+        output.textContent = 'Invalid JSON';
+      }
+    }
+    function renderTree(obj, depth) {
+      const indent = '  '.repeat(depth);
+      if (typeof obj === 'object' && obj !== null) {
+        if (Array.isArray(obj)) {
+          if (obj.length === 0) return '<span style="color:#888;">[]</span>';
+          return '[\n' + obj.map(item => indent + '  ' + renderTree(item, depth + 1)).join(',\n') + '\n' + indent + ']';
+        }
+        const keys = Object.keys(obj);
+        if (keys.length === 0) return '<span style="color:#888;">{}</span>';
+        return '{\n' + keys.map(k => `${indent}  <span style="color:#7db6f5;">"${k}"</span>: ${renderTree(obj[k], depth + 1)}`).join(',\n') + '\n' + indent + '}';
+      }
+      if (typeof obj === 'string') return `<span style="color:#a8e6cf;">"${obj}"</span>`;
+      if (typeof obj === 'number') return `<span style="color:#f9c74f;">${obj}</span>`;
+      if (typeof obj === 'boolean') return `<span style="color:#f94144;">${obj}</span>`;
+      if (obj === null) return '<span style="color:#888;">null</span>';
+      return String(obj);
+    }
+    input?.addEventListener('input', render);
+    render();
+  }
+  function renderJsonSchema() {
+    const workspace = document.getElementById("jsonToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON Schema</label><textarea id="schemaInput" class="converter-textarea" placeholder='{"type": "object", "properties": {...}}'></textarea></div><div class="input-group" style="flex:1;"><label>JSON Data</label><textarea id="schemaData" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div id="schemaResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupJsonSchemaListeners() {
+    const schemaInput = document.getElementById("schemaInput");
+    const dataInput = document.getElementById("schemaData");
+    const result = document.getElementById("schemaResult");
+    function validate() {
+      try {
+        JSON.parse(schemaInput.value);
+        JSON.parse(dataInput.value);
+        result.innerHTML = '<span style="color:#90ee90;">JSON is valid (schema validation requires full JSON Schema validator library)</span>';
+      } catch (e) {
+        result.innerHTML = '<span style="color:#ff6b6b;">Invalid JSON: ' + e.message + '</span>';
+      }
+    }
+    schemaInput?.addEventListener('input', validate);
+    dataInput?.addEventListener('input', validate);
+  }
+
+  // DATE TOOLS
+  const dateToolsTabs = {
+    'difference': { render: renderDateDifference, setup: setupDateDifferenceListeners },
+    'unix': { render: renderDateUnix, setup: setupDateUnixListeners }
+  };
+  let currentDateToolsTabId = 'difference';
+  let dateToolsTabsInitialized = false;
+  function renderDateToolsTabs() {
+    const tabsContainer = document.getElementById("dateToolsTabs");
+    if (!tabsContainer || !window.DATE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.DATE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentDateToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!dateToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentDateToolsTabId = tabBtn.dataset.tabId;
+        renderDateToolsTabs();
+        loadDateToolsContent();
+      });
+      dateToolsTabsInitialized = true;
+    }
+    loadDateToolsContent();
+  }
+  function loadDateToolsContent() {
+    const tool = dateToolsTabs[currentDateToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderDateDifference() {
+    const workspace = document.getElementById("dateToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Date 1</label><input type="date" id="date1" class="converter-input"></div><div class="input-group"><label>Date 2</label><input type="date" id="date2" class="converter-input"></div></div><div id="dateDiffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDateDifferenceListeners() {
+    const date1 = document.getElementById("date1");
+    const date2 = document.getElementById("date2");
+    const result = document.getElementById("dateDiffResult");
+    function calc() {
+      if (!date1.value || !date2.value) { result.innerHTML = ''; return; }
+      const d1 = new Date(date1.value);
+      const d2 = new Date(date2.value);
+      const diff = Math.abs(d2 - d1);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      result.innerHTML = `<strong>Difference:</strong> ${days} days, ${hours} hours, ${minutes} minutes`;
+    }
+    date1?.addEventListener('input', calc);
+    date2?.addEventListener('input', calc);
+  }
+  function renderDateUnix() {
+    const workspace = document.getElementById("dateToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Unix Timestamp</label><input type="number" id="unixInput" class="converter-input" placeholder="1700000000"></div></div><div id="unixResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDateUnixListeners() {
+    const input = document.getElementById("unixInput");
+    const result = document.getElementById("unixResult");
+    function convert() {
+      if (!input.value) { result.innerHTML = ''; return; }
+      const ts = parseInt(input.value);
+      const date = new Date(ts < 10000000000 ? ts * 1000 : ts);
+      result.innerHTML = `<strong>Date:</strong> ${date.toLocaleString()}`;
+    }
+    input?.addEventListener('input', convert);
+  }
+
+  // TIME TOOLS
+  const timeToolsTabs = {
+    'timezone': { render: renderTimezone, setup: setupTimezoneListeners }
+  };
+  let currentTimeToolsTabId = 'timezone';
+  let timeToolsTabsInitialized = false;
+  function renderTimeToolsTabs() {
+    const tabsContainer = document.getElementById("timeToolsTabs");
+    if (!tabsContainer || !window.TIME_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.TIME_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentTimeToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!timeToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentTimeToolsTabId = tabBtn.dataset.tabId;
+        renderTimeToolsTabs();
+        loadTimeToolsContent();
+      });
+      timeToolsTabsInitialized = true;
+    }
+    loadTimeToolsContent();
+  }
+  function loadTimeToolsContent() {
+    const tool = timeToolsTabs[currentTimeToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderTimezone() {
+    const workspace = document.getElementById("timeToolsWorkspace");
+    const timezones = Intl.supportedValuesOf('timeZone');
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Source Timezone</label><select id="tzSource" class="converter-select">${timezones.map(tz => `<option value="${tz}">${tz}</option>`).join('')}</select></div><div class="input-group"><label>Target Timezone</label><select id="tzTarget" class="converter-select">${timezones.map(tz => `<option value="${tz}">${tz}</option>`).join('')}</select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Input Time</label><input type="datetime-local" id="tzInput" class="converter-input"></div></div><div id="tzResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupTimezoneListeners() {
+    const source = document.getElementById("tzSource");
+    const target = document.getElementById("tzTarget");
+    const input = document.getElementById("tzInput");
+    const result = document.getElementById("tzResult");
+    function convert() {
+      if (!input.value) { result.innerHTML = ''; return; }
+      try {
+        const date = new Date(input.value);
+        const sourceTime = new Intl.DateTimeFormat('en-US', { timeZone: source.value, dateStyle: 'full', timeStyle: 'long' }).format(date);
+        const targetTime = new Intl.DateTimeFormat('en-US', { timeZone: target.value, dateStyle: 'full', timeStyle: 'long' }).format(date);
+        result.innerHTML = `<div><strong>Source (${source.value}):</strong> ${sourceTime}</div><div style="margin-top:8px;"><strong>Target (${target.value}):</strong> ${targetTime}</div>`;
+      } catch (e) {
+        result.innerHTML = 'Invalid input';
+      }
+    }
+    source?.addEventListener('change', convert);
+    target?.addEventListener('change', convert);
+    input?.addEventListener('input', convert);
+  }
+
+  // SCHEDULING TOOLS
+  const schedulingToolsTabs = {
+    'cron-parser': { render: renderCronParser, setup: setupCronParserListeners },
+    'cron-generator': { render: renderCronGenerator, setup: setupCronGeneratorListeners }
+  };
+  let currentSchedulingToolsTabId = 'cron-parser';
+  let schedulingToolsTabsInitialized = false;
+  function renderSchedulingToolsTabs() {
+    const tabsContainer = document.getElementById("schedulingToolsTabs");
+    if (!tabsContainer || !window.SCHEDULING_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SCHEDULING_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentSchedulingToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!schedulingToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentSchedulingToolsTabId = tabBtn.dataset.tabId;
+        renderSchedulingToolsTabs();
+        loadSchedulingToolsContent();
+      });
+      schedulingToolsTabsInitialized = true;
+    }
+    loadSchedulingToolsContent();
+  }
+  function loadSchedulingToolsContent() {
+    const tool = schedulingToolsTabs[currentSchedulingToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderCronParser() {
+    const workspace = document.getElementById("schedulingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Cron Expression</label><input type="text" id="cronInput" class="converter-input" placeholder="* * * * *"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Date/Time to Check</label><input type="datetime-local" id="cronCheckDate" class="converter-input"></div></div><div id="cronResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCronParserListeners() {
+    const input = document.getElementById("cronInput");
+    const checkDate = document.getElementById("cronCheckDate");
+    const result = document.getElementById("cronResult");
+    function parse() {
+      const cron = input.value.trim();
+      if (!cron) { result.innerHTML = ''; return; }
+      const parts = cron.split(/\s+/);
+      if (parts.length !== 5) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid cron expression (need 5 fields)</span>'; return; }
+      const [min, hour, day, month, dow] = parts;
+      const fieldNames = ['Minute', 'Hour', 'Day of Month', 'Month', 'Day of Week'];
+      const fieldValues = [min, hour, day, month, dow];
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+      fieldNames.forEach((name, i) => { html += `<div><strong>${name}:</strong> ${fieldValues[i]}</div>`; });
+      html += '</div>';
+      if (checkDate.value) {
+        const date = new Date(checkDate.value);
+        const mins = min === '*' || min.split(',').includes(String(date.getMinutes())) ? true : (min.includes('/') ? (date.getMinutes() % parseInt(min.split('/')[1]) === 0) : false);
+        const hrs = hour === '*' || hour.split(',').includes(String(date.getHours())) ? true : (hour.includes('/') ? (date.getHours() % parseInt(hour.split('/')[1]) === 0) : false);
+        const runs = mins && hrs;
+        html += `<div style="margin-top:12px;">At <strong>${date.toLocaleString()}</strong>: <span style="color:${runs ? '#90ee90' : '#ff6b6b'};">${runs ? 'WILL RUN' : 'will NOT run'}</span></div>`;
+      }
+      result.innerHTML = html;
+    }
+    input?.addEventListener('input', parse);
+    checkDate?.addEventListener('input', parse);
+  }
+  function renderCronGenerator() {
+    const workspace = document.getElementById("schedulingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Minute</label><select id="cronGenMin" class="converter-select"><option value="*">Every minute</option><option value="0">At minute 0</option><option value="*/5">Every 5 minutes</option><option value="*/10">Every 10 minutes</option><option value="*/15">Every 15 minutes</option><option value="*/30">Every 30 minutes</option></select></div><div class="input-group"><label>Hour</label><select id="cronGenHour" class="converter-select"><option value="*">Every hour</option><option value="0">At midnight</option><option value="9">At 9 AM</option><option value="12">At noon</option><option value="18">At 6 PM</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Day of Month</label><select id="cronGenDay" class="converter-select"><option value="*">Every day</option><option value="1">1st of month</option><option value="15">15th of month</option></select></div><div class="input-group"><label>Month</label><select id="cronGenMonth" class="converter-select"><option value="*">Every month</option><option value="1">January</option><option value="6">June</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Day of Week</label><select id="cronGenDow" class="converter-select"><option value="*">Every day</option><option value="1-5">Weekdays</option><option value="0,6">Weekends</option></select></div></div><div id="cronGenResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCronGeneratorListeners() {
+    const mins = document.getElementById("cronGenMin");
+    const hrs = document.getElementById("cronGenHour");
+    const day = document.getElementById("cronGenDay");
+    const month = document.getElementById("cronGenMonth");
+    const dow = document.getElementById("cronGenDow");
+    const result = document.getElementById("cronGenResult");
+    function generate() {
+      const cron = `${mins.value} ${hrs.value} ${day.value} ${month.value} ${dow.value}`;
+      result.innerHTML = `<div style="font-family:monospace;font-size:1.2rem;background:#e8f5e9;padding:12px;border-radius:4px;"><strong>${cron}</strong></div>`;
+    }
+    [mins, hrs, day, month, dow].forEach(el => el?.addEventListener('change', generate));
+  }
+
+  // NETWORK TOOLS
+  const networkToolsTabs = {
+    'dns': { render: renderDnsLookup, setup: setupDnsLookupListeners },
+    'subnet': { render: renderSubnetCalc, setup: setupSubnetCalcListeners },
+    'cidr': { render: renderCidrTool, setup: setupCidrToolListeners }
+  };
+  let currentNetworkToolsTabId = 'dns';
+  let networkToolsTabsInitialized = false;
+  function renderNetworkToolsTabs() {
+    const tabsContainer = document.getElementById("networkToolsTabs");
+    if (!tabsContainer || !window.NETWORK_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.NETWORK_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentNetworkToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!networkToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentNetworkToolsTabId = tabBtn.dataset.tabId;
+        renderNetworkToolsTabs();
+        loadNetworkToolsContent();
+      });
+      networkToolsTabsInitialized = true;
+    }
+    loadNetworkToolsContent();
+  }
+  function loadNetworkToolsContent() {
+    const tool = networkToolsTabs[currentNetworkToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderDnsLookup() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Domain Name</label><input type="text" id="dnsInput" class="converter-input" placeholder="example.com"></div></div><div id="dnsResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDnsLookupListeners() {
+    const input = document.getElementById("dnsInput");
+    const result = document.getElementById("dnsResult");
+    function lookup() {
+      const domain = input.value.trim();
+      if (!domain) { result.innerHTML = ''; return; }
+      const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      if (ipPattern.test(domain)) {
+        result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Reverse DNS:</strong> ${domain.split('.').reverse().join('.')}.in-addr.arpa (simulated)</div></div>`;
+      } else {
+        result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>A Record:</strong> 93.184.216.34 (simulated)</div><div><strong>AAAA Record:</strong> 2606:2800:220:1::248:1893 (simulated)</div><div><strong>MX Record:</strong> mail.${domain} (simulated)</div><div style="color:#ffa500;margin-top:8px;">Note: DNS lookup requires a server-side API</div></div>`;
+      }
+    }
+    input?.addEventListener('input', lookup);
+  }
+  function renderSubnetCalc() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>IP Address</label><input type="text" id="subnetIp" class="converter-input" placeholder="192.168.1.0"></div><div class="input-group"><label>Subnet Mask</label><input type="text" id="subnetMask" class="converter-input" placeholder="255.255.255.0"></div></div><div id="subnetResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupSubnetCalcListeners() {
+    const ip = document.getElementById("subnetIp");
+    const mask = document.getElementById("subnetMask");
+    const result = document.getElementById("subnetResult");
+    function calc() {
+      const ipVal = ip.value.trim();
+      const maskVal = mask.value.trim();
+      if (!ipVal || !maskVal) { result.innerHTML = ''; return; }
+      const ipParts = ipVal.split('.').map(Number);
+      const maskParts = maskVal.split('.').map(Number);
+      if (ipParts.length !== 4 || maskParts.length !== 4 || ipParts.some(p => isNaN(p) || p > 255) || maskParts.some(p => isNaN(p) || p > 255)) {
+        result.innerHTML = '<span style="color:#ff6b6b;">Invalid IP or mask</span>'; return;
+      }
+      const wildcard = maskParts.map(p => 255 - p);
+      const network = ipParts.map((p, i) => p & maskParts[i]);
+      const broadcast = ipParts.map((p, i) => p | wildcard[i]);
+      const totalHosts = network.map((_, i) => ((255 - maskParts[i]) + 1)).reduce((a, b) => a * b, 1) - 2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Network:</strong> ${network.join('.')}</div><div><strong>Broadcast:</strong> ${broadcast.join('.')}</div><div><strong>Wildcard:</strong> ${wildcard.join('.')}</div><div><strong>Total Hosts:</strong> ${Math.max(0, totalHosts)}</div><div><strong>Usable Range:</strong> ${network.slice(0,3).join('.')}.${network[3]+1} - ${broadcast.slice(0,3).join('.')}.${broadcast[3]-1}</div></div>`;
+    }
+    ip?.addEventListener('input', calc);
+    mask?.addEventListener('input', calc);
+  }
+  function renderCidrTool() {
+    const workspace = document.getElementById("networkToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>CIDR Notation</label><input type="text" id="cidrInput" class="converter-input" placeholder="192.168.1.0/24"></div></div><div id="cidrResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCidrToolListeners() {
+    const input = document.getElementById("cidrInput");
+    const result = document.getElementById("cidrResult");
+    function calc() {
+      const cidr = input.value.trim();
+      if (!cidr) { result.innerHTML = ''; return; }
+      const match = cidr.match(/^(\d+\.\d+\.\d+\.\d+)\/(\d+)$/);
+      if (!match) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid CIDR (e.g., 192.168.1.0/24)</span>'; return; }
+      const [_, baseIp, bits] = match;
+      const prefix = parseInt(bits);
+      if (prefix < 0 || prefix > 32) { result.innerHTML = '<span style="color:#ff6b6b;">Invalid prefix (0-32)</span>'; return; }
+      const mask = Array(4).fill(0).map((_, i) => i < Math.floor(prefix / 8) ? 255 : i === Math.floor(prefix / 8) ? 256 - Math.pow(2, 8 - (prefix % 8 || 8)) : 0);
+      const wildcard = mask.map(p => 255 - p);
+      const baseParts = baseIp.split('.').map(Number);
+      const network = baseParts.map((p, i) => p & mask[i]);
+      const broadcast = baseParts.map((p, i) => p | wildcard[i]);
+      const hosts = Math.pow(2, 32 - prefix) - 2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Network:</strong> ${network.join('.')}</div><div><strong>Subnet Mask:</strong> ${mask.join('.')}</div><div><strong>Wildcard:</strong> ${wildcard.join('.')}</div><div><strong>Broadcast:</strong> ${broadcast.join('.')}</div><div><strong>Usable Hosts:</strong> ${Math.max(0, hosts)}</div></div>`;
+    }
+    input?.addEventListener('input', calc);
+  }
+
+  // HTTP TOOLS
+  const httpToolsTabs = {
+    'request': { render: renderHttpRequest, setup: setupHttpRequestListeners },
+    'curl': { render: renderCurlBuilder, setup: setupCurlBuilderListeners },
+    'headers': { render: renderHttpHeaders, setup: setupHttpHeadersListeners }
+  };
+  let currentHttpToolsTabId = 'request';
+  let httpToolsTabsInitialized = false;
+  function renderHttpToolsTabs() {
+    const tabsContainer = document.getElementById("httpToolsTabs");
+    if (!tabsContainer || !window.HTTP_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.HTTP_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentHttpToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!httpToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentHttpToolsTabId = tabBtn.dataset.tabId;
+        renderHttpToolsTabs();
+        loadHttpToolsContent();
+      });
+      httpToolsTabsInitialized = true;
+    }
+    loadHttpToolsContent();
+  }
+  function loadHttpToolsContent() {
+    const tool = httpToolsTabs[currentHttpToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderHttpRequest() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Method</label><select id="httpMethod" class="converter-select"><option value="GET">GET</option><option value="POST">POST</option><option value="PUT">PUT</option><option value="DELETE">DELETE</option><option value="PATCH">PATCH</option></select></div><div class="input-group"><label>URL</label><input type="text" id="httpUrl" class="converter-input" placeholder="https://api.example.com/endpoint"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Headers (JSON)</label><textarea id="httpHeaders" class="converter-textarea" placeholder='{"Authorization": "Bearer token"}'></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Body</label><textarea id="httpBody" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div style="margin-top:12px;"><button id="httpSendBtn" class="converter-btn">Send Request</button></div><div id="httpResponse" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHttpRequestListeners() {
+    const method = document.getElementById("httpMethod");
+    const url = document.getElementById("httpUrl");
+    const headers = document.getElementById("httpHeaders");
+    const body = document.getElementById("httpBody");
+    const sendBtn = document.getElementById("httpSendBtn");
+    const response = document.getElementById("httpResponse");
+    sendBtn?.addEventListener('click', async () => {
+      try {
+        const opts = { method: method.value, headers: JSON.parse(headers.value || '{}') };
+        if (['POST', 'PUT', 'PATCH'].includes(method.value) && body.value) opts.body = body.value;
+        response.innerHTML = `<div style="color:#ffa500;">Sending ${method.value} request to ${url.value}...</div>`;
+        const res = await fetch(url.value, opts);
+        const text = await res.text();
+        response.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Status:</strong> ${res.status} ${res.statusText}</div><div style="margin-top:8px;"><strong>Response:</strong><pre style="white-space:pre-wrap;">${text.slice(0, 500)}${text.length > 500 ? '...' : ''}</pre></div></div>`;
+      } catch (e) {
+        response.innerHTML = `<div style="color:#ff6b6b;">Error: ${e.message}</div>`;
+      }
+    });
+  }
+  function renderCurlBuilder() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Method</label><select id="curlMethod" class="converter-select"><option value="GET">GET</option><option value="POST">POST</option><option value="PUT">PUT</option><option value="DELETE">DELETE</option></select></div><div class="input-group"><label>URL</label><input type="text" id="curlUrl" class="converter-input" placeholder="https://api.example.com"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Headers</label><textarea id="curlHeaders" class="converter-textarea" placeholder="Content-Type: application/json"></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Body</label><textarea id="curlBody" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div id="curlResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCurlBuilderListeners() {
+    const method = document.getElementById("curlMethod");
+    const url = document.getElementById("curlUrl");
+    const headers = document.getElementById("curlHeaders");
+    const body = document.getElementById("curlBody");
+    const result = document.getElementById("curlResult");
+    function build() {
+      let curl = `curl -X ${method.value}`;
+      const headerLines = headers.value.split('\n').filter(h => h.trim());
+      headerLines.forEach(h => { curl += ` \\\n  -H '${h.trim()}'`; });
+      if (['POST', 'PUT', 'PATCH'].includes(method.value) && body.value.trim()) {
+        curl += ` \\\n  -d '${body.value.trim()}'`;
+      }
+      curl += ` \\\n  '${url.value}'`;
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${curl}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    [method, url, headers, body].forEach(el => el?.addEventListener('input', build));
+  }
+  function renderHttpHeaders() {
+    const workspace = document.getElementById("httpToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>URL</label><input type="text" id="headersUrl" class="converter-input" placeholder="https://example.com"></div></div><div style="margin-top:12px;"><button id="headersFetchBtn" class="converter-btn">Fetch Headers</button></div><div id="headersResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHttpHeadersListeners() {
+    const url = document.getElementById("headersUrl");
+    const fetchBtn = document.getElementById("headersFetchBtn");
+    const result = document.getElementById("headersResult");
+    fetchBtn?.addEventListener('click', async () => {
+      try {
+        result.innerHTML = `<div style="color:#ffa500;">Fetching headers...</div>`;
+        const res = await fetch(url.value, { method: 'HEAD' });
+        let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+        res.headers.forEach((val, key) => { html += `<div><strong>${key}:</strong> ${val}</div>`; });
+        html += '</div>';
+        result.innerHTML = html;
+      } catch (e) {
+        result.innerHTML = `<div style="color:#ff6b6b;">Error: ${e.message}</div>`;
+      }
+    });
+  }
+
+  // WEBSOCKET TOOLS
+  const websocketToolsTabs = {
+    'tester': { render: renderWebsocketTester, setup: setupWebsocketTesterListeners }
+  };
+  let currentWebsocketToolsTabId = 'tester';
+  let websocketToolsTabsInitialized = false;
+  function renderWebsocketToolsTabs() {
+    const tabsContainer = document.getElementById("websocketToolsTabs");
+    if (!tabsContainer || !window.WEBSOCKET_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.WEBSOCKET_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentWebsocketToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!websocketToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentWebsocketToolsTabId = tabBtn.dataset.tabId;
+        renderWebsocketToolsTabs();
+        loadWebsocketToolsContent();
+      });
+      websocketToolsTabsInitialized = true;
+    }
+    loadWebsocketToolsContent();
+  }
+  function loadWebsocketToolsContent() {
+    const tool = websocketToolsTabs[currentWebsocketToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderWebsocketTester() {
+    const workspace = document.getElementById("websocketToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>WebSocket URL</label><input type="text" id="wsUrl" class="converter-input" placeholder="wss://echo.websocket.org"></div></div><div style="margin-top:12px;"><button id="wsConnectBtn" class="converter-btn">Connect</button><button id="wsDisconnectBtn" class="converter-btn" style="margin-left:8px;" disabled>Disconnect</button></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Message</label><textarea id="wsMessage" class="converter-textarea" placeholder="Enter message..."></textarea></div></div><div style="margin-top:12px;"><button id="wsSendBtn" class="converter-btn" disabled>Send</button></div><div id="wsLog" style="margin-top:12px;max-height:300px;overflow-y:auto;font-family:monospace;background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;"></div></div>`;
+  }
+  function setupWebsocketTesterListeners() {
+    const url = document.getElementById("wsUrl");
+    const connectBtn = document.getElementById("wsConnectBtn");
+    const disconnectBtn = document.getElementById("wsDisconnectBtn");
+    const message = document.getElementById("wsMessage");
+    const sendBtn = document.getElementById("wsSendBtn");
+    const log = document.getElementById("wsLog");
+    let socket = null;
+    function logMsg(msg, type = 'info') {
+      const colors = { info: '#d4d4d4', send: '#90ee90', recv: '#87ceeb', error: '#ff6b6b' };
+      log.innerHTML += `<div style="color:${colors[type] || colors.info};">${new Date().toLocaleTimeString()} ${msg}</div>`;
+      log.scrollTop = log.scrollHeight;
+    }
+    connectBtn?.addEventListener('click', () => {
+      try {
+        socket = new WebSocket(url.value);
+        socket.onopen = () => { logMsg('[Connected]', 'info'); connectBtn.disabled = true; disconnectBtn.disabled = false; sendBtn.disabled = false; };
+        socket.onclose = () => { logMsg('[Disconnected]', 'info'); connectBtn.disabled = false; disconnectBtn.disabled = true; sendBtn.disabled = true; socket = null; };
+        socket.onerror = (e) => logMsg('[Error]', 'error');
+        socket.onmessage = (e) => logMsg(`[Received] ${e.data}`, 'recv');
+        logMsg(`[Connecting to ${url.value}...]`, 'info');
+      } catch (e) { logMsg(`[Error] ${e.message}`, 'error'); }
+    });
+    disconnectBtn?.addEventListener('click', () => { if (socket) socket.close(); });
+    sendBtn?.addEventListener('click', () => { if (socket && socket.readyState === WebSocket.OPEN) { socket.send(message.value); logMsg(`[Sent] ${message.value}`, 'send'); } });
+  }
+
+  // STORAGE TOOLS
+  const storageToolsTabs = {
+    'localstorage': { render: renderLocalStorage, setup: setupLocalStorageListeners },
+    'cookies': { render: renderCookies, setup: setupCookiesListeners }
+  };
+  let currentStorageToolsTabId = 'localstorage';
+  let storageToolsTabsInitialized = false;
+  function renderStorageToolsTabs() {
+    const tabsContainer = document.getElementById("storageToolsTabs");
+    if (!tabsContainer || !window.STORAGE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.STORAGE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentStorageToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!storageToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentStorageToolsTabId = tabBtn.dataset.tabId;
+        renderStorageToolsTabs();
+        loadStorageToolsContent();
+      });
+      storageToolsTabsInitialized = true;
+    }
+    loadStorageToolsContent();
+  }
+  function loadStorageToolsContent() {
+    const tool = storageToolsTabs[currentStorageToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderLocalStorage() {
+    const workspace = document.getElementById("storageToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div style="margin-bottom:12px;"><button id="lsRefreshBtn" class="converter-btn">Refresh</button><button id="lsClearBtn" class="converter-btn" style="margin-left:8px;">Clear All</button></div><div id="lsList" style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"></div><div style="margin-top:12px;"><h4>Add/Edit Item</h4><div class="converter-inputs"><div class="input-group"><label>Key</label><input type="text" id="lsKey" class="converter-input"></div><div class="input-group"><label>Value</label><input type="text" id="lsValue" class="converter-input"></div></div><button id="lsSaveBtn" class="converter-btn" style="margin-top:8px;">Save</button></div></div>`;
+  }
+  function setupLocalStorageListeners() {
+    const list = document.getElementById("lsList");
+    const refreshBtn = document.getElementById("lsRefreshBtn");
+    const clearBtn = document.getElementById("lsClearBtn");
+    const keyInput = document.getElementById("lsKey");
+    const valueInput = document.getElementById("lsValue");
+    const saveBtn = document.getElementById("lsSaveBtn");
+    function refresh() {
+      let html = '';
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const val = localStorage.getItem(key);
+        html += `<div style="margin-bottom:8px;"><strong>${key}:</strong> <span style="color:#666;">${val}</span> <button class="converter-btn" style="padding:2px 8px;font-size:0.8rem;" onclick="localStorage.removeItem('${key}');document.getElementById('lsRefreshBtn').click()">Delete</button></div>`;
+      }
+      if (!html) html = '<span style="color:#888;">No items in localStorage</span>';
+      list.innerHTML = html;
+    }
+    refreshBtn?.addEventListener('click', refresh);
+    clearBtn?.addEventListener('click', () => { if (confirm('Clear all localStorage?')) { localStorage.clear(); refresh(); } });
+    saveBtn?.addEventListener('click', () => { if (keyInput.value) { localStorage.setItem(keyInput.value, valueInput.value); keyInput.value = ''; valueInput.value = ''; refresh(); } });
+    refresh();
+  }
+  function renderCookies() {
+    const workspace = document.getElementById("storageToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div style="margin-bottom:12px;"><button id="cookieRefreshBtn" class="converter-btn">Refresh</button></div><div id="cookieList" style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"></div><div style="margin-top:12px;"><h4>Cookie Info</h4><p style="color:#666;font-size:0.9rem;">Note: Cookies can only be read/written for the current domain. This tool shows available cookie data.</p></div></div>`;
+  }
+  function setupCookiesListeners() {
+    const list = document.getElementById("cookieList");
+    const refreshBtn = document.getElementById("cookieRefreshBtn");
+    function refresh() {
+      const cookies = document.cookie.split(';').map(c => c.trim());
+      let html = '';
+      if (cookies.length === 1 && cookies[0] === '') {
+        html = '<span style="color:#888;">No cookies found for this domain</span>';
+      } else {
+        cookies.filter(c => c).forEach(cookie => {
+          const [name, ...valueParts] = cookie.split('=');
+          html += `<div style="margin-bottom:8px;"><strong>${name}:</strong> <span style="color:#666;">${valueParts.join('=')}</span></div>`;
+        });
+      }
+      list.innerHTML = html;
+    }
+    refreshBtn?.addEventListener('click', refresh);
+    refresh();
+  }
+
+  // FILE TOOLS
+  const fileToolsTabs = {
+    'checksum': { render: renderChecksum, setup: setupChecksumListeners },
+    'csv': { render: renderCsvMapper, setup: setupCsvMapperListeners }
+  };
+  let currentFileToolsTabId = 'checksum';
+  let fileToolsTabsInitialized = false;
+  function renderFileToolsTabs() {
+    const tabsContainer = document.getElementById("fileToolsTabs");
+    if (!tabsContainer || !window.FILE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.FILE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentFileToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!fileToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentFileToolsTabId = tabBtn.dataset.tabId;
+        renderFileToolsTabs();
+        loadFileToolsContent();
+      });
+      fileToolsTabsInitialized = true;
+    }
+    loadFileToolsContent();
+  }
+  function loadFileToolsContent() {
+    const tool = fileToolsTabs[currentFileToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderChecksum() {
+    const workspace = document.getElementById("fileToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>File 1</label><input type="file" id="checksumFile1" class="converter-input" style="padding:4px;"></div><div class="input-group"><label>File 2</label><input type="file" id="checksumFile2" class="converter-input" style="padding:4px;"></div></div><div id="checksumResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupChecksumListeners() {
+    const file1 = document.getElementById("checksumFile1");
+    const file2 = document.getElementById("checksumFile2");
+    const result = document.getElementById("checksumResult");
+    async function computeHash(file) {
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    async function compare() {
+      if (!file1.files[0] || !file2.files[0]) { result.innerHTML = ''; return; }
+      result.innerHTML = '<div style="color:#ffa500;">Computing hashes...</div>';
+      const [h1, h2] = await Promise.all([computeHash(file1.files[0]), computeHash(file2.files[0])]);
+      const match = h1 === h2;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>${file1.files[0].name}:</strong> ${h1}</div><div style="margin-top:8px;"><strong>${file2.files[0].name}:</strong> ${h2}</div><div style="margin-top:12px;color:${match ? '#90ee90' : '#ff6b6b'};"><strong>${match ? 'MATCH' : 'MISMATCH'}</strong></div></div>`;
+    }
+    file1?.addEventListener('change', compare);
+    file2?.addEventListener('change', compare);
+  }
+  function renderCsvMapper() {
+    const workspace = document.getElementById("fileToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Input CSV</label><textarea id="csvInput" class="converter-textarea" placeholder="name,age,city&#10;John,30,NYC&#10;Jane,25,LA"></textarea></div><div class="input-group"><label>Mapping (JSON)</label><textarea id="csvMapping" class="converter-textarea" placeholder='{"name": "Name", "age": "Age", "city": "City"}'></textarea></div></div><div style="margin-top:12px;"><button id="csvTransformBtn" class="converter-btn">Transform</button></div><div id="csvResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCsvMapperListeners() {
+    const input = document.getElementById("csvInput");
+    const mapping = document.getElementById("csvMapping");
+    const transformBtn = document.getElementById("csvTransformBtn");
+    const result = document.getElementById("csvResult");
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return { headers: [], rows: [] };
+      const headers = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line => line.split(',').map(cell => cell.trim()));
+      return { headers, rows };
+    }
+    function transform() {
+      try {
+        const { headers, rows } = parseCSV(input.value);
+        const map = JSON.parse(mapping.value || '{}');
+        const newHeaders = Object.values(map);
+        let html = `<table style="width:100%;border-collapse:collapse;"><thead><tr>${newHeaders.map(h => `<th style="border:1px solid #ddd;padding:8px;background:#f5f5f5;">${h}</th>`).join('')}</tr></thead><tbody>`;
+        rows.forEach(row => {
+          html += '<tr>' + headers.map((h, i) => `<td style="border:1px solid #ddd;padding:8px;">${row[i] || ''}</td>`).join('') + '</tr>';
+        });
+        html += '</tbody></table>';
+        result.innerHTML = html;
+      } catch (e) {
+        result.innerHTML = `<span style="color:#ff6b6b;">Error: ${e.message}</span>`;
+      }
+    }
+    transformBtn?.addEventListener('click', transform);
+    input?.addEventListener('input', transform);
+    mapping?.addEventListener('input', transform);
+  }
+
+  // CI/CD TOOLS
+  const ciCdToolsTabs = {
+    'yaml': { render: renderYamlValidator, setup: setupYamlValidatorListeners },
+    'github-actions': { render: renderGithubActions, setup: setupGithubActionsListeners }
+  };
+  let currentCiCdToolsTabId = 'yaml';
+  let ciCdToolsTabsInitialized = false;
+  function renderCiCdToolsTabs() {
+    const tabsContainer = document.getElementById("ciCdToolsTabs");
+    if (!tabsContainer || !window.CICD_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.CICD_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentCiCdToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!ciCdToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCiCdToolsTabId = tabBtn.dataset.tabId;
+        renderCiCdToolsTabs();
+        loadCiCdToolsContent();
+      });
+      ciCdToolsTabsInitialized = true;
+    }
+    loadCiCdToolsContent();
+  }
+  function loadCiCdToolsContent() {
+    const tool = ciCdToolsTabs[currentCiCdToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderYamlValidator() {
+    const workspace = document.getElementById("ciCdToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>YAML Input</label><textarea id="yamlInput" class="converter-textarea" placeholder="name: example&#10;version: 1.0&#10;dependencies:&#10;  - package1&#10;  - package2"></textarea></div></div><div style="margin-top:12px;"><button id="yamlValidateBtn" class="converter-btn">Validate</button></div><div id="yamlResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupYamlValidatorListeners() {
+    const input = document.getElementById("yamlInput");
+    const validateBtn = document.getElementById("yamlValidateBtn");
+    const result = document.getElementById("yamlResult");
+    function validate() {
+      if (!window.jsyaml) { result.innerHTML = '<span style="color:#ffa500;">YAML library not loaded</span>'; return; }
+      try {
+        const parsed = jsyaml.load(input.value);
+        result.innerHTML = `<div style="color:#90ee90;">Valid YAML</div><pre style="background:#f5f5f5;padding:12px;border-radius:4px;margin-top:8px;max-height:300px;overflow:auto;">${JSON.stringify(parsed, null, 2)}</pre>`;
+      } catch (e) {
+        result.innerHTML = `<div style="color:#ff6b6b;">Invalid YAML: ${e.message}</div>`;
+      }
+    }
+    validateBtn?.addEventListener('click', validate);
+    input?.addEventListener('input', validate);
+  }
+  function renderGithubActions() {
+    const workspace = document.getElementById("ciCdToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Workflow Name</label><input type="text" id="gaName" class="converter-input" placeholder="my-workflow"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Trigger Event</label><select id="gaTrigger" class="converter-select"><option value="push">push</option><option value="pull_request">pull_request</option><option value="schedule">schedule</option><option value="workflow_dispatch">workflow_dispatch</option></select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Job Name</label><input type="text" id="gaJob" class="converter-input" placeholder="build"></div></div><div style="margin-top:12px;"><button id="gaGenerateBtn" class="converter-btn">Generate</button></div><div id="gaResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupGithubActionsListeners() {
+    const name = document.getElementById("gaName");
+    const trigger = document.getElementById("gaTrigger");
+    const job = document.getElementById("gaJob");
+    const generateBtn = document.getElementById("gaGenerateBtn");
+    const result = document.getElementById("gaResult");
+    function generate() {
+      const workflow = { name: name.value || 'My Workflow', on: trigger.value, jobs: { [job.value || 'build']: { 'runs-on': 'ubuntu-latest', steps: [{ uses: 'actions/checkout@v3' }, { run: 'echo "Hello World"' }] } } };
+      const yaml = window.jsyaml ? jsyaml.dump(workflow) : JSON.stringify(workflow, null, 2);
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${yaml}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    generateBtn?.addEventListener('click', generate);
+    [name, trigger, job].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // CODE QUALITY TOOLS
+  const codeQualityToolsTabs = {
+    'eslint': { render: renderEslintPlayground, setup: setupEslintPlaygroundListeners },
+    'prettier': { render: renderPrettierPlayground, setup: setupPrettierPlaygroundListeners }
+  };
+  let currentCodeQualityToolsTabId = 'eslint';
+  let codeQualityToolsTabsInitialized = false;
+  function renderCodeQualityToolsTabs() {
+    const tabsContainer = document.getElementById("codeQualityToolsTabs");
+    if (!tabsContainer || !window.CODE_QUALITY_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.CODE_QUALITY_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentCodeQualityToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!codeQualityToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentCodeQualityToolsTabId = tabBtn.dataset.tabId;
+        renderCodeQualityToolsTabs();
+        loadCodeQualityToolsContent();
+      });
+      codeQualityToolsTabsInitialized = true;
+    }
+    loadCodeQualityToolsContent();
+  }
+  function loadCodeQualityToolsContent() {
+    const tool = codeQualityToolsTabs[currentCodeQualityToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderEslintPlayground() {
+    const workspace = document.getElementById("codeQualityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>JavaScript Code</label><textarea id="eslintInput" class="converter-textarea" placeholder="const x=1&#10;console.log(x)"></textarea></div></div><div id="eslintResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupEslintPlaygroundListeners() {
+    const input = document.getElementById("eslintInput");
+    const result = document.getElementById("eslintResult");
+    const rules = { 'no-unused-vars': 'warn', 'no-console': 'warn', 'semi': 'error', 'quotes': ['error', 'single'] };
+    function lint() {
+      const code = input.value;
+      if (!code.trim()) { result.innerHTML = ''; return; }
+      const issues = [];
+      const unusedVars = code.match(/\b(const|let|var)\s+(\w+)/g) || [];
+      unusedVars.forEach(v => { const match = v.match(/\b(const|let|var)\s+(\w+)/); if (match && !code.includes(match[2] + ';')) {} });
+      if (code.includes('console.log')) issues.push({ rule: 'no-console', severity: 'warn', message: 'Unexpected console statement' });
+      if (!code.includes(';') && code.length > 10) issues.push({ rule: 'semi', severity: 'error', message: 'Missing semicolon' });
+      if (code.includes('"') && !code.includes("'")) issues.push({ rule: 'quotes', severity: 'error', message: 'Strings must use single quotes' });
+      if (issues.length === 0) {
+        result.innerHTML = '<div style="color:#90ee90;">No issues found (basic linting)</div>';
+      } else {
+        result.innerHTML = issues.map(i => `<div style="margin-bottom:4px;"><span style="color:${i.severity === 'error' ? '#ff6b6b' : '#ffa500'};">[${i.severity}]</span> <strong>${i.rule}:</strong> ${i.message}</div>`).join('');
+      }
+    }
+    input?.addEventListener('input', lint);
+    lint();
+  }
+  function renderPrettierPlayground() {
+    const workspace = document.getElementById("codeQualityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Input Code</label><textarea id="prettierInput" class="converter-textarea" placeholder="const x=1&#10;const y=2"></textarea></div><div class="input-group"><label>Formatted Output</label><textarea id="prettierOutput" class="converter-textarea" readonly style="background:#f5f5f5;"></textarea></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Print Width</label><input type="number" id="prettierWidth" class="converter-input" value="80"></div><div class="input-group"><label>Tab Width</label><input type="number" id="prettierTabWidth" class="converter-input" value="2"></div></div></div>`;
+  }
+  function setupPrettierPlaygroundListeners() {
+    const input = document.getElementById("prettierInput");
+    const output = document.getElementById("prettierOutput");
+    const width = document.getElementById("prettierWidth");
+    const tabWidth = document.getElementById("prettierTabWidth");
+    function format() {
+      try {
+        const pw = parseInt(width.value) || 80;
+        const tw = parseInt(tabWidth.value) || 2;
+        let result = input.value;
+        result = result.replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ').replace(/\s*\{\s*/g, ' { ').replace(/\s*\}\s*/g, ' } ').replace(/\s*;\s*/g, ';\n').replace(/\n+/g, '\n').trim();
+        let lines = result.split('\n');
+        lines = lines.map(line => ' '.repeat(tw) + line.trim());
+        output.value = lines.join('\n');
+      } catch (e) {
+        output.value = 'Error: ' + e.message;
+      }
+    }
+    input?.addEventListener('input', format);
+    width?.addEventListener('input', format);
+    tabWidth?.addEventListener('input', format);
+    format();
+  }
+
+  // SCAFFOLDING TOOLS
+  const scaffoldingToolsTabs = {
+    'project': { render: renderProjectScaffolder, setup: setupProjectScaffolderListeners }
+  };
+  let currentScaffoldingToolsTabId = 'project';
+  let scaffoldingToolsTabsInitialized = false;
+  function renderScaffoldingToolsTabs() {
+    const tabsContainer = document.getElementById("scaffoldingToolsTabs");
+    if (!tabsContainer || !window.SCAFFOLDING_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SCAFFOLDING_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentScaffoldingToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!scaffoldingToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentScaffoldingToolsTabId = tabBtn.dataset.tabId;
+        renderScaffoldingToolsTabs();
+        loadScaffoldingToolsContent();
+      });
+      scaffoldingToolsTabsInitialized = true;
+    }
+    loadScaffoldingToolsContent();
+  }
+  function loadScaffoldingToolsContent() {
+    const tool = scaffoldingToolsTabs[currentScaffoldingToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderProjectScaffolder() {
+    const workspace = document.getElementById("scaffoldingToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Project Type</label><select id="scaffoldType" class="converter-select"><option value="node">Node.js</option><option value="react">React</option><option value="python">Python</option></select></div><div class="input-group"><label>Project Name</label><input type="text" id="scaffoldName" class="converter-input" placeholder="my-project"></div></div><div style="margin-top:12px;"><button id="scaffoldGenerateBtn" class="converter-btn">Generate</button></div><div id="scaffoldResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupProjectScaffolderListeners() {
+    const type = document.getElementById("scaffoldType");
+    const name = document.getElementById("scaffoldName");
+    const generateBtn = document.getElementById("scaffoldGenerateBtn");
+    const result = document.getElementById("scaffoldResult");
+    function generate() {
+      const projectName = name.value || 'my-project';
+      let files = {};
+      if (type.value === 'node') {
+        files = { 'package.json': JSON.stringify({ name: projectName, version: '1.0.0', main: 'index.js', scripts: { start: 'node index.js' } }, null, 2), 'index.js': 'console.log("Hello, World!");', 'README.md': `# ${projectName}\n\nA Node.js project.` };
+      } else if (type.value === 'react') {
+        files = { 'package.json': JSON.stringify({ name: projectName, version: '1.0.0', scripts: { start: 'react-scripts start', build: 'react-scripts build' } }, null, 2), 'src/App.js': 'function App() { return <div>Hello World</div>; }', 'README.md': `# ${projectName}\n\nA React project.` };
+      } else {
+        files = { 'main.py': 'print("Hello, World!")', 'requirements.txt': '', 'README.md': `# ${projectName}\n\nA Python project.` };
+      }
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;">';
+      Object.entries(files).forEach(([filename, content]) => {
+        html += `<div style="margin-bottom:12px;"><strong>${filename}</strong>:</div><pre style="background:#1e1e1e;color:#d4d4d4;padding:8px;border-radius:4px;margin-bottom:8px;">${content}</pre>`;
+      });
+      html += '</div>';
+      result.innerHTML = html;
+    }
+    generateBtn?.addEventListener('click', generate);
+    [type, name].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // MARKDOWN TOOLS
+  const markdownToolsTabs = {
+    'editor': { render: renderMarkdownEditor, setup: setupMarkdownEditorListeners },
+    'table': { render: renderMarkdownTable, setup: setupMarkdownTableListeners }
+  };
+  let currentMarkdownToolsTabId = 'editor';
+  let markdownToolsTabsInitialized = false;
+  function renderMarkdownToolsTabs() {
+    const tabsContainer = document.getElementById("markdownToolsTabs");
+    if (!tabsContainer || !window.MARKDOWN_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.MARKDOWN_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentMarkdownToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!markdownToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentMarkdownToolsTabId = tabBtn.dataset.tabId;
+        renderMarkdownToolsTabs();
+        loadMarkdownToolsContent();
+      });
+      markdownToolsTabsInitialized = true;
+    }
+    loadMarkdownToolsContent();
+  }
+  function loadMarkdownToolsContent() {
+    const tool = markdownToolsTabs[currentMarkdownToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderMarkdownEditor() {
+    const workspace = document.getElementById("markdownToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Markdown</label><textarea id="mdInput" class="converter-textarea" style="height:200px;" placeholder="# Hello&#10;&#10;This is **bold** and *italic*."></textarea></div><div class="input-group"><label>Preview</label><div id="mdPreview" class="converter-textarea" style="height:200px;background:#fff;overflow:auto;border:1px solid #ddd;"></div></div></div></div>`;
+  }
+  function setupMarkdownEditorListeners() {
+    const input = document.getElementById("mdInput");
+    const preview = document.getElementById("mdPreview");
+    function convert() {
+      let md = input.value;
+      md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+      md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+      md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+      md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      md = md.replace(/`(.+?)`/g, '<code>$1</code>');
+      md = md.replace(/\n/g, '<br>');
+      preview.innerHTML = md;
+    }
+    input?.addEventListener('input', convert);
+    convert();
+  }
+  function renderMarkdownTable() {
+    const workspace = document.getElementById("markdownToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Columns (comma-separated)</label><input type="text" id="tableCols" class="converter-input" placeholder="Name, Age, City"></div><div class="input-group"><label>Rows</label><input type="number" id="tableRows" class="converter-input" value="3" min="1" max="10"></div></div><div style="margin-top:12px;"><button id="tableGenBtn" class="converter-btn">Generate Table</button></div><div id="tableResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupMarkdownTableListeners() {
+    const cols = document.getElementById("tableCols");
+    const rows = document.getElementById("tableRows");
+    const genBtn = document.getElementById("tableGenBtn");
+    const result = document.getElementById("tableResult");
+    function generate() {
+      const headers = cols.value.split(',').map(h => h.trim()).filter(h => h);
+      if (headers.length === 0) { result.innerHTML = ''; return; }
+      const sep = headers.map(() => '---');
+      let md = `| ${headers.join(' | ')} |\n| ${sep.join(' | ')} |`;
+      for (let i = 0; i < parseInt(rows.value) || 3; i++) {
+        md += `\n| ${headers.map(() => 'Cell').join(' | ')} |`;
+      }
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${md}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [cols, rows].forEach(el => el?.addEventListener('input', generate));
+  }
+
+  // HTML TOOLS
+  const htmlToolsTabs = {
+    'sanitizer': { render: renderHtmlSanitizer, setup: setupHtmlSanitizerListeners },
+    'formatter': { render: renderHtmlFormatterTool, setup: setupHtmlFormatterToolListeners }
+  };
+  let currentHtmlToolsTabId = 'sanitizer';
+  let htmlToolsTabsInitialized = false;
+  function renderHtmlToolsTabs() {
+    const tabsContainer = document.getElementById("htmlToolsTabs");
+    if (!tabsContainer || !window.HTML_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.HTML_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentHtmlToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!htmlToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentHtmlToolsTabId = tabBtn.dataset.tabId;
+        renderHtmlToolsTabs();
+        loadHtmlToolsContent();
+      });
+      htmlToolsTabsInitialized = true;
+    }
+    loadHtmlToolsContent();
+  }
+  function loadHtmlToolsContent() {
+    const tool = htmlToolsTabs[currentHtmlToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderHtmlSanitizer() {
+    const workspace = document.getElementById("htmlToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>HTML Input</label><textarea id="htmlSanInput" class="converter-textarea" placeholder="<script>alert('xss')</script><p>Safe content</p>"></textarea></div></div><div style="margin-top:12px;"><button id="htmlSanitizeBtn" class="converter-btn">Sanitize</button></div><div id="htmlSanResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHtmlSanitizerListeners() {
+    const input = document.getElementById("htmlSanInput");
+    const sanitizeBtn = document.getElementById("htmlSanitizeBtn");
+    const result = document.getElementById("htmlSanResult");
+    function sanitize() {
+      let html = input.value;
+      html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      html = html.replace(/on\w+="[^"]*"/gi, '');
+      html = html.replace(/on\w+='[^']*'/gi, '');
+      html = html.replace(/javascript:/gi, '');
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Sanitized HTML:</strong><pre style="white-space:pre-wrap;margin-top:8px;">${html}</pre></div>`;
+    }
+    sanitizeBtn?.addEventListener('click', sanitize);
+    input?.addEventListener('input', sanitize);
+  }
+  function renderHtmlFormatterTool() {
+    const workspace = document.getElementById("htmlToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>HTML Input</label><textarea id="htmlFmtInput" class="converter-textarea" placeholder="<div><p>Hello</p></div>"></textarea></div></div><div style="margin-top:12px;"><button id="htmlFmtBtn" class="converter-btn">Format</button></div><div id="htmlFmtResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupHtmlFormatterToolListeners() {
+    const input = document.getElementById("htmlFmtInput");
+    const fmtBtn = document.getElementById("htmlFmtBtn");
+    const result = document.getElementById("htmlFmtResult");
+    function format() {
+      try {
+        let html = input.value;
+        html = html.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim();
+        result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${html}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+      } catch (e) {
+        result.innerHTML = `<span style="color:#ff6b6b;">Error: ${e.message}</span>`;
+      }
+    }
+    fmtBtn?.addEventListener('click', format);
+    input?.addEventListener('input', format);
+  }
+
+  // BITWISE TOOLS
+  const bitwiseToolsTabs = {
+    'calculator': { render: renderBitwiseCalculator, setup: setupBitwiseCalculatorListeners }
+  };
+  let currentBitwiseToolsTabId = 'calculator';
+  let bitwiseToolsTabsInitialized = false;
+  function renderBitwiseToolsTabs() {
+    const tabsContainer = document.getElementById("bitwiseToolsTabs");
+    if (!tabsContainer || !window.BITWISE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.BITWISE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentBitwiseToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!bitwiseToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentBitwiseToolsTabId = tabBtn.dataset.tabId;
+        renderBitwiseToolsTabs();
+        loadBitwiseToolsContent();
+      });
+      bitwiseToolsTabsInitialized = true;
+    }
+    loadBitwiseToolsContent();
+  }
+  function loadBitwiseToolsContent() {
+    const tool = bitwiseToolsTabs[currentBitwiseToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderBitwiseCalculator() {
+    const workspace = document.getElementById("bitwiseToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Number A</label><input type="number" id="bitA" class="converter-input" value="5"></div><div class="input-group"><label>Operation</label><select id="bitOp" class="converter-select"><option value="&amp;">AND (&amp;)</option><option value="|">OR (|)</option><option value="^">XOR (^)</option><option value="&lt;&lt;">Left Shift (&lt;&lt;)</option><option value=">>">Right Shift (>>)</option><option value="~">NOT (~)</option></select></div><div class="input-group"><label>Number B</label><input type="number" id="bitB" class="converter-input" value="3"></div></div><div id="bitResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupBitwiseCalculatorListeners() {
+    const a = document.getElementById("bitA");
+    const op = document.getElementById("bitOp");
+    const b = document.getElementById("bitB");
+    const result = document.getElementById("bitResult");
+    function calc() {
+      const aVal = parseInt(a.value) || 0;
+      const bVal = parseInt(b.value) || 0;
+      let res;
+      if (op.value === '~') {
+        res = ~aVal;
+      } else if (op.value === '<<') {
+        res = aVal << bVal;
+      } else if (op.value === '>>') {
+        res = aVal >> bVal;
+      } else {
+        res = eval(`${aVal} ${op.value} ${bVal}`);
+      }
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><div><strong>Result:</strong> ${res}</div><div><strong>Binary:</strong> ${(res >>> 0).toString(2)}</div><div><strong>Hex:</strong> 0x${(res >>> 0).toString(16).toUpperCase()}</div></div>`;
+    }
+    [a, op, b].forEach(el => el?.addEventListener('input', calc));
+    calc();
+  }
+
+  // RESILIENCE TOOLS
+  const resilienceToolsTabs = {
+    'retry': { render: renderRetryCalculator, setup: setupRetryCalculatorListeners },
+    'backoff': { render: renderBackoffGenerator, setup: setupBackoffGeneratorListeners },
+    'circuit': { render: renderCircuitBreaker, setup: setupCircuitBreakerListeners }
+  };
+  let currentResilienceToolsTabId = 'retry';
+  let resilienceToolsTabsInitialized = false;
+  function renderResilienceToolsTabs() {
+    const tabsContainer = document.getElementById("resilienceToolsTabs");
+    if (!tabsContainer || !window.RESILIENCE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.RESILIENCE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentResilienceToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!resilienceToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentResilienceToolsTabId = tabBtn.dataset.tabId;
+        renderResilienceToolsTabs();
+        loadResilienceToolsContent();
+      });
+      resilienceToolsTabsInitialized = true;
+    }
+    loadResilienceToolsContent();
+  }
+  function loadResilienceToolsContent() {
+    const tool = resilienceToolsTabs[currentResilienceToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderRetryCalculator() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Max Attempts</label><input type="number" id="retryMax" class="converter-input" value="5" min="1"></div><div class="input-group"><label>Base Delay (ms)</label><input type="number" id="retryDelay" class="converter-input" value="1000"></div><div class="input-group"><label>Max Delay (ms)</label><input type="number" id="retryMaxDelay" class="converter-input" value="30000"></div></div><div style="margin-top:12px;"><button id="retryCalcBtn" class="converter-btn">Calculate</button></div><div id="retryResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupRetryCalculatorListeners() {
+    const max = document.getElementById("retryMax");
+    const delay = document.getElementById("retryDelay");
+    const maxDelay = document.getElementById("retryMaxDelay");
+    const calcBtn = document.getElementById("retryCalcBtn");
+    const result = document.getElementById("retryResult");
+    function calculate() {
+      const m = parseInt(max.value) || 5;
+      const d = parseInt(delay.value) || 1000;
+      const mx = parseInt(maxDelay.value) || 30000;
+      let html = '<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Attempt Schedule:</strong><ul style="margin:8px 0 0 20px;padding:0;">';
+      let total = 0;
+      for (let i = 1; i <= m; i++) {
+        const wait = Math.min(d * Math.pow(2, i - 1), mx);
+        total += wait;
+        html += `<li>Attempt ${i}: wait ${wait}ms</li>`;
+      }
+      html += `</ul><div style="margin-top:8px;"><strong>Total max wait:</strong> ${total}ms</div></div>`;
+      result.innerHTML = html;
+    }
+    calcBtn?.addEventListener('click', calculate);
+    [max, delay, maxDelay].forEach(el => el?.addEventListener('input', calculate));
+    calculate();
+  }
+  function renderBackoffGenerator() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Strategy</label><select id="backoffStrategy" class="converter-select"><option value="linear">Linear</option><option value="exponential">Exponential</option><option value="fibonacci">Fibonacci</option></select></div><div class="input-group"><label>Base Delay (ms)</label><input type="number" id="backoffBase" class="converter-input" value="1000"></div><div class="input-group"><label>Max Attempts</label><input type="number" id="backoffAttempts" class="converter-input" value="5"></div></div><div style="margin-top:12px;"><button id="backoffGenBtn" class="converter-btn">Generate Code</button></div><div id="backoffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupBackoffGeneratorListeners() {
+    const strategy = document.getElementById("backoffStrategy");
+    const base = document.getElementById("backoffBase");
+    const attempts = document.getElementById("backoffAttempts");
+    const genBtn = document.getElementById("backoffGenBtn");
+    const result = document.getElementById("backoffResult");
+    function generate() {
+      const str = strategy.value;
+      const b = parseInt(base.value) || 1000;
+      const a = parseInt(attempts.value) || 5;
+      let code = '';
+      if (str === 'linear') {
+        code = `function linearBackoff(attempt) {\n  return ${b} * attempt;\n}`;
+      } else if (str === 'exponential') {
+        code = `function exponentialBackoff(attempt) {\n  return ${b} * Math.pow(2, attempt - 1);\n}`;
+      } else {
+        code = `function fibonacciBackoff(attempt) {\n  const fib = [1, 1];\n  for (let i = 2; i < attempt; i++) fib.push(fib[i-1] + fib[i-2]);\n  return ${b} * fib[attempt - 1];\n}`;
+      }
+      code += `\n\n// Delays for ${a} attempts:\n` + Array.from({length: a}, (_, i) => `// Attempt ${i+1}: ${str === 'linear' ? b * (i+1) : str === 'exponential' ? b * Math.pow(2, i) : b}ms`).join('\n');
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${code}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [strategy, base, attempts].forEach(el => el?.addEventListener('input', generate));
+  }
+  function renderCircuitBreaker() {
+    const workspace = document.getElementById("resilienceToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Failure Threshold</label><input type="number" id="cbThreshold" class="converter-input" value="5"></div><div class="input-group"><label>Timeout (ms)</label><input type="number" id="cbTimeout" class="converter-input" value="60000"></div><div class="input-group"><label>Reset Timeout (ms)</label><input type="number" id="cbReset" class="converter-input" value="30000"></div></div><div id="cbResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCircuitBreakerListeners() {
+    const threshold = document.getElementById("cbThreshold");
+    const timeout = document.getElementById("cbTimeout");
+    const reset = document.getElementById("cbReset");
+    const result = document.getElementById("cbResult");
+    function update() {
+      const t = parseInt(threshold.value) || 5;
+      const to = parseInt(timeout.value) || 60000;
+      const r = parseInt(reset.value) || 30000;
+      result.innerHTML = `<div style="font-family:monospace;background:#f5f5f5;padding:12px;border-radius:4px;"><strong>Circuit Breaker Config:</strong><ul style="margin:8px 0 0 20px;padding:0;"><li>Open after: ${t} failures</li><li>Timeout: ${to}ms</li><li>Reset after: ${r}ms</li></ul><div style="margin-top:8px;"><strong>States:</strong> CLOSED → OPEN → HALF-OPEN → CLOSED</div></div>`;
+    }
+    [threshold, timeout, reset].forEach(el => el?.addEventListener('input', update));
+    update();
+  }
+
+  // SECURITY TOOLS
+  const securityToolsTabs = {
+    'csp': { render: renderCspGenerator, setup: setupCspGeneratorListeners }
+  };
+  let currentSecurityToolsTabId = 'csp';
+  let securityToolsTabsInitialized = false;
+  function renderSecurityToolsTabs() {
+    const tabsContainer = document.getElementById("securityToolsTabs");
+    if (!tabsContainer || !window.SECURITY_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.SECURITY_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentSecurityToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!securityToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentSecurityToolsTabId = tabBtn.dataset.tabId;
+        renderSecurityToolsTabs();
+        loadSecurityToolsContent();
+      });
+      securityToolsTabsInitialized = true;
+    }
+    loadSecurityToolsContent();
+  }
+  function loadSecurityToolsContent() {
+    const tool = securityToolsTabs[currentSecurityToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderCspGenerator() {
+    const workspace = document.getElementById("securityToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Default-src</label><input type="text" id="cspDefault" class="converter-input" value="'self'"></div><div class="input-group"><label>Script-src</label><input type="text" id="cspScript" class="converter-input" value="'self' 'unsafe-inline'"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Style-src</label><input type="text" id="cspStyle" class="converter-input" value="'self' 'unsafe-inline'"></div><div class="input-group"><label>Img-src</label><input type="text" id="cspImg" class="converter-input" value="'self' data:"></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Connect-src</label><input type="text" id="cspConnect" class="converter-input" value="'self'"></div><div class="input-group"><label>Font-src</label><input type="text" id="cspFont" class="converter-input" value="'self'"></div></div><div style="margin-top:12px;"><button id="cspGenBtn" class="converter-btn">Generate CSP</button></div><div id="cspResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupCspGeneratorListeners() {
+    const defaultSrc = document.getElementById("cspDefault");
+    const scriptSrc = document.getElementById("cspScript");
+    const styleSrc = document.getElementById("cspStyle");
+    const imgSrc = document.getElementById("cspImg");
+    const connectSrc = document.getElementById("cspConnect");
+    const fontSrc = document.getElementById("cspFont");
+    const genBtn = document.getElementById("cspGenBtn");
+    const result = document.getElementById("cspResult");
+    function generate() {
+      const csp = `default-src ${defaultSrc.value}; script-src ${scriptSrc.value}; style-src ${styleSrc.value}; img-src ${imgSrc.value}; connect-src ${connectSrc.value}; font-src ${fontSrc.value};`;
+      result.innerHTML = `<div style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;position:relative;"><pre style="white-space:pre-wrap;margin:0;">${csp}</pre><button class="converter-btn" style="position:absolute;top:8px;right:8px;" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent)">Copy</button></div><div style="margin-top:8px;font-size:0.9rem;color:#666;">Add as HTTP header: <code>Content-Security-Policy: ${csp}</code></div>`;
+    }
+    genBtn?.addEventListener('click', generate);
+    [defaultSrc, scriptSrc, styleSrc, imgSrc, connectSrc, fontSrc].forEach(el => el?.addEventListener('input', generate));
+    generate();
   }
 
   function renderContrastChecker() {
