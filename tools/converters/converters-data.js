@@ -73,3 +73,22 @@ window.TEXT_TOOLS_CATALOG = [
   { tabId: "slug", tabName: "Slug" },
   { tabId: "regex", tabName: "Regex" }
 ];
+
+window.DIFF_TOOLS_CATALOG = [
+  { tabId: "text", tabName: "Text Diff" },
+  { tabId: "json", tabName: "JSON Diff" }
+];
+
+window.JSON_TOOLS_CATALOG = [
+  { tabId: "tree", tabName: "Tree Viewer" },
+  { tabId: "schema", tabName: "Schema Validator" }
+];
+
+window.DATE_TOOLS_CATALOG = [
+  { tabId: "difference", tabName: "Difference" },
+  { tabId: "unix", tabName: "Unix Converter" }
+];
+
+window.TIME_TOOLS_CATALOG = [
+  { tabId: "timezone", tabName: "Timezone" }
+];

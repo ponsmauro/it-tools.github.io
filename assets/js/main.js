@@ -10,6 +10,10 @@
   const hashingPanelNode = document.getElementById("hashingPanel");
   const cryptoPanelNode = document.getElementById("cryptoPanel");
   const textToolsPanelNode = document.getElementById("textToolsPanel");
+  const diffToolsPanelNode = document.getElementById("diffToolsPanel");
+  const jsonToolsPanelNode = document.getElementById("jsonToolsPanel");
+  const dateToolsPanelNode = document.getElementById("dateToolsPanel");
+  const timeToolsPanelNode = document.getElementById("timeToolsPanel");
 
   if (!Array.isArray(window.TOOLS_CATALOG)) return;
   if (!categoriesNode || !convertersPanelNode) return;
@@ -28,12 +32,12 @@
       button.type = "button";
       button.className = `category-btn${entry.category === active ? " active" : ""}`;
       button.textContent = `${entry.category} (${entry.items.length})`;
-      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS") {
+      if (entry.category !== "CONVERTERS" && entry.category !== "FORMATTERS" && entry.category !== "ENCODERS" && entry.category !== "DECODERS" && entry.category !== "GENERATORS" && entry.category !== "VALIDATORS" && entry.category !== "CHECKERS" && entry.category !== "HASHING" && entry.category !== "CRYPTO" && entry.category !== "TEXT TOOLS" && entry.category !== "DIFF TOOLS" && entry.category !== "JSON TOOLS" && entry.category !== "DATE TOOLS" && entry.category !== "TIME TOOLS") {
         button.disabled = true;
         button.title = "Coming soon";
       }
       button.addEventListener("click", () => {
-        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS") {
+        if (entry.category === "CONVERTERS" || entry.category === "FORMATTERS" || entry.category === "ENCODERS" || entry.category === "DECODERS" || entry.category === "GENERATORS" || entry.category === "VALIDATORS" || entry.category === "CHECKERS" || entry.category === "HASHING" || entry.category === "CRYPTO" || entry.category === "TEXT TOOLS" || entry.category === "DIFF TOOLS" || entry.category === "JSON TOOLS" || entry.category === "DATE TOOLS" || entry.category === "TIME TOOLS") {
           active = entry.category;
           renderCategories();
           if (active === "CONVERTERS") {
@@ -56,6 +60,14 @@
             showCryptoPanel();
           } else if (active === "TEXT TOOLS") {
             showTextToolsPanel();
+          } else if (active === "DIFF TOOLS") {
+            showDiffToolsPanel();
+          } else if (active === "JSON TOOLS") {
+            showJsonToolsPanel();
+          } else if (active === "DATE TOOLS") {
+            showDateToolsPanel();
+          } else if (active === "TIME TOOLS") {
+            showTimeToolsPanel();
           }
         }
       });
@@ -179,7 +191,83 @@
     hashingPanelNode.style.display = "none";
     cryptoPanelNode.style.display = "none";
     textToolsPanelNode.style.display = "flex";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
     renderTextToolsTabs();
+  }
+
+  function showDiffToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "flex";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    renderDiffToolsTabs();
+  }
+
+  function showJsonToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "flex";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "none";
+    renderJsonToolsTabs();
+  }
+
+  function showDateToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "flex";
+    timeToolsPanelNode.style.display = "none";
+    renderDateToolsTabs();
+  }
+
+  function showTimeToolsPanel() {
+    convertersPanelNode.style.display = "none";
+    formattersPanelNode.style.display = "none";
+    encodersPanelNode.style.display = "none";
+    decodersPanelNode.style.display = "none";
+    generatorsPanelNode.style.display = "none";
+    validatorsPanelNode.style.display = "none";
+    checkersPanelNode.style.display = "none";
+    hashingPanelNode.style.display = "none";
+    cryptoPanelNode.style.display = "none";
+    textToolsPanelNode.style.display = "none";
+    diffToolsPanelNode.style.display = "none";
+    jsonToolsPanelNode.style.display = "none";
+    dateToolsPanelNode.style.display = "none";
+    timeToolsPanelNode.style.display = "flex";
+    renderTimeToolsTabs();
   }
 
   const converterTabs = {
@@ -1117,6 +1205,298 @@
     document.getElementById("regexFlagG")?.addEventListener('change', testRegex);
     document.getElementById("regexFlagI")?.addEventListener('change', testRegex);
     document.getElementById("regexFlagM")?.addEventListener('change', testRegex);
+  }
+
+  // DIFF TOOLS
+  const diffToolsTabs = {
+    'text': { render: renderTextDiff, setup: setupTextDiffListeners },
+    'json': { render: renderJsonDiff, setup: setupJsonDiffListeners }
+  };
+  let currentDiffToolsTabId = 'text';
+  let diffToolsTabsInitialized = false;
+  function renderDiffToolsTabs() {
+    const tabsContainer = document.getElementById("diffToolsTabs");
+    if (!tabsContainer || !window.DIFF_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.DIFF_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentDiffToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!diffToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentDiffToolsTabId = tabBtn.dataset.tabId;
+        renderDiffToolsTabs();
+        loadDiffToolsContent();
+      });
+      diffToolsTabsInitialized = true;
+    }
+    loadDiffToolsContent();
+  }
+  function loadDiffToolsContent() {
+    const tool = diffToolsTabs[currentDiffToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderTextDiff() {
+    const workspace = document.getElementById("diffToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>Original</label><textarea id="diffOriginal" class="converter-textarea" placeholder="Original text..."></textarea></div><div class="input-group" style="flex:1;"><label>Modified</label><textarea id="diffModified" class="converter-textarea" placeholder="Modified text..."></textarea></div></div><div id="diffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupTextDiffListeners() {
+    const original = document.getElementById("diffOriginal");
+    const modified = document.getElementById("diffModified");
+    const result = document.getElementById("diffResult");
+    function diff() {
+      if (!original.value && !modified.value) { result.innerHTML = ''; return; }
+      const origLines = original.value.split('\n');
+      const modLines = modified.value.split('\n');
+      let html = '<div style="font-family:monospace;">';
+      const maxLen = Math.max(origLines.length, modLines.length);
+      for (let i = 0; i < maxLen; i++) {
+        const o = origLines[i] || '';
+        const m = modLines[i] || '';
+        if (o === m) {
+          html += `<div style="color:#888;">  ${o}</div>`;
+        } else {
+          if (o) html += `<div style="color:#ff6b6b;">- ${o}</div>`;
+          if (m) html += `<div style="color:#90ee90;">+ ${m}</div>`;
+        }
+      }
+      html += '</div>';
+      result.innerHTML = html;
+    }
+    original?.addEventListener('input', diff);
+    modified?.addEventListener('input', diff);
+  }
+  function renderJsonDiff() {
+    const workspace = document.getElementById("diffToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON 1</label><textarea id="jsonDiff1" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div><div class="input-group" style="flex:1;"><label>JSON 2</label><textarea id="jsonDiff2" class="converter-textarea" placeholder='{"key": "value2"}'></textarea></div></div><div id="jsonDiffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupJsonDiffListeners() {
+    const input1 = document.getElementById("jsonDiff1");
+    const input2 = document.getElementById("jsonDiff2");
+    const result = document.getElementById("jsonDiffResult");
+    function diff() {
+      try {
+        const obj1 = JSON.parse(input1.value || '{}');
+        const obj2 = JSON.parse(input2.value || '{}');
+        const diff = findJsonDiff(obj1, obj2);
+        result.innerHTML = diff || '<span style="color:#90ee90;">Objects are identical</span>';
+      } catch (e) {
+        result.innerHTML = '<span style="color:#ffa500;">Invalid JSON</span>';
+      }
+    }
+    function findJsonDiff(o1, o2, path = '') {
+      let result = '';
+      const allKeys = new Set([...Object.keys(o1 || {}), ...Object.keys(o2 || {})]);
+      for (const key of allKeys) {
+        const p = path ? `${path}.${key}` : key;
+        if (!(key in o1)) result += `<div style="color:#90ee90;">+ ${p}: ${JSON.stringify(o2[key])}</div>`;
+        else if (!(key in o2)) result += `<div style="color:#ff6b6b;">- ${p}: ${JSON.stringify(o1[key])}</div>`;
+        else if (JSON.stringify(o1[key]) !== JSON.stringify(o2[key])) {
+          if (typeof o1[key] === 'object') result += findJsonDiff(o1[key], o2[key], p);
+          else result += `<div style="color:#ffa500;">~ ${p}: ${JSON.stringify(o1[key])} → ${JSON.stringify(o2[key])}</div>`;
+        }
+      }
+      return result;
+    }
+    input1?.addEventListener('input', diff);
+    input2?.addEventListener('input', diff);
+  }
+
+  // JSON TOOLS
+  const jsonToolsTabs = {
+    'tree': { render: renderJsonTree, setup: setupJsonTreeListeners },
+    'schema': { render: renderJsonSchema, setup: setupJsonSchemaListeners }
+  };
+  let currentJsonToolsTabId = 'tree';
+  let jsonToolsTabsInitialized = false;
+  function renderJsonToolsTabs() {
+    const tabsContainer = document.getElementById("jsonToolsTabs");
+    if (!tabsContainer || !window.JSON_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.JSON_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentJsonToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!jsonToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentJsonToolsTabId = tabBtn.dataset.tabId;
+        renderJsonToolsTabs();
+        loadJsonToolsContent();
+      });
+      jsonToolsTabsInitialized = true;
+    }
+    loadJsonToolsContent();
+  }
+  function loadJsonToolsContent() {
+    const tool = jsonToolsTabs[currentJsonToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderJsonTree() {
+    const workspace = document.getElementById("jsonToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON Input</label><textarea id="jsonTreeInput" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><pre id="jsonTreeOutput" style="background:#1a1a2e;padding:12px;border-radius:8px;overflow:auto;max-height:400px;"></pre></div>`;
+  }
+  function setupJsonTreeListeners() {
+    const input = document.getElementById("jsonTreeInput");
+    const output = document.getElementById("jsonTreeOutput");
+    function render() {
+      try {
+        const obj = JSON.parse(input.value);
+        output.innerHTML = renderTree(obj, 0);
+      } catch (e) {
+        output.textContent = 'Invalid JSON';
+      }
+    }
+    function renderTree(obj, depth) {
+      const indent = '  '.repeat(depth);
+      if (typeof obj === 'object' && obj !== null) {
+        if (Array.isArray(obj)) {
+          if (obj.length === 0) return '<span style="color:#888;">[]</span>';
+          return '[\n' + obj.map(item => indent + '  ' + renderTree(item, depth + 1)).join(',\n') + '\n' + indent + ']';
+        }
+        const keys = Object.keys(obj);
+        if (keys.length === 0) return '<span style="color:#888;">{}</span>';
+        return '{\n' + keys.map(k => `${indent}  <span style="color:#7db6f5;">"${k}"</span>: ${renderTree(obj[k], depth + 1)}`).join(',\n') + '\n' + indent + '}';
+      }
+      if (typeof obj === 'string') return `<span style="color:#a8e6cf;">"${obj}"</span>`;
+      if (typeof obj === 'number') return `<span style="color:#f9c74f;">${obj}</span>`;
+      if (typeof obj === 'boolean') return `<span style="color:#f94144;">${obj}</span>`;
+      if (obj === null) return '<span style="color:#888;">null</span>';
+      return String(obj);
+    }
+    input?.addEventListener('input', render);
+    render();
+  }
+  function renderJsonSchema() {
+    const workspace = document.getElementById("jsonToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group" style="flex:1;"><label>JSON Schema</label><textarea id="schemaInput" class="converter-textarea" placeholder='{"type": "object", "properties": {...}}'></textarea></div><div class="input-group" style="flex:1;"><label>JSON Data</label><textarea id="schemaData" class="converter-textarea" placeholder='{"key": "value"}'></textarea></div></div><div id="schemaResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupJsonSchemaListeners() {
+    const schemaInput = document.getElementById("schemaInput");
+    const dataInput = document.getElementById("schemaData");
+    const result = document.getElementById("schemaResult");
+    function validate() {
+      try {
+        JSON.parse(schemaInput.value);
+        JSON.parse(dataInput.value);
+        result.innerHTML = '<span style="color:#90ee90;">JSON is valid (schema validation requires full JSON Schema validator library)</span>';
+      } catch (e) {
+        result.innerHTML = '<span style="color:#ff6b6b;">Invalid JSON: ' + e.message + '</span>';
+      }
+    }
+    schemaInput?.addEventListener('input', validate);
+    dataInput?.addEventListener('input', validate);
+  }
+
+  // DATE TOOLS
+  const dateToolsTabs = {
+    'difference': { render: renderDateDifference, setup: setupDateDifferenceListeners },
+    'unix': { render: renderDateUnix, setup: setupDateUnixListeners }
+  };
+  let currentDateToolsTabId = 'difference';
+  let dateToolsTabsInitialized = false;
+  function renderDateToolsTabs() {
+    const tabsContainer = document.getElementById("dateToolsTabs");
+    if (!tabsContainer || !window.DATE_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.DATE_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentDateToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!dateToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentDateToolsTabId = tabBtn.dataset.tabId;
+        renderDateToolsTabs();
+        loadDateToolsContent();
+      });
+      dateToolsTabsInitialized = true;
+    }
+    loadDateToolsContent();
+  }
+  function loadDateToolsContent() {
+    const tool = dateToolsTabs[currentDateToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderDateDifference() {
+    const workspace = document.getElementById("dateToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Date 1</label><input type="date" id="date1" class="converter-input"></div><div class="input-group"><label>Date 2</label><input type="date" id="date2" class="converter-input"></div></div><div id="dateDiffResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDateDifferenceListeners() {
+    const date1 = document.getElementById("date1");
+    const date2 = document.getElementById("date2");
+    const result = document.getElementById("dateDiffResult");
+    function calc() {
+      if (!date1.value || !date2.value) { result.innerHTML = ''; return; }
+      const d1 = new Date(date1.value);
+      const d2 = new Date(date2.value);
+      const diff = Math.abs(d2 - d1);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      result.innerHTML = `<strong>Difference:</strong> ${days} days, ${hours} hours, ${minutes} minutes`;
+    }
+    date1?.addEventListener('input', calc);
+    date2?.addEventListener('input', calc);
+  }
+  function renderDateUnix() {
+    const workspace = document.getElementById("dateToolsWorkspace");
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Unix Timestamp</label><input type="number" id="unixInput" class="converter-input" placeholder="1700000000"></div></div><div id="unixResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupDateUnixListeners() {
+    const input = document.getElementById("unixInput");
+    const result = document.getElementById("unixResult");
+    function convert() {
+      if (!input.value) { result.innerHTML = ''; return; }
+      const ts = parseInt(input.value);
+      const date = new Date(ts < 10000000000 ? ts * 1000 : ts);
+      result.innerHTML = `<strong>Date:</strong> ${date.toLocaleString()}`;
+    }
+    input?.addEventListener('input', convert);
+  }
+
+  // TIME TOOLS
+  const timeToolsTabs = {
+    'timezone': { render: renderTimezone, setup: setupTimezoneListeners }
+  };
+  let currentTimeToolsTabId = 'timezone';
+  let timeToolsTabsInitialized = false;
+  function renderTimeToolsTabs() {
+    const tabsContainer = document.getElementById("timeToolsTabs");
+    if (!tabsContainer || !window.TIME_TOOLS_CATALOG) return;
+    tabsContainer.innerHTML = window.TIME_TOOLS_CATALOG.map(tab => `<button class="category-btn ${tab.tabId === currentTimeToolsTabId ? 'active' : ''}" data-tab-id="${tab.tabId}">${tab.tabName}</button>`).join('');
+    if (!timeToolsTabsInitialized) {
+      tabsContainer.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.category-btn');
+        if (!tabBtn) return;
+        currentTimeToolsTabId = tabBtn.dataset.tabId;
+        renderTimeToolsTabs();
+        loadTimeToolsContent();
+      });
+      timeToolsTabsInitialized = true;
+    }
+    loadTimeToolsContent();
+  }
+  function loadTimeToolsContent() {
+    const tool = timeToolsTabs[currentTimeToolsTabId];
+    if (tool) { tool.render(); tool.setup(); }
+  }
+  function renderTimezone() {
+    const workspace = document.getElementById("timeToolsWorkspace");
+    const timezones = Intl.supportedValuesOf('timeZone');
+    workspace.innerHTML = `<div class="converter-container"><div class="converter-inputs"><div class="input-group"><label>Source Timezone</label><select id="tzSource" class="converter-select">${timezones.map(tz => `<option value="${tz}">${tz}</option>`).join('')}</select></div><div class="input-group"><label>Target Timezone</label><select id="tzTarget" class="converter-select">${timezones.map(tz => `<option value="${tz}">${tz}</option>`).join('')}</select></div></div><div class="converter-inputs" style="margin-top:12px;"><div class="input-group"><label>Input Time</label><input type="datetime-local" id="tzInput" class="converter-input"></div></div><div id="tzResult" style="margin-top:12px;"></div></div>`;
+  }
+  function setupTimezoneListeners() {
+    const source = document.getElementById("tzSource");
+    const target = document.getElementById("tzTarget");
+    const input = document.getElementById("tzInput");
+    const result = document.getElementById("tzResult");
+    function convert() {
+      if (!input.value) { result.innerHTML = ''; return; }
+      try {
+        const date = new Date(input.value);
+        const sourceTime = new Intl.DateTimeFormat('en-US', { timeZone: source.value, dateStyle: 'full', timeStyle: 'long' }).format(date);
+        const targetTime = new Intl.DateTimeFormat('en-US', { timeZone: target.value, dateStyle: 'full', timeStyle: 'long' }).format(date);
+        result.innerHTML = `<div><strong>Source (${source.value}):</strong> ${sourceTime}</div><div style="margin-top:8px;"><strong>Target (${target.value}):</strong> ${targetTime}</div>`;
+      } catch (e) {
+        result.innerHTML = 'Invalid input';
+      }
+    }
+    source?.addEventListener('change', convert);
+    target?.addEventListener('change', convert);
+    input?.addEventListener('input', convert);
   }
 
   function renderContrastChecker() {
