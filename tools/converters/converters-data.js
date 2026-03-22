@@ -67,3 +67,9 @@ window.CRYPTO_CATALOG = [
   { tabId: "keypair", tabName: "Keypair" },
   { tabId: "x509", tabName: "X.509" }
 ];
+
+window.TEXT_TOOLS_CATALOG = [
+  { tabId: "counter", tabName: "Counter" },
+  { tabId: "slug", tabName: "Slug" },
+  { tabId: "regex", tabName: "Regex" }
+];
